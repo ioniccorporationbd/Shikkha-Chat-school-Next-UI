@@ -1,11 +1,15 @@
-import React from 'react';
+import BannerSlider from "@/Components/BannerSlider";
+import GoverningBody from "@/Components/GoverningBody";
+import Oddhayan from "@/Components/Oddhayan";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-      
-    </div>
+    <main>
+      <BannerSlider />
+      <Oddhayan/>
+      <GoverningBody/>
+    </main>
   );
 };
 
-export default page;
+export default Page;
