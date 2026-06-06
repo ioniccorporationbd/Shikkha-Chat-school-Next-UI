@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import logo from "../../public/assets/images/logo-mane.png";
 
 type SubLinkItem = {
   name: string;
@@ -169,8 +170,8 @@ const Navbar = ({ selected, setSelected }: NavbarProps) => {
         {/* Logo */}
         <Link href="/" onClick={() => handleSelect("Home")} className="shrink-0">
           <Image
-            src="/assets/images/flogo.png"
-            alt="Shikkha Chat Logo"
+            src = {logo}
+            alt="Logo"
             width={150}
             height={52}
             priority
