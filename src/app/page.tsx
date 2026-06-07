@@ -6,15 +6,33 @@ import Slider2 from "@/Components/Slider2";
 
 const Page = () => {
   return (
-    <main>
+    <main className="w-full overflow-hidden bg-white">
       <BannerSlider />
-      <div className="max-w-350 mx-auto">
-        <Oddhayan/>
-      <GoverningBody/>
-      <Slider1/>
-      <Slider2/>
+
+      <div className="mx-auto w-full max-w-7xl">
+        <Oddhayan />
+
+        <GoverningBody />
+
+        {/* Slider + Notice Board Responsive Section */}
+        <section className="px-3 py-5 sm:px-4 lg:px-6">
+          <div className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-2 xl:grid-cols-7">
+            {/* Left Slider */}
+            <div className="w-full lg:col-span-1 xl:col-span-4">
+              <div className="h-full w-full overflow-hidden rounded-xl bg-white shadow-sm">
+                <Slider1 />
+              </div>
+            </div>
+
+            {/* Right Notice Board */}
+            <div className="w-full lg:col-span-1 xl:col-span-3">
+              <div className="h-full w-full rounded-xl bg-white shadow-sm">
+                <Slider2 />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      
     </main>
   );
 };
