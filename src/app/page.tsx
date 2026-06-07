@@ -1,4 +1,5 @@
 import BannerSlider from "@/Components/BannerSlider";
+import Courses from "@/Components/Courses";
 import GoverningBody from "@/Components/GoverningBody";
 import Oddhayan from "@/Components/Oddhayan";
 import Slider1 from "@/Components/Slider1";
@@ -32,6 +33,7 @@ const Page = () => {
             </div>
           </div>
         </section>
+<Courses/>
       </div>
     </main>
   );

@@ -1,7 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap");
 @import "tailwindcss";
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
+@import "swiper/css/free-mode";
+
+/* =========================
+   Project Global Theme
+========================= */
+
+:root {
+  --color-primary: #ff0000;
+  --color-secondary: #e2edf7;
+  --font-main: "Noto Serif Bengali", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #111111;
+  font-family: var(--font-main);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: var(--font-main) !important;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "width" 100;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* =========================
+   Reusable Brand Helpers
+========================= */
+
+.brand-primary {
+  color: var(--color-primary);
+}
+
+.brand-bg-primary {
+  background-color: var(--color-primary);
+}
+
+.brand-secondary {
+  color: var(--color-secondary);
+}
+
+.brand-bg-secondary {
+  background-color: var(--color-secondary);
+}
 
 /* =========================
    Slider1 CSS
@@ -29,21 +89,53 @@
   width: 8px;
   height: 8px;
   background: #ffffff;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: all 0.3s ease;
 }
 
 .slider-one-swiper .swiper-pagination-bullet-active {
   width: 26px;
   border-radius: 999px;
-  background: #ff0000;
+  background: var(--color-primary);
   opacity: 1;
 }
 
-/* Hide default Swiper navigation arrows if they appear */
+/* Hide default Swiper arrows because Slider1 uses custom arrows */
 .slider-one-swiper .swiper-button-next,
 .slider-one-swiper .swiper-button-prev {
   display: none !important;
+}
+
+/* =========================
+   Banner Slider CSS
+========================= */
+
+.banner-slider-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-slider-swiper .swiper-wrapper {
+  transition-timing-function: ease-in-out;
+}
+
+.banner-slider-swiper .swiper-pagination {
+  bottom: 18px !important;
+}
+
+.banner-slider-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.banner-slider-swiper .swiper-pagination-bullet-active {
+  width: 28px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  opacity: 1;
 }
 
 /* =========================
@@ -63,6 +155,63 @@
 }
 
 /* =========================
+   Courses Slider CSS
+========================= */
+
+.courses-swiper {
+  width: 100%;
+  padding-bottom: 40px !important;
+}
+
+.courses-swiper .swiper-wrapper {
+  align-items: stretch;
+  transition-timing-function: ease-in-out;
+}
+
+.courses-swiper .swiper-slide {
+  height: auto;
+}
+
+.courses-swiper .swiper-pagination {
+  bottom: 0 !important;
+}
+
+.courses-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: var(--color-secondary);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.courses-swiper .swiper-pagination-bullet-active {
+  width: 26px;
+  border-radius: 999px;
+  background: var(--color-primary);
+}
+
+/* =========================
+   Better Scrollbar
+========================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cc0000;
+}
+
+/* =========================
    Responsive Fix
 ========================= */
 
@@ -71,12 +220,20 @@
     bottom: 10px !important;
   }
 
-  .slider-one-swiper .swiper-pagination-bullet {
+  .slider-one-swiper .swiper-pagination-bullet,
+  .banner-slider-swiper .swiper-pagination-bullet,
+  .courses-swiper .swiper-pagination-bullet {
     width: 7px;
     height: 7px;
   }
 
-  .slider-one-swiper .swiper-pagination-bullet-active {
+  .slider-one-swiper .swiper-pagination-bullet-active,
+  .banner-slider-swiper .swiper-pagination-bullet-active,
+  .courses-swiper .swiper-pagination-bullet-active {
     width: 22px;
+  }
+
+  .banner-slider-swiper .swiper-pagination {
+    bottom: 10px !important;
   }
 }
