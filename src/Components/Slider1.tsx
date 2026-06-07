@@ -104,18 +104,18 @@ const Slider1 = () => {
         >
           {sliders.map((slide, index) => (
             <SwiperSlide key={slide.id}>
-              <div className="relative h-[230px] w-full overflow-hidden bg-[#E2EDF7] sm:h-[320px] md:h-[420px] lg:h-[460px] xl:h-[500px]">
+              <div className="relative h-57.5 w-full overflow-hidden bg-[#E2EDF7] sm:h-80 md:h-105 lg:h-115 xl:h-125">
                 <Image
                   src={slide.image}
                   alt={slide.alt}
                   fill
                   priority={index === 0}
                   sizes="100vw"
-                  className="object-cover object-center transition-transform duration-[2400ms] ease-out group-hover:scale-[1.035]"
+                  className="object-cover object-center transition-transform duration-2400 ease-out group-hover:scale-[1.035]"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/5 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/25 via-black/5 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/20 to-transparent" />
               </div>
             </SwiperSlide>
           ))}

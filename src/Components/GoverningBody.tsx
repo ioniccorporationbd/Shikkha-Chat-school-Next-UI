@@ -118,7 +118,7 @@ export default function GoverningBody() {
             Governing Body
           </div>
 
-          <div className="mx-auto my-5 h-[2px] w-[30%] bg-[#FF0000]" />
+          <div className="mx-auto my-5 h-0.5 w-[30%] bg-[#FF0000]" />
         </div>
 
         <div className="flex flex-col items-center gap-5 text-center lg:col-span-5">

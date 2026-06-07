@@ -12,7 +12,7 @@ const NotFoundPage = () => {
             width={150}
             height={60}
             priority
-            className="h-auto w-[150px] object-contain"
+            className="h-auto w-37.5 object-contain"
           />
         </div>
 

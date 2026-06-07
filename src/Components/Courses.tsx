@@ -106,7 +106,7 @@ const SectionHeading = ({ title }: { title: string }) => {
         {title}
       </h2>
 
-      <div className="mx-auto mt-4 h-[2px] w-[230px] bg-[#FF0000]" />
+      <div className="mx-auto mt-4 h-0.5 w-57.5 bg-[#FF0000]" />
     </div>
   );
 };
@@ -114,28 +114,28 @@ const SectionHeading = ({ title }: { title: string }) => {
 const CourseCard = ({ course }: { course: CourseItem }) => {
   return (
     <div
-      className={`group h-[280px] overflow-hidden rounded-[12px] ${course.bgColor} p-[8px] text-center font-serif transition-all duration-300 hover:-translate-y-2 hover:shadow-xl`}
+      className={`group h-70 overflow-hidden rounded-xl ${course.bgColor} p-2 text-center font-serif transition-all duration-300 hover:-translate-y-2 hover:shadow-xl`}
     >
-      <h3 className="pt-[20px] text-[28px] font-bold leading-none text-white">
+      <h3 className="pt-5 text-[28px] font-bold leading-none text-white">
         {course.title}
       </h3>
 
       <button
         type="button"
-        className="mt-[22px] rounded-[8px] border border-white px-[14px] py-[3px] text-[13px] font-bold leading-none text-white"
+        className="mt-5.5 rounded-lg border border-white px-3.5 py-0.75 text-[13px] font-bold leading-none text-white"
       >
         বিস্তারিত
       </button>
 
       <div
-        className={`mt-[22px] flex h-[145px] w-full items-center justify-center rounded-[10px] ${course.subBgColor}`}
+        className={`mt-5.5 flex h-36.25 w-full items-center justify-center rounded-[10px] ${course.subBgColor}`}
       >
         <Image
           src={course.image}
           alt={course.title}
           width={125}
           height={125}
-          className="h-[115px] w-[115px] object-contain transition-transform duration-300 group-hover:scale-110"
+          className="h-18.75 w-28.75 object-contain transition-transform duration-300 group-hover:scale-110"
           priority={course.id <= 4}
         />
       </div>
@@ -145,16 +145,16 @@ const CourseCard = ({ course }: { course: CourseItem }) => {
 
 const ActivityCard = ({ activity }: { activity: ActivityItem }) => {
   return (
-    <div className="group flex h-[170px] w-full max-w-[270px] flex-col items-center justify-center rounded-[10px] border border-[#EEEEEE] bg-white px-5 text-center font-serif shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_32px_rgba(0,0,0,0.16)]">
+    <div className="group flex h-42.5 w-full max-w-67.5 flex-col items-center justify-center rounded-[10px] border border-[#EEEEEE] bg-white px-5 text-center font-serif shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_32px_rgba(0,0,0,0.16)]">
       <Image
         src={activity.image}
         alt={activity.title}
         width={70}
         height={70}
-        className="h-[62px] w-[62px] object-contain transition-transform duration-300 group-hover:scale-110"
+        className="h-15.5 w-15.5 object-contain transition-transform duration-300 group-hover:scale-110"
       />
 
-      <h3 className="mt-[22px] text-[19px] font-bold leading-tight text-black sm:text-[20px]">
+      <h3 className="mt-5.5 text-[19px] font-bold leading-tight text-black sm:text-[20px]">
         {activity.title}
       </h3>
     </div>
@@ -164,7 +164,7 @@ const ActivityCard = ({ activity }: { activity: ActivityItem }) => {
 const Courses = () => {
   return (
     <section className="w-full bg-white px-4 pb-16 pt-8 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1180px]">
+      <div className="mx-auto max-w-295">
         <SectionHeading title="Our Courses for Students" />
 
         <Swiper
@@ -206,10 +206,10 @@ const Courses = () => {
         </Swiper>
       </div>
 
-      <div className="mx-auto mt-[58px] max-w-[1180px]">
+      <div className="mx-auto mt-14.5 max-w-295">
         <SectionHeading title="Others Activities" />
 
-        <div className="mt-[22px] flex flex-wrap justify-center gap-x-[30px] gap-y-[30px]">
+        <div className="mt-5.5 flex flex-wrap justify-center gap-x-7.5 gap-y-7.5">
           {activities.map((activity) => (
             <ActivityCard key={activity.id} activity={activity} />
           ))}

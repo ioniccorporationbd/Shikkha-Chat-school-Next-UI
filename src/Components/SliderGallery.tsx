@@ -84,7 +84,7 @@ const SliderGallery = () => {
           <SwiperSlide key={item.id}>
             <div className="overflow-hidden">
               <Image
-                className="h-[300px] w-full transition-transform duration-300 hover:scale-125"
+                className="h-75 w-full transition-transform duration-300 hover:scale-125"
                 src={item.image}
                 alt={item.alt}
                 width={800}

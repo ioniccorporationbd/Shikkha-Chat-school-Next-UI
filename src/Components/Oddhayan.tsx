@@ -20,14 +20,14 @@ const SectionHeading = ({ title }: SectionHeadingProps) => {
         {title}
       </h2>
 
-      <div className="mx-auto mt-2 h-[3px] w-24 rounded-full bg-[#FF0000] lg:mx-0" />
+      <div className="mx-auto mt-2 h-0.75 w-24 rounded-full bg-[#FF0000] lg:mx-0" />
     </div>
   );
 };
 
 const ProfileCard = ({ image, name, designation }: ProfileCardProps) => {
   return (
-    <div className="group flex min-h-[300px] flex-col items-center justify-center rounded-2xl bg-white/95 p-5 text-center shadow-sm ring-1 ring-red-100 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl hover:ring-red-200">
+    <div className="group flex min-h-75 flex-col items-center justify-center rounded-2xl bg-white/95 p-5 text-center shadow-sm ring-1 ring-red-100 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl hover:ring-red-200">
       <div className="relative mb-4 h-40 w-40 overflow-hidden rounded-xl bg-red-50 shadow-sm">
         <Image
           src={image}
@@ -59,17 +59,17 @@ const Oddhayan = () => {
         <div className="my-2 h-3 bg-[#e7b3b3]" />
 
         {/* Top banner image */}
-        <div className="relative h-[220px] w-full overflow-hidden sm:h-[300px] md:h-[350px] lg:h-[400px]">
+        <div className="relative h-55 w-full overflow-hidden sm:h-75 md:h-87.5 lg:h-100">
           <Image
             src={oddhayan}
             alt="Viqarunnisa Noon School & College"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center transition-transform duration-[1800ms] ease-out hover:scale-[1.02]"
+            className="object-cover object-center transition-transform duration-1800 ease-out hover:scale-[1.02]"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/5" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/10 via-transparent to-white/5" />
         </div>
 
         <div className="mx-auto my-10 grid max-w-7xl grid-cols-1 gap-10 px-3 sm:px-5 lg:px-6 xl:grid-cols-2">

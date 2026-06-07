@@ -67,7 +67,7 @@ const SectionHeading = ({ title }: { title: string }) => {
       <h2 className="text-2xl font-bold text-[#FF0000] sm:text-3xl">
         {title}
       </h2>
-      <div className="mx-auto mt-2 h-[3px] w-20 rounded-full bg-[#FF0000] lg:mx-0" />
+      <div className="mx-auto mt-2 h-0.75 w-20 rounded-full bg-[#FF0000] lg:mx-0" />
     </div>
   );
 };
@@ -75,7 +75,7 @@ const SectionHeading = ({ title }: { title: string }) => {
 const MenuLineIcon = () => {
   return (
     <span className="inline-flex h-5 w-5 items-center justify-center">
-      <span className="relative h-[2px] w-4 rounded-full bg-current before:absolute before:left-0 before:top-[-5px] before:h-[2px] before:w-4 before:rounded-full before:bg-current after:absolute after:left-0 after:top-[5px] after:h-[2px] after:w-4 after:rounded-full after:bg-current" />
+      <span className="relative h-0.5 w-4 rounded-full bg-current before:absolute before:left-0 before:top-1.25 before:h-0.5 before:w-4 before:rounded-full before:bg-current after:absolute after:left-0 after:top-1.25 after:h-0.5 after:w-4 after:rounded-full after:bg-current" />
     </span>
   );
 };
@@ -84,7 +84,7 @@ const NoticeCard = ({ notice }: { notice: NoticeItem }) => {
   return (
     <Link
       href={notice.href}
-      className="group flex min-h-[76px] gap-3 rounded-lg border border-[#f1f1f0] bg-white px-3 py-2 shadow-sm transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-red-100 hover:bg-red-50/50 hover:shadow-md sm:min-h-[82px]"
+      className="group flex min-h-19 gap-3 rounded-lg border border-[#f1f1f0] bg-white px-3 py-2 shadow-sm transition-all duration-300 ease-out hover:-translate-y-px hover:border-red-100 hover:bg-red-50/50 hover:shadow-md sm:min-h-20.5"
     >
       <div className="w-14 shrink-0 overflow-hidden rounded-md lg:w-20">
         <p className="bg-[#FF0000] py-1 text-center text-sm font-semibold text-white sm:text-base">
@@ -134,7 +134,7 @@ const Slider2 = () => {
                 type="button"
                 onClick={() => setSelected(button)}
                 key={button}
-                className={`rounded-lg border px-3 py-1 text-base font-semibold transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-[#FF0000] hover:bg-[#FF0000] hover:text-white hover:shadow-md sm:px-4 sm:text-lg ${
+                className={`rounded-lg border px-3 py-1 text-base font-semibold transition-all duration-300 ease-out hover:-translate-y-px hover:border-[#FF0000] hover:bg-[#FF0000] hover:text-white hover:shadow-md sm:px-4 sm:text-lg ${
                   isActive
                     ? "border-[#FF0000] bg-[#FF0000] text-white shadow-sm"
                     : "border-black bg-[#F6F2F2] text-black"
@@ -173,7 +173,7 @@ const Slider2 = () => {
             },
           }}
           modules={[Autoplay, Pagination, Mousewheel]}
-          className="notice-board-swiper h-[285px] sm:h-[310px] lg:h-[370px]"
+          className="notice-board-swiper h-71.25 sm:h-77.5 lg:h-92.5"
         >
           {filteredNotices.map((notice) => (
             <SwiperSlide key={`${notice.id}-${selected}`}>
