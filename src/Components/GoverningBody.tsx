@@ -1,22 +1,113 @@
 import Image from "next/image";
 
-const body1 = "/assets/body images/6. Siddique Nasir.jpg";
-const body2 = "/assets/body images/7. Md. Ohaduj Zaman.jpg";
-const body3 = "/assets/body images/8. Dr. Tajul Islam.png";
-const body4 = "/assets/body images/9. Anower Kabir.jpg";
-const body5 = "/assets/body images/10. Golam Benzir.jpg";
-const body6 = "/assets/body images/11. Moushmi Khan.jpg";
-const body7 = "/assets/body images/4. Abdur Razzak.jpg";
-const body8 = "/assets/body images/5. Chaad Sultana.jpg";
+type GoverningMember = {
+  name: string;
+  designation: string;
+  image: string;
+  alt: string;
+};
 
-const bkash = "/assets/images/bkash.png";
-const rocket = "/assets/images/rocket.png";
-const dbbl = "/assets/images/dbbl.jpg";
-const sonali = "/assets/images/Sonali-Bank-logo.png";
-const mobile = "/assets/images/mobileNexus.png";
-const odhayanLogo = "/assets/images/logo_oddhoyan.png";
+type PaymentMethod = {
+  name: string;
+  image: string;
+};
+
+const governingMembers: GoverningMember[] = [
+  {
+    name: "Siddiqui Nasir Uddin",
+    designation: "Guardians’ Representative (College)",
+    image: "/assets/body%20images/Siddique%20Nasir.jpg",
+    alt: "Siddiqui Nasir Uddin",
+  },
+  {
+    name: "Md. Ohaduj Zaman Montu",
+    designation: "Guardians’ Representative (College)",
+    image: "/assets/body%20images/Md.%20Ohaduj%20Zaman.jpg",
+    alt: "Md. Ohaduj Zaman Montu",
+  },
+  {
+    name: "Dr. Tajul Islam",
+    designation: "Guardians’ Representative (Secondary)",
+    image: "/assets/body%20images/Dr.%20Tajul%20Islam.png",
+    alt: "Dr. Tajul Islam",
+  },
+  {
+    name: "Anwar Kabir Bhuiya (Pulok)",
+    designation: "Guardians’ Representative (College)",
+    image: "/assets/body%20images/Anower%20Kabir.jpg",
+    alt: "Anwar Kabir Bhuiya Pulok",
+  },
+  {
+    name: "Ghulam Benazir Polash",
+    designation: "Guardians’ Representative (Primary)",
+    image: "/assets/body%20images/Golam%20Benzir.jpg",
+    alt: "Ghulam Benazir Polash",
+  },
+  {
+    name: "Mausumi Khan",
+    designation: "Guardians’ Representative (Reserved Female)",
+    image: "/assets/body%20images/Moushmi%20Khan.jpg",
+    alt: "Mausumi Khan",
+  },
+  {
+    name: "Md. Abdur Razzaque Akando",
+    designation: "Teachers’ Representative (School)",
+    image: "/assets/body%20images/Abdur%20Razzak.jpg",
+    alt: "Md. Abdur Razzaque Akando",
+  },
+  {
+    name: "Chand Sultana",
+    designation: "Teachers’ Representative (Reserved Female)",
+    image: "/assets/body%20images/Chaad%20Sultana.jpg",
+    alt: "Chand Sultana",
+  },
+];
+
+const paymentMethods: PaymentMethod[] = [
+  {
+    name: "bKash",
+    image: "/assets/images/bkash.png",
+  },
+  {
+    name: "Rocket",
+    image: "/assets/images/rocket%20.png",
+  },
+  {
+    name: "DBBL",
+    image: "/assets/images/dbbl%20.jpg",
+  },
+  {
+    name: "Sonali Bank",
+    image: "/assets/images/Sonali-Bank-logo-.png",
+  },
+];
+
+const mobile = "/assets/images/mobileNexus%20.png";
+const odhayanLogo = "/assets/images/logo-mane.png";
+
+function GoverningMemberCard({ member }: { member: GoverningMember }) {
+  return (
+    <div className="flex w-36 flex-col items-center justify-center overflow-hidden rounded-md bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <Image
+        className="h-44 w-36 object-cover object-top"
+        src={member.image}
+        alt={member.alt}
+        width={144}
+        height={176}
+      />
+
+      <div className="h-24 px-1 py-2">
+        <p className="text-sm font-bold text-[#FF0000]">{member.name}</p>
+        <p className="text-xs">{member.designation}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function GoverningBody() {
+  const firstRowMembers = governingMembers.slice(0, 5);
+  const lastRowMembers = governingMembers.slice(5);
+
   return (
     <div>
       {/* Our Governing Body */}
@@ -32,170 +123,25 @@ export default function GoverningBody() {
 
         <div className="flex flex-col items-center gap-5 text-center lg:col-span-5">
           <div className="grid grid-cols-2 gap-5 md:grid-cols-5">
-            <div className="flex w-36 flex-col items-center justify-center border">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body1}
-                alt="Siddiqui Nasir Uddin"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Siddiqui Nasir Uddin
-                </p>
-                <p className="px-1 text-xs">
-                  Guardians’ Representative (College)
-                </p>
-              </div>
-            </div>
-
-            <div className="flex w-36 flex-col items-center justify-center border">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body2}
-                alt="Md. Ohaduj Zaman Montu"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Md. Ohaduj Zaman Montu
-                </p>
-                <p className="px-1 text-xs">
-                  Guardians’ Representative (College)
-                </p>
-              </div>
-            </div>
-
-            <div className="flex w-36 flex-col items-center justify-center border">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body3}
-                alt="Dr. Tajul Islam"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Dr. Tajul Islam
-                </p>
-                <p className="px-1 text-xs">
-                  Guardians’ Representative (Secondary)
-                </p>
-              </div>
-            </div>
-
-            <div className="flex w-36 flex-col items-center justify-center border">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body4}
-                alt="Anwar Kabir Bhuiya Pulok"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Anwar Kabir Bhuiya (Pulok)
-                </p>
-                <p className="px-1 text-xs">
-                  Guardians’ Representative (College)
-                </p>
-              </div>
-            </div>
-
-            <div className="flex w-36 flex-col items-center justify-center border">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body5}
-                alt="Ghulam Benazir Polash"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Ghulam Benazir Polash
-                </p>
-                <p className="px-1 text-xs">
-                  Guardians’ Representative (Primary)
-                </p>
-              </div>
-            </div>
+            {firstRowMembers.map((member) => (
+              <GoverningMemberCard key={member.name} member={member} />
+            ))}
 
             {/* hidden for desktop */}
-            <div className="flex w-36 flex-col items-center justify-center border md:hidden">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body6}
-                alt="Mausumi Khan"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Mausumi Khan
-                </p>
-                <p className="px-1 text-xs">
-                  Guardians’ Representative (Reserved Female)
-                </p>
-              </div>
+            <div className="md:hidden">
+              <GoverningMemberCard member={governingMembers[5]} />
             </div>
           </div>
 
           <div className="grid grid-cols-2 items-center justify-center gap-5 text-center md:grid-cols-3">
-            <div className="hidden w-36 flex-col items-center justify-center border md:flex">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body6}
-                alt="Md. Abdur Razzaque Akando"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Md. Abdur Razzaque Akando
-                </p>
-                <p className="px-1 text-xs">
-                  Teachers’ Representative (School)
-                </p>
+            {lastRowMembers.map((member, index) => (
+              <div
+                key={member.name}
+                className={index === 0 ? "hidden md:block" : "block"}
+              >
+                <GoverningMemberCard member={member} />
               </div>
-            </div>
-
-            <div className="flex w-36 flex-col items-center justify-center border">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body7}
-                alt="Chand Sultana"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Chand Sultana
-                </p>
-                <p className="px-1 text-xs">
-                  Teachers’ Representative (Reserved Female)
-                </p>
-              </div>
-            </div>
-
-            <div className="flex w-36 flex-col items-center justify-center border">
-              <Image
-                className="h-44 w-36 object-cover"
-                src={body8}
-                alt="Siddiqui Nasir Uddin"
-                width={144}
-                height={176}
-              />
-              <div className="h-24">
-                <p className="px-1 text-sm font-bold text-[#FF0000]">
-                  Siddiqui Nasir Uddin
-                </p>
-                <p className="text-xs">
-                  Guardians’ Representative (College)
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -213,48 +159,22 @@ export default function GoverningBody() {
           </div>
 
           <div className="grid grid-cols-2 gap-5 md:place-items-center">
-            <Image
-              className="rounded-md border p-3 shadow-lg"
-              src={bkash}
-              alt="bKash"
-              width={220}
-              height={100}
-            />
-
-            <Image
-              className="rounded-md border p-3 shadow-lg"
-              src={rocket}
-              alt="Rocket"
-              width={220}
-              height={100}
-            />
-
-            <Image
-              className="rounded-md border p-3 shadow-lg"
-              src={dbbl}
-              alt="DBBL"
-              width={220}
-              height={100}
-            />
-
-            <Image
-              className="rounded-md border p-3 shadow-lg"
-              src={sonali}
-              alt="Sonali Bank"
-              width={220}
-              height={100}
-            />
+            {paymentMethods.map((method) => (
+              <Image
+                key={method.name}
+                className="rounded-md p-3 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                src={method.image}
+                alt={method.name}
+                width={220}
+                height={100}
+              />
+            ))}
           </div>
         </div>
 
         <div className="grid place-items-center gap-10 lg:grid-cols-2">
           <div>
-            <Image
-              src={mobile}
-              alt="Mobile Nexus"
-              width={320}
-              height={500}
-            />
+            <Image src={mobile} alt="Mobile Nexus" width={320} height={500} />
           </div>
 
           <div className="flex flex-col items-center justify-end gap-5 lg:items-start">

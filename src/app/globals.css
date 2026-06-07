@@ -1,3 +1,16 @@
 @import "tailwindcss";
 @import "swiper/css";
 @import "swiper/css/pagination";
+
+
+.notice-board-swiper {
+  width: 100%;
+}
+
+.notice-board-swiper .swiper-slide {
+  height: auto;
+}
+
+.notice-board-swiper .swiper-wrapper {
+  transition-timing-function: ease-in-out;
+}
