@@ -4,6 +4,7 @@ import GoverningBody from "@/Components/GoverningBody";
 import Oddhayan from "@/Components/Oddhayan";
 import Slider1 from "@/Components/Slider1";
 import Slider2 from "@/Components/Slider2";
+import SliderGallery from "@/Components/SliderGallery";
 
 const Page = () => {
   return (
@@ -33,8 +34,9 @@ const Page = () => {
             </div>
           </div>
         </section>
-<Courses/>
+        <Courses />
       </div>
+      <SliderGallery />
     </main>
   );
 };
