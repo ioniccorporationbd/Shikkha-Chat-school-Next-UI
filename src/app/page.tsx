@@ -1,4 +1,3 @@
-import BannerSlider from "@/Home Components/BannerSlider";
 import Courses from "@/Home Components/Courses";
 import GoverningBody from "@/Home Components/GoverningBody";
 import Oddhayan from "@/Home Components/Oddhayan";
@@ -9,8 +8,6 @@ import SliderGallery from "@/Home Components/SliderGallery";
 const Page = () => {
   return (
     <main className="w-full overflow-hidden bg-white">
-      <BannerSlider />
-
       <div className="mx-auto w-full max-w-7xl">
         <Oddhayan />
 

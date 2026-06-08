@@ -26,15 +26,15 @@ const navList: NavItem[] = [
   { name: "Home", link: "/" },
   {
     name: "About us",
-    link: "/Aboutus",
+    link: "/aboutus",
     subLink: [
-      { name: "Message from Chairman", link: "/MessagefromChairman" },
-      { name: "Message from Principal", link: "/MessagefromPrincipal" },
-      { name: "Governing Body", link: "/aboutus" },
-      { name: "Master Plan", link: "/aboutus" },
-      { name: "History", link: "/aboutus" },
-      { name: "Vision and Objectives", link: "/aboutus" },
-      { name: "Infrastructure", link: "/aboutus" },
+      { name: "Message from Chairman", link: "/aboutus#message-from-chairman" },
+      { name: "Message from Principal", link: "/aboutus#message-from-principal" },
+      { name: "Governing Body", link: "/aboutus#governing-body" },
+      { name: "Master Plan", link: "/aboutus#master-plan" },
+      { name: "History", link: "/aboutus#history" },
+      { name: "Vision and Objectives", link: "/aboutus#vision-and-objectives" },
+      { name: "Infrastructure", link: "/aboutus#infrastructure" },
     ],
   },
   {
