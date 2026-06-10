@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
 type SubLinkItem = {
   name: string;
@@ -17,52 +17,130 @@ type NavItem = {
 };
 
 const navList: NavItem[] = [
-  { name: "Home", link: "/" },
+  {
+    name: "Home",
+    link: "/",
+  },
   {
     name: "About us",
     link: "/aboutus",
     subLink: [
-      { name: "Message from Chairman", link: "/aboutus#message-from-chairman" },
-      { name: "Message from Principal", link: "/aboutus#message-from-principal" },
-      { name: "Governing Body", link: "/aboutus#governing-body" },
-      { name: "Master Plan", link: "/aboutus#master-plan" },
-      { name: "History", link: "/aboutus#history" },
-      { name: "Vision and Objectives", link: "/aboutus#vision-and-objectives" },
-      { name: "Infrastructure", link: "/aboutus#infrastructure" },
+      {
+        name: "Message from Chairman",
+        link: "/aboutus#message-from-chairman",
+      },
+      {
+        name: "Message from Principal",
+        link: "/aboutus#message-from-principal",
+      },
+      {
+        name: "Governing Body",
+        link: "/aboutus#governing-body",
+      },
+      {
+        name: "Master Plan",
+        link: "/aboutus#master-plan",
+      },
+      {
+        name: "History",
+        link: "/aboutus#history",
+      },
+      {
+        name: "Vision and Objectives",
+        link: "/aboutus#vision-and-objectives",
+      },
+      {
+        name: "Infrastructure",
+        link: "/aboutus#infrastructure",
+      },
     ],
   },
   {
     name: "Academic",
     link: "/academic",
     subLink: [
-      { name: "Code of Conducts", link: "/academic#code-of-conducts" },
-      { name: "Guideline for Parents", link: "/academic#guideline-for-parents" },
-      { name: "Dress Code", link: "/academic#dress-code" },
+      {
+        name: "Code of Conducts",
+        link: "/academic#code-of-conducts",
+      },
+      {
+        name: "Guideline for Parents",
+        link: "/academic#guideline-for-parents",
+      },
+      {
+        name: "Dress Code",
+        link: "/academic#dress-code",
+      },
       {
         name: "HomeWork And Class Lecture Documents",
         link: "/academic#homework-and-class-lecture-documents",
       },
-      { name: "Lesson Plan", link: "/academic#lesson-plan" },
-      { name: "Academic calendar", link: "/academic#academic-calendar" },
-      { name: "Syllabus", link: "/academic#syllabus" },
-      { name: "Class Routine", link: "/academic#class-routine" },
-      { name: "Co-curricular Activities", link: "/academic#co-curricular-activities" },
+      {
+        name: "Lesson Plan",
+        link: "/academic#lesson-plan",
+      },
+      {
+        name: "Academic calendar",
+        link: "/academic#academic-calendar",
+      },
+      {
+        name: "Syllabus",
+        link: "/academic#syllabus",
+      },
+      {
+        name: "Class Routine",
+        link: "/academic#class-routine",
+      },
+      {
+        name: "Co-curricular Activities",
+        link: "/academic#co-curricular-activities",
+      },
     ],
   },
   {
     name: "Information",
     link: "/information",
     subLink: [
-      { name: "Notice Board", link: "/information#notice-board" },
-      { name: "Payment Procedure", link: "/information#payment-procedure" },
-      { name: "Facilities", link: "/information#facilities" },
-      { name: "News and Events", link: "/information#news-and-events" },
-      { name: "Our Achievements", link: "/information#our-achievements" },
-      { name: "List of Holidays", link: "/information#list-of-holidays" },
-      { name: "Teachers Info", link: "/information#teachers-info" },
-      { name: "Student Info", link: "/information#student-info" },
-      { name: "Policies & Guidelines", link: "/information#policies-and-guidelines" },
-      { name: "Library", link: "/information#library" },
+      {
+        name: "Notice Board",
+        link: "/information#notice-board",
+      },
+      {
+        name: "Payment Procedure",
+        link: "/information#payment-procedure",
+      },
+      {
+        name: "Facilities",
+        link: "/information#facilities",
+      },
+      {
+        name: "News and Events",
+        link: "/information#news-and-events",
+      },
+      {
+        name: "Our Achievements",
+        link: "/information#our-achievements",
+      },
+      {
+        name: "List of Holidays",
+        link: "/information#list-of-holidays",
+      },
+      {
+        name: "Teachers Info",
+        link: "/information#teachers-info",
+      },
+      {
+        name: "Student Info",
+        link: "/information#student-info",
+      },
+      {
+        name: "Policies & Guidelines",
+        link: "/information#policies-and-guidelines",
+      },
+      {
+        name: "Library",
+        link: "/information#library",
+      },
       {
         name: "Health and Environmental Awarness Info",
         link: "/information#health-and-environmental-awarness-info",
@@ -73,38 +151,80 @@ const navList: NavItem[] = [
     name: "Admission",
     link: "/admission",
     subLink: [
-      { name: "Apply Now", link: "/admission#apply-now" },
-      { name: "Fast Facts", link: "/admission#fast-facts" },
-      { name: "Fees & Payment", link: "/admission#fees-and-payment" },
-      { name: "Scholarships", link: "/admission#scholarships" },
-      { name: "Transfer Procedures", link: "/admission#transfer-procedures" },
+      {
+        name: "Apply Now",
+        link: "/admission#apply-now",
+      },
+      {
+        name: "Fast Facts",
+        link: "/admission#fast-facts",
+      },
+      {
+        name: "Fees & Payment",
+        link: "/admission#fees-and-payment",
+      },
+      {
+        name: "Scholarships",
+        link: "/admission#scholarships",
+      },
+      {
+        name: "Transfer Procedures",
+        link: "/admission#transfer-procedures",
+      },
     ],
   },
   {
     name: "Campus Life",
     link: "/campuslife",
     subLink: [
-      { name: "Photo Gallery", link: "/campuslife#photo-gallery" },
-      { name: "Video Gallery", link: "/campuslife#video-gallery" },
+      {
+        name: "Photo Gallery",
+        link: "/campuslife#photo-gallery",
+      },
+      {
+        name: "Video Gallery",
+        link: "/campuslife#video-gallery",
+      },
     ],
   },
   {
     name: "Employment",
     link: "/employment",
     subLink: [
-      { name: "At a Glance", link: "/employment#at-a-glance" },
-      { name: "Employment Circulars", link: "/employment#employment-circulars" },
-      { name: "Recruitment Exam Results", link: "/employment#recruitment-exam-results" },
+      {
+        name: "At a Glance",
+        link: "/employment#at-a-glance",
+      },
+      {
+        name: "Employment Circulars",
+        link: "/employment#employment-circulars",
+      },
+      {
+        name: "Recruitment Exam Results",
+        link: "/employment#recruitment-exam-results",
+      },
     ],
   },
-  { name: "Contact", link: "/contact" },
+  {
+    name: "Contact",
+    link: "/contact",
+  },
   {
     name: "স্বাধীনতা কর্নার",
     link: "/freedomcorner",
     subLink: [
-      { name: "নোটিশ", link: "/freedomcorner#notices" },
-      { name: "ছবির গ্যালারী", link: "/freedomcorner#photo-gallery" },
-      { name: "ভিডিও গ্যালারী", link: "/freedomcorner#video-gallery" },
+      {
+        name: "নোটিশ",
+        link: "/freedomcorner#notices",
+      },
+      {
+        name: "ছবির গ্যালারী",
+        link: "/freedomcorner#photo-gallery",
+      },
+      {
+        name: "ভিডিও গ্যালারী",
+        link: "/freedomcorner#video-gallery",
+      },
     ],
   },
 ];
@@ -144,11 +264,34 @@ const Navber = () => {
     setActiveSubIndex((prev) => (prev === index ? null : index));
   };
 
+  const handleMenuLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    link: string
+  ) => {
+    closeMobileMenu();
+
+    if (typeof window === "undefined") return;
+
+    const targetUrl = new URL(link, window.location.origin);
+    const currentPath = window.location.pathname;
+
+    if (targetUrl.pathname === currentPath) {
+      event.preventDefault();
+
+      window.history.pushState(
+        null,
+        "",
+        `${targetUrl.pathname}${targetUrl.hash}`
+      );
+
+      window.dispatchEvent(new Event("hashchange"));
+    }
+  };
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setToggle(false);
-        setActiveSubIndex(null);
+        closeMobileMenu();
       }
     };
 
@@ -161,16 +304,20 @@ const Navber = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-[#EBEBEB] shadow-sm">
-      <div className="relative mx-auto flex h-[60px] max-w-7xl items-center justify-between gap-3 px-4">
+      <div className="relative mx-auto flex h-15 max-w-7xl items-center justify-between gap-3 px-4">
         {/* Logo */}
-        <Link href="/" onClick={closeMobileMenu} className="shrink-0">
+        <Link
+          href="/"
+          onClick={(event) => handleMenuLinkClick(event, "/")}
+          className="shrink-0"
+        >
           <Image
             src="/assets/images/logo-mane.png"
             alt="Logo"
             width={150}
             height={52}
             priority
-            className="h-[50px] w-auto object-contain transition-transform duration-300 hover:scale-[1.03]"
+            className="h-12.5 w-auto object-contain transition-transform duration-300 hover:scale-[1.03]"
           />
         </Link>
 
@@ -184,7 +331,7 @@ const Navber = () => {
             return (
               <div
                 key={`${item.name}-${index}`}
-                className={`group relative z-20 flex h-[60px] items-center gap-1 border-b-4 font-semibold transition-all duration-300 ${
+                className={`group relative z-20 flex h-15 items-center gap-1 border-b-4 font-semibold transition-all duration-300 ${
                   isActive
                     ? "border-primary"
                     : "border-transparent hover:border-primary"
@@ -192,6 +339,7 @@ const Navber = () => {
               >
                 <Link
                   href={item.link}
+                  onClick={(event) => handleMenuLinkClick(event, item.link)}
                   className="whitespace-nowrap text-black transition-colors duration-300 hover:text-primary"
                 >
                   {item.name}
@@ -206,6 +354,9 @@ const Navber = () => {
                         <Link
                           key={`${subItem.name}-${subIndex}`}
                           href={subItem.link}
+                          onClick={(event) =>
+                            handleMenuLinkClick(event, subItem.link)
+                          }
                           className="rounded-md px-2 py-2 text-sm text-black transition-all duration-300 hover:bg-primary/10 hover:pl-4 hover:text-primary"
                         >
                           {subItem.name}
@@ -266,7 +417,9 @@ const Navber = () => {
                   >
                     <Link
                       href={item.link}
-                      onClick={closeMobileMenu}
+                      onClick={(event) =>
+                        handleMenuLinkClick(event, item.link)
+                      }
                       className="w-full px-3 py-3 font-semibold text-black transition-colors duration-300 hover:text-primary"
                     >
                       {item.name}
@@ -290,7 +443,7 @@ const Navber = () => {
 
                   <div
                     className={`overflow-hidden transition-all duration-300 ${
-                      isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                      isOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
                     {item.subLink && (
@@ -299,7 +452,9 @@ const Navber = () => {
                           <Link
                             key={`${subItem.name}-${subIndex}`}
                             href={subItem.link}
-                            onClick={closeMobileMenu}
+                            onClick={(event) =>
+                              handleMenuLinkClick(event, subItem.link)
+                            }
                             className="rounded-md border-b border-dotted border-primary px-3 py-2 text-sm font-medium text-black transition-all duration-300 hover:bg-primary/10 hover:pl-5 hover:text-primary"
                           >
                             {subItem.name}
