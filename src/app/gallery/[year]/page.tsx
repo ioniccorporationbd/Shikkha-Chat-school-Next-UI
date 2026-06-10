@@ -216,7 +216,7 @@ const GalleryYearPage = () => {
   if (!isValidGalleryYear(year)) {
     return (
       <main className="min-h-screen bg-secondary px-4 py-10">
-        <section className="mx-auto max-w-[900px] rounded-2xl bg-white p-8 text-center shadow-sm">
+        <section className="mx-auto max-w-225 rounded-2xl bg-white p-8 text-center shadow-sm">
           <h1 className="text-3xl font-black text-black">Gallery Not Found</h1>
           <p className="mt-3 text-gray-600">
             This year gallery does not exist.
@@ -235,7 +235,7 @@ const GalleryYearPage = () => {
 
   return (
     <main className="min-h-screen bg-secondary px-3 py-8 sm:px-4 sm:py-10">
-      <section className="mx-auto max-w-[1280px]">
+      <section className="mx-auto max-w-7xl">
         <div className="mb-8 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/5 sm:p-7">
           <Link
             href="/gallery"
@@ -258,7 +258,7 @@ const GalleryYearPage = () => {
                 {selectedYearInfo?.description}
               </p>
 
-              <div className="mt-4 h-[3px] w-24 rounded-full bg-primary" />
+              <div className="mt-4 h-0.75 w-24 rounded-full bg-primary" />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
@@ -302,7 +302,7 @@ const GalleryYearPage = () => {
                 onClick={() => openPhoto(index)}
                 className="group overflow-hidden rounded-2xl bg-white text-left shadow-md ring-1 ring-secondary transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:ring-primary/40"
               >
-                <div className="relative h-[230px] w-full overflow-hidden bg-secondary">
+                <div className="relative h-57.5 w-full overflow-hidden bg-secondary">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -356,7 +356,7 @@ const GalleryYearPage = () => {
                 rel="noopener noreferrer"
                 className="group overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-secondary transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:ring-primary/40"
               >
-                <div className="relative h-[230px] w-full overflow-hidden bg-secondary">
+                <div className="relative h-57.5 w-full overflow-hidden bg-secondary">
                   <Image
                     src={item.thumbnail}
                     alt={item.title}
@@ -389,7 +389,7 @@ const GalleryYearPage = () => {
 
       {activePhoto && (
         <section
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 px-3 py-20"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/90 px-3 py-20"
           onWheel={handleWheelZoom}
         >
           <button
