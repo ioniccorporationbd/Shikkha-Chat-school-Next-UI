@@ -210,6 +210,10 @@ const navList: NavItem[] = [
     link: "/contact",
   },
   {
+    name: "Gallery",
+    link: "/gallery",
+  },
+  {
     name: "স্বাধীনতা কর্নার",
     link: "/freedomcorner",
     subLink: [

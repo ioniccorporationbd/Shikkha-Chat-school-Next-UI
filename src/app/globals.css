@@ -15,7 +15,7 @@
 ========================= */
 
 :root {
-  --primary-color: #ff0000;
+  --primary-color: #6a3d3d;
   --secondary-color: #e2edf7;
   --primary: var(--primary-color);
   --secondary: var(--secondary-color);
