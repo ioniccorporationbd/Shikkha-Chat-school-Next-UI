@@ -3,20 +3,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
+      // Picsum Photos — used in gallery photo pool
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
+        hostname: "picsum.photos",
       },
+      // YouTube thumbnails — used in gallery video pool
       {
         protocol: "https",
         hostname: "img.youtube.com",
-        pathname: "/**",
       },
+      // Unsplash — keep in case you switch back or use elsewhere
       {
         protocol: "https",
-        hostname: "i.ytimg.com",
-        pathname: "/**",
+        hostname: "images.unsplash.com",
       },
     ],
   },

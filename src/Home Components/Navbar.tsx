@@ -175,15 +175,15 @@ const navList: NavItem[] = [
   },
   {
     name: "Campus Life",
-    link: "/campuslife",
+    link: "/gallery",
     subLink: [
       {
         name: "Photo Gallery",
-        link: "/campuslife#photo-gallery",
+        link: "/gallery",
       },
       {
         name: "Video Gallery",
-        link: "/campuslife#video-gallery",
+        link: "/gallery",
       },
     ],
   },
@@ -210,10 +210,6 @@ const navList: NavItem[] = [
     link: "/contact",
   },
   {
-    name: "Gallery",
-    link: "/gallery",
-  },
-  {
     name: "স্বাধীনতা কর্নার",
     link: "/freedomcorner",
     subLink: [
@@ -223,11 +219,11 @@ const navList: NavItem[] = [
       },
       {
         name: "ছবির গ্যালারী",
-        link: "/freedomcorner#photo-gallery",
+        link: "/gallery",
       },
       {
         name: "ভিডিও গ্যালারী",
-        link: "/freedomcorner#video-gallery",
+        link: "/gallery",
       },
     ],
   },
@@ -253,7 +249,7 @@ const DownIcon = ({ open = false }: { open?: boolean }) => {
   );
 };
 
-const Navber = () => {
+const Navbar = () => {
   const pathname = usePathname();
 
   const [toggle, setToggle] = useState<boolean>(false);
@@ -265,7 +261,9 @@ const Navber = () => {
   };
 
   const handleSubToggle = (index: number) => {
-    setActiveSubIndex((prev) => (prev === index ? null : index));
+    setActiveSubIndex((previousIndex) =>
+      previousIndex === index ? null : index
+    );
   };
 
   const handleMenuLinkClick = (
@@ -279,7 +277,7 @@ const Navber = () => {
     const targetUrl = new URL(link, window.location.origin);
     const currentPath = window.location.pathname;
 
-    if (targetUrl.pathname === currentPath) {
+    if (targetUrl.pathname === currentPath && targetUrl.hash) {
       event.preventDefault();
 
       window.history.pushState(
@@ -308,8 +306,7 @@ const Navber = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-[#EBEBEB] shadow-sm">
-      <div className="relative mx-auto flex h-15 max-w-7xl items-center justify-between gap-3 px-4">
-        {/* Logo */}
+      <div className="relative mx-auto flex h-[60px] max-w-7xl items-center justify-between gap-3 px-4">
         <Link
           href="/"
           onClick={(event) => handleMenuLinkClick(event, "/")}
@@ -321,11 +318,10 @@ const Navber = () => {
             width={150}
             height={52}
             priority
-            className="h-12.5 w-auto object-contain transition-transform duration-300 hover:scale-[1.03]"
+            className="h-[50px] w-auto object-contain transition-transform duration-300 hover:scale-[1.03]"
           />
         </Link>
 
-        {/* Desktop Navbar */}
         <nav className="hidden flex-1 items-center justify-center gap-3 text-[13px] font-semibold xl:flex 2xl:gap-4 2xl:text-[14px]">
           {navList.map((item, index) => {
             const isActive =
@@ -335,7 +331,7 @@ const Navber = () => {
             return (
               <div
                 key={`${item.name}-${index}`}
-                className={`group relative z-20 flex h-15 items-center gap-1 border-b-4 font-semibold transition-all duration-300 ${
+                className={`group relative z-20 flex h-[60px] items-center gap-1 border-b-4 font-semibold transition-all duration-300 ${
                   isActive
                     ? "border-primary"
                     : "border-transparent hover:border-primary"
@@ -374,29 +370,24 @@ const Navber = () => {
           })}
         </nav>
 
-        {/* Desktop Parents Login */}
         <div className="hidden shrink-0 xl:block">
           <Link
-            href="https://education.ionicerp.xyz"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/login"
             className="inline-flex rounded-md bg-primary px-5 py-2 text-base font-bold text-white transition-all duration-300 hover:-translate-y-px hover:bg-primary/90 hover:shadow-md"
           >
-            Parents Login
+            Login
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
         <button
           type="button"
-          onClick={() => setToggle((prev) => !prev)}
+          onClick={() => setToggle((previousValue) => !previousValue)}
           className="flex h-10 w-10 items-center justify-center rounded-md text-primary transition-all duration-300 hover:bg-primary/10 xl:hidden"
           aria-label="Toggle menu"
         >
           {toggle ? <CloseIcon /> : <MenuIcon />}
         </button>
 
-        {/* Mobile Menu */}
         <div
           className={`absolute left-0 top-full w-full bg-white shadow-xl transition-all duration-300 xl:hidden ${
             toggle
@@ -421,9 +412,7 @@ const Navber = () => {
                   >
                     <Link
                       href={item.link}
-                      onClick={(event) =>
-                        handleMenuLinkClick(event, item.link)
-                      }
+                      onClick={(event) => handleMenuLinkClick(event, item.link)}
                       className="w-full px-3 py-3 font-semibold text-black transition-colors duration-300 hover:text-primary"
                     >
                       {item.name}
@@ -447,7 +436,7 @@ const Navber = () => {
 
                   <div
                     className={`overflow-hidden transition-all duration-300 ${
-                      isOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"
+                      isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
                     {item.subLink && (
@@ -472,12 +461,11 @@ const Navber = () => {
             })}
 
             <Link
-              href="https://education.ionicerp.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/login"
+              onClick={closeMobileMenu}
               className="mt-3 rounded-lg bg-primary px-4 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-primary/90"
             >
-              Parents Login
+              Login
             </Link>
           </nav>
         </div>
@@ -486,4 +474,4 @@ const Navber = () => {
   );
 };
 
-export default Navber;
+export default Navbar;

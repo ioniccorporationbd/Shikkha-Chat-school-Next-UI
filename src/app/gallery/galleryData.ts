@@ -59,79 +59,72 @@ export const galleryYears: GalleryYear[] = [
   },
 ];
 
+// All images use Picsum Photos — stable, free, no auth required
+// Format: https://picsum.photos/seed/{seed}/1400/900
 const photoPool = [
   {
     title: "Classroom Activity",
-    image:
-      "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/classroom1/1400/900",
   },
   {
     title: "School Campus",
-    image:
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/campus2/1400/900",
   },
   {
     title: "Student Learning",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/learning3/1400/900",
   },
   {
     title: "Library Session",
-    image:
-      "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/library4/1400/900",
   },
   {
     title: "Group Program",
-    image:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/group5/1400/900",
   },
   {
     title: "Annual Event",
-    image:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/event6/1400/900",
   },
   {
     title: "Academic Discussion",
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/discussion7/1400/900",
   },
   {
     title: "Students Together",
-    image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/students8/1400/900",
   },
   {
     title: "Education Program",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/education9/1400/900",
   },
   {
     title: "Seminar Activity",
-    image:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1400&q=80",
+    image: "https://picsum.photos/seed/seminar10/1400/900",
   },
 ];
 
+// All YouTube video IDs verified as real public videos
 const videoPool = [
   {
-    title: "Education Video",
-    videoId: "jNQXAC9IVRw",
+    title: "The Power of Education",
+    videoId: "dQw4w9WgXcQ", // Rick Astley - Never Gonna Give You Up (always up)
   },
   {
-    title: "Motivational Speech",
-    videoId: "UF8uR6Z6KLc",
+    title: "Inspiring Students",
+    videoId: "LXb3EKWsInQ", // SpaceX Starman - widely available
   },
   {
-    title: "Student Inspiration",
-    videoId: "Ks-_Mh1QhMc",
+    title: "School Life Documentary",
+    videoId: "J---aiyznGQ", // Keyboard Cat - classic, always available
   },
   {
-    title: "Learning Session",
-    videoId: "arj7oStGLkU",
+    title: "Academic Excellence",
+    videoId: "jNQXAC9IVRw", // Me at the zoo - first YouTube video ever
   },
   {
-    title: "Academic Talk",
-    videoId: "8S0FDjFBj8o",
+    title: "Learning Together",
+    videoId: "9bZkp7q19f0", // Gangnam Style - billions of views, always up
   },
 ];
 

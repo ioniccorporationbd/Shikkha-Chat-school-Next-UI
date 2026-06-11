@@ -108,9 +108,6 @@ const GalleryPage = () => {
                     </span>
                   </div>
 
-                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-4 py-1 text-sm font-black text-primary shadow">
-                    {item.year}
-                  </div>
                 </div>
 
                 <div className="p-4">
@@ -122,19 +119,6 @@ const GalleryPage = () => {
                     {item.description}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-secondary px-3 py-1 text-xs font-black text-primary">
-                      {photoCount} Photos
-                    </span>
-
-                    <span className="rounded-full bg-secondary px-3 py-1 text-xs font-black text-primary">
-                      {videoCount} Videos
-                    </span>
-
-                    <span className="rounded-full bg-primary px-3 py-1 text-xs font-black text-white">
-                      View Gallery
-                    </span>
-                  </div>
                 </div>
               </Link>
             );
