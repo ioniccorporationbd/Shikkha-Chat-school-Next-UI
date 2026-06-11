@@ -1,0 +1,268 @@
+[
+  {
+    "year": "2020",
+    "title": "Photo Gallery 2020",
+    "description": "School photo collection, programs, activities, and memories of 2020.",
+    "coverImage": "/assets/Banner images/slider1.jpg",
+    "photos": [
+      {
+        "id": "2020-photo-1",
+        "title": "Campus Assembly 2020",
+        "description": "Memorable campus assembly moment from 2020.",
+        "image": "/assets/Banner images/slider1.jpg"
+      },
+      {
+        "id": "2020-photo-2",
+        "title": "Academic Program 2020",
+        "description": "Memorable academic program moment from 2020.",
+        "image": "/assets/Banner images/slider2.jpg"
+      },
+      {
+        "id": "2020-photo-3",
+        "title": "School Event 2020",
+        "description": "Memorable school event moment from 2020.",
+        "image": "/assets/Banner images/slider3.jpg"
+      },
+      {
+        "id": "2020-photo-4",
+        "title": "Student Activity 2020",
+        "description": "Memorable student activity moment from 2020.",
+        "image": "/assets/Banner images/slider4.jpg"
+      },
+      {
+        "id": "2020-photo-5",
+        "title": "Annual Function 2020",
+        "description": "Memorable annual function moment from 2020.",
+        "image": "/assets/Banner images/slider5.jpg"
+      }
+    ]
+  },
+  {
+    "year": "2021",
+    "title": "Photo Gallery 2021",
+    "description": "School photo collection, programs, activities, and memories of 2021.",
+    "coverImage": "/assets/Banner images/slider2.jpg",
+    "photos": [
+      {
+        "id": "2021-photo-1",
+        "title": "Academic Program 2021",
+        "description": "Memorable academic program moment from 2021.",
+        "image": "/assets/Banner images/slider2.jpg"
+      },
+      {
+        "id": "2021-photo-2",
+        "title": "School Event 2021",
+        "description": "Memorable school event moment from 2021.",
+        "image": "/assets/Banner images/slider3.jpg"
+      },
+      {
+        "id": "2021-photo-3",
+        "title": "Student Activity 2021",
+        "description": "Memorable student activity moment from 2021.",
+        "image": "/assets/Banner images/slider4.jpg"
+      },
+      {
+        "id": "2021-photo-4",
+        "title": "Annual Function 2021",
+        "description": "Memorable annual function moment from 2021.",
+        "image": "/assets/Banner images/slider5.jpg"
+      },
+      {
+        "id": "2021-photo-5",
+        "title": "Annual Celebration 2021",
+        "description": "Memorable annual celebration moment from 2021.",
+        "image": "/assets/Slider1 images/anual.jpg"
+      }
+    ]
+  },
+  {
+    "year": "2022",
+    "title": "Photo Gallery 2022",
+    "description": "School photo collection, programs, activities, and memories of 2022.",
+    "coverImage": "/assets/Banner images/slider3.jpg",
+    "photos": [
+      {
+        "id": "2022-photo-1",
+        "title": "School Event 2022",
+        "description": "Memorable school event moment from 2022.",
+        "image": "/assets/Banner images/slider3.jpg"
+      },
+      {
+        "id": "2022-photo-2",
+        "title": "Student Activity 2022",
+        "description": "Memorable student activity moment from 2022.",
+        "image": "/assets/Banner images/slider4.jpg"
+      },
+      {
+        "id": "2022-photo-3",
+        "title": "Annual Function 2022",
+        "description": "Memorable annual function moment from 2022.",
+        "image": "/assets/Banner images/slider5.jpg"
+      },
+      {
+        "id": "2022-photo-4",
+        "title": "Annual Celebration 2022",
+        "description": "Memorable annual celebration moment from 2022.",
+        "image": "/assets/Slider1 images/anual.jpg"
+      },
+      {
+        "id": "2022-photo-5",
+        "title": "Campus Building 2022",
+        "description": "Memorable campus building moment from 2022.",
+        "image": "/assets/Slider1 images/building.jpg"
+      }
+    ]
+  },
+  {
+    "year": "2023",
+    "title": "Photo Gallery 2023",
+    "description": "School photo collection, programs, activities, and memories of 2023.",
+    "coverImage": "/assets/Banner images/slider4.jpg",
+    "photos": [
+      {
+        "id": "2023-photo-1",
+        "title": "Student Activity 2023",
+        "description": "Memorable student activity moment from 2023.",
+        "image": "/assets/Banner images/slider4.jpg"
+      },
+      {
+        "id": "2023-photo-2",
+        "title": "Annual Function 2023",
+        "description": "Memorable annual function moment from 2023.",
+        "image": "/assets/Banner images/slider5.jpg"
+      },
+      {
+        "id": "2023-photo-3",
+        "title": "Annual Celebration 2023",
+        "description": "Memorable annual celebration moment from 2023.",
+        "image": "/assets/Slider1 images/anual.jpg"
+      },
+      {
+        "id": "2023-photo-4",
+        "title": "Campus Building 2023",
+        "description": "Memorable campus building moment from 2023.",
+        "image": "/assets/Slider1 images/building.jpg"
+      },
+      {
+        "id": "2023-photo-5",
+        "title": "Student Parade 2023",
+        "description": "Memorable student parade moment from 2023.",
+        "image": "/assets/Slider1 images/parod.jpg"
+      }
+    ]
+  },
+  {
+    "year": "2024",
+    "title": "Photo Gallery 2024",
+    "description": "School photo collection, programs, activities, and memories of 2024.",
+    "coverImage": "/assets/Banner images/slider5.jpg",
+    "photos": [
+      {
+        "id": "2024-photo-1",
+        "title": "Annual Function 2024",
+        "description": "Memorable annual function moment from 2024.",
+        "image": "/assets/Banner images/slider5.jpg"
+      },
+      {
+        "id": "2024-photo-2",
+        "title": "Annual Celebration 2024",
+        "description": "Memorable annual celebration moment from 2024.",
+        "image": "/assets/Slider1 images/anual.jpg"
+      },
+      {
+        "id": "2024-photo-3",
+        "title": "Campus Building 2024",
+        "description": "Memorable campus building moment from 2024.",
+        "image": "/assets/Slider1 images/building.jpg"
+      },
+      {
+        "id": "2024-photo-4",
+        "title": "Student Parade 2024",
+        "description": "Memorable student parade moment from 2024.",
+        "image": "/assets/Slider1 images/parod.jpg"
+      },
+      {
+        "id": "2024-photo-5",
+        "title": "Study Program 2024",
+        "description": "Memorable study program moment from 2024.",
+        "image": "/assets/oddhayan imagea/oddoyan.png"
+      }
+    ]
+  },
+  {
+    "year": "2025",
+    "title": "Photo Gallery 2025",
+    "description": "School photo collection, programs, activities, and memories of 2025.",
+    "coverImage": "/assets/Slider1 images/anual.jpg",
+    "photos": [
+      {
+        "id": "2025-photo-1",
+        "title": "Annual Celebration 2025",
+        "description": "Memorable annual celebration moment from 2025.",
+        "image": "/assets/Slider1 images/anual.jpg"
+      },
+      {
+        "id": "2025-photo-2",
+        "title": "Campus Building 2025",
+        "description": "Memorable campus building moment from 2025.",
+        "image": "/assets/Slider1 images/building.jpg"
+      },
+      {
+        "id": "2025-photo-3",
+        "title": "Student Parade 2025",
+        "description": "Memorable student parade moment from 2025.",
+        "image": "/assets/Slider1 images/parod.jpg"
+      },
+      {
+        "id": "2025-photo-4",
+        "title": "Study Program 2025",
+        "description": "Memorable study program moment from 2025.",
+        "image": "/assets/oddhayan imagea/oddoyan.png"
+      },
+      {
+        "id": "2025-photo-5",
+        "title": "Achievement Program 2025",
+        "description": "Memorable achievement program moment from 2025.",
+        "image": "/assets/Courses images/Our Achievement.png"
+      }
+    ]
+  },
+  {
+    "year": "2026",
+    "title": "Photo Gallery 2026",
+    "description": "School photo collection, programs, activities, and memories of 2026.",
+    "coverImage": "/assets/Slider1 images/building.jpg",
+    "photos": [
+      {
+        "id": "2026-photo-1",
+        "title": "Campus Building 2026",
+        "description": "Memorable campus building moment from 2026.",
+        "image": "/assets/Slider1 images/building.jpg"
+      },
+      {
+        "id": "2026-photo-2",
+        "title": "Student Parade 2026",
+        "description": "Memorable student parade moment from 2026.",
+        "image": "/assets/Slider1 images/parod.jpg"
+      },
+      {
+        "id": "2026-photo-3",
+        "title": "Study Program 2026",
+        "description": "Memorable study program moment from 2026.",
+        "image": "/assets/oddhayan imagea/oddoyan.png"
+      },
+      {
+        "id": "2026-photo-4",
+        "title": "Achievement Program 2026",
+        "description": "Memorable achievement program moment from 2026.",
+        "image": "/assets/Courses images/Our Achievement.png"
+      },
+      {
+        "id": "2026-photo-5",
+        "title": "Campus Assembly 2026",
+        "description": "Memorable campus assembly moment from 2026.",
+        "image": "/assets/Banner images/slider1.jpg"
+      }
+    ]
+  }
+]
