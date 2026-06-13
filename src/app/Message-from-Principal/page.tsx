@@ -1,123 +1,121 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ChairmanMessage() {
+export default function PrincipalMessage() {
   return (
-    <div className="min-h-screen bg-[#f0f0f5] font-sans">
-      <div className="max-w-5xl mx-auto px-4 py-10">
-        <div className="flex justify-center mb-6">
+    <div className="min-h-screen bg-[#f9f9f9] font-sans antialiased text-[#333333]">
+      <div className="max-w-7xl mx-auto px-8 py-16">
+        {/* Back to Home Button (Bigger text and padding) */}
+        <div className="flex justify-center mb-10">
           <Link
             href="/"
-            className="bg-[#1a5c3a] text-white text-sm px-5 py-2 rounded-full hover:bg-[#144d30] transition-colors"
+            className="bg-[#0f2d24] text-white text-base font-semibold px-8 py-3 rounded-full hover:bg-[#163f33] transition-colors shadow"
           >
             Back to Home
           </Link>
         </div>
 
-        <h1 className="text-center text-2xl font-bold text-gray-800 mb-1">
-          চেয়ারম্যানের বাণী
+        {/* Main Title Section (Enlarged text and spacing) */}
+        <h1 className="text-center text-4xl font-black tracking-wide text-gray-900 mb-4">
+          অধ্যক্ষের বাণী
         </h1>
-        <div className="flex justify-center mb-8">
-          <div className="w-12 h-[3px] bg-gray-800 rounded" />
+        <div className="flex justify-center mb-16">
+          <div className="w-24 h-[4px] bg-gray-900" />
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8 items-start">
-          <div className="flex flex-col items-center flex-shrink-0">
-            <div className="w-[220px] h-[260px] relative overflow-hidden rounded-sm shadow">
+        {/* Layout Grid (Expanded maximum layout space) */}
+        <div className="flex flex-col lg:flex-row gap-16 items-start max-w-6xl mx-auto">
+          {/* Profile Sidebar (Significantly enlarged image container) */}
+          <div className="flex flex-col items-center flex-shrink-0 mx-auto lg:mx-0">
+            <div className="w-[340px] h-[410px] relative overflow-hidden rounded-xl shadow-md border border-gray-100 bg-black">
               <Image
-                src="/chairman.jpg"
-                alt="ড. মোহাম্মদ রফিকুল আমীন"
+                src="/assets/images/managing-director.avif"
+                alt="অধ্যক্ষের নাম"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
+                priority
               />
             </div>
-            <p className="text-sm text-gray-700 mt-3 text-center">
-              ড. মোহাম্মদ রফিকুল আমীন
+            <p className="text-xl font-bold text-gray-800 mt-6 text-center tracking-wide">
+              [অধ্যক্ষের নাম এখানে লিখুন]
             </p>
           </div>
 
-          <div className="flex-1 text-[15px] leading-relaxed text-gray-700">
-            <p className="text-xs text-gray-400 mb-1">চেয়ারম্যানের বাণী</p>
+          {/* Message Text Content (Enlarged text size and paragraph layout) */}
+          <div className="flex-1 text-xl leading-[1.9] text-[#222222] font-normal">
+            <p className="text-sm text-gray-400 mb-3 font-semibold tracking-wider">অধ্যক্ষের বাণী</p>
 
-            <h2 className="text-lg font-bold text-gray-800 mb-4">
-              &quot;সবার জন্য সুন্দর আবাসন – আমাদের জাতীয় অঙ্গীকার&quot;
+            <h2 className="text-2xl font-extrabold text-gray-900 mb-8 tracking-wide">
+              &quot;মানসম্মত শিক্ষা ও নৈতিক চরিত্র গঠন – আমাদের মূল অঙ্গীকার&quot;
             </h2>
 
-            <p className="mb-3">প্রিয় দেশবাসী ও সম্ভাব্য গ্রাহকবৃন্দ,</p>
+            <p className="mb-6">প্রিয় অভিভাবক, শিক্ষার্থীবৃন্দ ও সুধীজন,</p>
 
-            <p className="mb-3">
-              স্বপ্ন শহর প্রোপার্টিজ লিমিটেড প্রতিষ্ঠার পেছনে রয়েছে একটি গভীর সামাজিক
-              দায়বোধ।
+            <p className="mb-6">
+              আমাদের এই শিক্ষাপ্রতিষ্ঠান প্রতিষ্ঠার পেছনে রয়েছে একটি সুদূরপ্রসারী সামাজিক ও শিক্ষাগত দায়বোধ।
             </p>
 
-            <p className="mb-3 text-[#1a5c3a]">
-              ক. বাংলাদেশের দ্রুত নগরায়ণ এবং জনসংখ্যা বৃদ্ধির ফলে আবাসন সংকট দিন
-              দিন তীব্রতর হচ্ছে, বিশেষ করে নিম্ন এবং নিম্ন-মধ্যবিত্ত পরিবারের জন্য। এই
-              চ্যালেঞ্জ মোকাবেলায় আমরা একটি যুগান্তকারী উদ্যোগ হাতে নিয়েছি: আগামী
-              দশ বছরের মধ্যে ৭৫০ বর্গফুটের – ১০ লক্ষ ফ্ল্যাট নির্মাণের মহাপরিকল্পনা।
+            {/* Section A - Blue Highlighted Paragraph (Bigger text weight and size) */}
+            <p className="mb-6 text-[#1d4ed8] font-semibold">
+              ক. একবিংশ শতাব্দীর চ্যালেঞ্জ মোকাবেলায় শিক্ষার্থীদের দক্ষ ও যোগ্য নাগরিক হিসেবে গড়ে তোলাই আমাদের লক্ষ্য। এই মহৎ উদ্দেশ্য সফল করতে আমরা আগামী শিক্ষাবর্ষগুলোতে সর্বাধুনিক ডিজিটাল ক্লাসরুম, বিশ্বমানের ল্যাবরেটরি এবং যুগোপযোগী পাঠ্যক্রম বাস্তবায়নের একটি মহাপরিকল্পনা হাতে নিয়েছি।
             </p>
 
-            <p className="mb-3">
-              আমরা বিশ্বাস করি, প্রতিটি মানুষের মৌলিক অধিকারের মধ্যে যোগ্য আবাসন
-              অন্যতম। একটি পরিবার যখন স্থায়ী ও নিরাপদ বাসস্থান পায়, তখনই তারা জাতি
-              গঠনের মূলধারায় অবদান রাখতে সক্ষম হয়। আমাদের এই প্রকল্প শুধুমাত্র ইট-
-              পাথরের নির্মাণ নয়, বরং এটি একটি সামাজিক আন্দোলন।
+            <p className="mb-6">
+              আমরা বিশ্বাস করি, প্রতিটি শিশুর সুপ্ত প্রতিভা বিকাশের মৌলিক অধিকার রয়েছে। একজন শিক্ষার্থী যখন একটি নিরাপদ, বৈষম্যহীন এবং অনুপ্রেরণামূলক পরিবেশ পায়, তখনই সে তার মেধার পূর্ণ বিকাশ ঘটাতে পারে। আমাদের এই প্রচেষ্টা শুধুমাত্র পুঁথিগত শিক্ষা প্রদানের মধ্যে সীমাবদ্ধ নয়, এটি একটি আদর্শ প্রজন্ম গড়ার আন্দোলন।
             </p>
 
-            <p className="mb-3">
-              আমরা গড়ে তুলতে চাই সম্পূর্ণ স্বয়ংসম্পূর্ণ আবাসন কমপ্লেক্স, যেখানে প্রতিটি
-              পরিবার পাবে:
+            <p className="mb-6">
+              আমরা গড়ে তুলতে চাই একটি আদর্শ ও আধুনিক শিক্ষাঙ্গন, যেখানে প্রতিটি শিক্ষার্থী পাবে:
             </p>
 
-            <ul className="mb-4 space-y-1 pl-1">
+            {/* Green Bullet Points (Enlarged markers and layout spacing) */}
+            <ul className="mb-8 space-y-4 pl-2 font-bold text-xl">
               {[
-                "পরিকল্পিত ও সবুজ পরিবেশ",
-                "প্রয়োজনীয় নাগরিক সুবিধাদি",
-                "নিরাপদ ও স্বাস্থ্যসম্মত বসবাসের পরিবেশ",
-                "সামাজিক ও ধর্মীয় প্রতিষ্ঠানের সুবিধা",
+                "পরিকল্পিত, মনোরম ও সবুজ ক্যাম্পাস",
+                "আধুনিক প্রযুক্তিভিত্তিক শিক্ষা ও মাল্টিমিডিয়া ক্লাসরুম",
+                "সহ-শিক্ষা কার্যক্রম ও ক্রীড়া চর্চার সুবর্ণ সুযোগ",
+                "নৈতিকতা, শৃঙ্খলা ও মানবিক মূল্যবোধের শিক্ষা",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2 text-[#1a5c3a]">
-                  <span className="mt-[6px] w-[6px] h-[6px] rounded-full bg-[#1a5c3a] flex-shrink-0" />
-                  {item}
+                <li key={item} className="flex items-center gap-4 text-[#16a34a]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] flex-shrink-0" />
+                  <span className="text-[#16a34a]">{item}</span>
                 </li>
               ))}
             </ul>
 
-            <p className="mb-3 text-[#1a5c3a]">
-              খ. এই উপলক্ষে দেশের ব্যাপক কর্ম সংস্থান এর চাহিদা পূরণে আমরা উদ্যোগ
-              নিয়েছি প্রাথমিক ভাবে কমে বেশি ২০০০০ ( বিশ হাজার) বিক্রয় ও বিপণন কর্মী
-              নিয়োগ দেয়ার। যেখানে থাকবে তাদের নিজ যোগ্যতা ও কর্মক্ষমতা অনুযায়ী
-              সন্তোষজনক আর্থিক সুবিধা অর্জনের।
-            </p>
-
-            <p className="mb-3">
-              আমাদের লক্ষ্য হলো এমন একটি বাংলাদেশ গড়ে তোলা, যেখানে আয় নির্বিশেষে
-              প্রতিটি নাগরিকের জন্য নিজস্ব একটি সুন্দর বাসস্থান থাকবে।
-            </p>
-
-            <p className="mb-3">
-              আমরা চাই আমাদের ভবিষ্যৎ প্রজন্ম যেন সুস্থ ও সুন্দর পরিবেশে বেড়ে উঠতে
-              পারে।
-            </p>
-
-            <p className="mb-3">
-              এই মহতী উদ্দেশ্যে আমরা সকলের সহযোগিতা এবং আস্থা কামনা করছি।
+            {/* Section B - Blue Highlighted Paragraph */}
+            <p className="mb-6 text-[#1d4ed8] font-semibold">
+              খ. শিক্ষক ও শিক্ষার্থীদের মানোন্নয়ন নিশ্চিত করতে আমরা নিয়মিত শিক্ষক প্রশিক্ষণ কর্মশালা এবং মেধা অন্বেষণ কর্মসূচির উদ্যোগ নিয়েছি। মেধার সঠিক মূল্যায়ন এবং যোগ্য শিক্ষক মন্ডলীর পরিচর্যায় শিক্ষার্থীরা যেন তাদের কাঙ্ক্ষিত লক্ষ্যে পৌঁছাতে পারে, আমরা সেই পরিবেশ নিশ্চিত করছি।
             </p>
 
             <p className="mb-6">
-              আসুন, আমরা সবাই মিলে গড়ে তুলি আমাদের কাঙ্ক্ষিত বাসস্থান, স্বপ্নের বাড়ি তথা
-              স্বপ্নের শহর।
+              আমাদের মূল লক্ষ্য হলো এমন একটি শিক্ষিত সমাজ গড়ে তোলা, যেখানে প্রতিটি শিক্ষার্থী দেশপ্রেম ও সততার আদর্শে উজ্জীবিত হয়ে দেশ ও দশের কল্যাণে কাজ করবে।
             </p>
 
-            <div>
-              <p className="font-bold text-gray-800">চেয়ারম্যান</p>
-              <p className="italic text-gray-500 text-sm">স্বপ্ন শহর প্রোপার্টিজ লিমিটেড</p>
+            <p className="mb-6">
+              আমরা চাই আমাদের ভবিষ্যৎ প্রজন্ম যেন একটি সুন্দর, সুস্থ ও জ্ঞানভিত্তিক পরিবেশে বিকশিত হতে পারে।
+            </p>
+
+            <p className="mb-6">
+              এই মহতী ও গৌরবোজ্জ্বল যাত্রায় আমরা সম্মানিত অভিভাবক এবং সংশ্লিষ্ট সকলের আন্তরিক সহযোগিতা ও সুচিন্তিত মতামত কামনা করছি।
+            </p>
+
+            <p className="mb-12">
+              আসুন, আমরা সবাই মিলে আমাদের সন্তানদের জন্য একটি উজ্জ্বল ভবিষ্যৎ এবং সমৃদ্ধ দেশ গড়ে তুলি।
+            </p>
+
+            {/* Signature Block (Enlarged) */}
+            <div className="mt-12 pt-4 border-t border-gray-100">
+              <p className="font-black text-gray-900 text-2xl mb-1">অধ্যক্ষ</p>
+              <p className="text-gray-600 text-lg font-medium">[প্রতিষ্ঠানের নাম এখানে লিখুন]</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="h-2 bg-[#c8a84b] mt-10" />
+      {/* Golden/Beige Footer Accent Bar (Thicker bar) */}
+      <div className="h-6 bg-[#f0e3bc] mt-24 w-full" />
     </div>
   );
-}
+};
+

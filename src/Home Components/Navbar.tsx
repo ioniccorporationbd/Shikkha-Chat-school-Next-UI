@@ -23,35 +23,35 @@ const navList: NavItem[] = [
   },
   {
     name: "About us",
-    link: "/aboutus",
+    link: "/message-from-chairman",
     subLink: [
-  {
-  name: "Message from Chairman",
-  link: "/message-from-chairman",
-},
+      {
+        name: "Message from Chairman",
+        link: "/message-from-chairman",
+      },
       {
         name: "Message from Principal",
-        link: "../../src/app/Message-from-Principal/page.tsx",
+        link: "/message-from-principal",
       },
       {
         name: "Governing Body",
-        link: "/aboutus#governing-body",
+        link: "/governing-body",
       },
       {
         name: "Master Plan",
-        link: "/aboutus#master-plan",
+        link: "/master-plan",
       },
       {
         name: "History",
-        link: "/aboutus#history",
+        link: "/history",
       },
       {
         name: "Vision and Objectives",
-        link: "/aboutus#vision-and-objectives",
+        link: "/vision-and-objectives",
       },
       {
         name: "Infrastructure",
-        link: "/aboutus#infrastructure",
+        link: "/infrastructure",
       },
     ],
   },
@@ -61,39 +61,39 @@ const navList: NavItem[] = [
     subLink: [
       {
         name: "Code of Conducts",
-        link: "/academic#code-of-conducts",
+        link: "/code-of-conducts",
       },
       {
         name: "Guideline for Parents",
-        link: "/academic#guideline-for-parents",
+        link: "/guideline-for-parents",
       },
       {
         name: "Dress Code",
-        link: "/academic#dress-code",
+        link: "/dress-code",
       },
       {
         name: "HomeWork And Class Lecture Documents",
-        link: "/academic#homework-and-class-lecture-documents",
+        link: "/homework-and-class-lecture-documents",
       },
       {
         name: "Lesson Plan",
-        link: "/academic#lesson-plan",
+        link: "/lesson-plan",
       },
       {
         name: "Academic calendar",
-        link: "/academic#academic-calendar",
+        link: "/academic-calendar",
       },
       {
         name: "Syllabus",
-        link: "/academic#syllabus",
+        link: "/syllabus",
       },
       {
         name: "Class Routine",
-        link: "/academic#class-routine",
+        link: "/class-routine",
       },
       {
         name: "Co-curricular Activities",
-        link: "/academic#co-curricular-activities",
+        link: "/co-curricular-activities",
       },
     ],
   },
@@ -103,47 +103,47 @@ const navList: NavItem[] = [
     subLink: [
       {
         name: "Notice Board",
-        link: "/information#notice-board",
+        link: "/notice-board",
       },
       {
         name: "Payment Procedure",
-        link: "/information#payment-procedure",
+        link: "/payment-procedure",
       },
       {
         name: "Facilities",
-        link: "/information#facilities",
+        link: "/facilities",
       },
       {
         name: "News and Events",
-        link: "/information#news-and-events",
+        link: "/news-and-events",
       },
       {
         name: "Our Achievements",
-        link: "/information#our-achievements",
+        link: "/our-achievements",
       },
       {
         name: "List of Holidays",
-        link: "/information#list-of-holidays",
+        link: "/list-of-holidays",
       },
       {
         name: "Teachers Info",
-        link: "/information#teachers-info",
+        link: "/teachers-info",
       },
       {
         name: "Student Info",
-        link: "/information#student-info",
+        link: "/student-info",
       },
       {
         name: "Policies & Guidelines",
-        link: "/information#policies-and-guidelines",
+        link: "/policies-and-guidelines",
       },
       {
         name: "Library",
-        link: "/information#library",
+        link: "/library",
       },
       {
-        name: "Health and Environmental Awarness Info",
-        link: "/information#health-and-environmental-awarness-info",
+        name: "Health and Environmental Awareness Info",
+        link: "/health-and-environmental-awareness-info",
       },
     ],
   },
@@ -153,23 +153,23 @@ const navList: NavItem[] = [
     subLink: [
       {
         name: "Apply Now",
-        link: "/admission#apply-now",
+        link: "/apply-now",
       },
       {
         name: "Fast Facts",
-        link: "/admission#fast-facts",
+        link: "/fast-facts",
       },
       {
         name: "Fees & Payment",
-        link: "/admission#fees-and-payment",
+        link: "/fees-and-payment",
       },
       {
         name: "Scholarships",
-        link: "/admission#scholarships",
+        link: "/scholarships",
       },
       {
         name: "Transfer Procedures",
-        link: "/admission#transfer-procedures",
+        link: "/transfer-procedures",
       },
     ],
   },
@@ -183,7 +183,7 @@ const navList: NavItem[] = [
       },
       {
         name: "Video Gallery",
-        link: "/gallery",
+        link: "/video-gallery",
       },
     ],
   },
@@ -193,15 +193,15 @@ const navList: NavItem[] = [
     subLink: [
       {
         name: "At a Glance",
-        link: "/employment#at-a-glance",
+        link: "/at-a-glance",
       },
       {
         name: "Employment Circulars",
-        link: "/employment#employment-circulars",
+        link: "/employment-circulars",
       },
       {
         name: "Recruitment Exam Results",
-        link: "/employment#recruitment-exam-results",
+        link: "/recruitment-exam-results",
       },
     ],
   },
@@ -215,7 +215,7 @@ const navList: NavItem[] = [
     subLink: [
       {
         name: "নোটিশ",
-        link: "/freedomcorner#notices",
+        link: "/freedomcorner/notices",
       },
       {
         name: "ছবির গ্যালারী",
@@ -223,7 +223,7 @@ const navList: NavItem[] = [
       },
       {
         name: "ভিডিও গ্যালারী",
-        link: "/gallery",
+        link: "/video-gallery",
       },
     ],
   },
@@ -427,7 +427,7 @@ const Navbar = () => {
                           handleSubToggle(index);
                         }}
                         className="px-4 py-3 text-primary"
-                        aria-label="Open submenu"
+                        aria-label={`Toggle ${item.name} submenu`}
                       >
                         <DownIcon open={isOpen} />
                       </button>

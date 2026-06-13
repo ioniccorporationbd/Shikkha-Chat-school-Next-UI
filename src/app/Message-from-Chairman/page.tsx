@@ -3,121 +3,119 @@ import Link from "next/link";
 
 export default function ChairmanMessage() {
   return (
-    <div className="min-h-screen bg-[#f0f0f5] font-sans">
-      <div className="max-w-5xl mx-auto px-4 py-10">
-        <div className="flex justify-center mb-6">
+    <div className="min-h-screen bg-[#f9f9f9] font-sans antialiased text-[#333333]">
+      <div className="max-w-7xl mx-auto px-8 py-16">
+        {/* Back to Home Button */}
+        <div className="flex justify-center mb-10">
           <Link
             href="/"
-            className="bg-[#1a5c3a] text-white text-sm px-5 py-2 rounded-full hover:bg-[#144d30] transition-colors"
+            className="bg-[#0f2d24] text-white text-base font-semibold px-8 py-3 rounded-full hover:bg-[#163f33] transition-colors shadow"
           >
             Back to Home
           </Link>
         </div>
 
-        <h1 className="text-center text-2xl font-bold text-gray-800 mb-1">
-          চেয়ারম্যানের বাণী
+        {/* Main Title Section */}
+        <h1 className="text-center text-4xl font-black tracking-wide text-gray-900 mb-4">
+          চেয়ারম্যান ও পরিচালকের বাণী
         </h1>
-        <div className="flex justify-center mb-8">
-          <div className="w-12 h-[3px] bg-gray-800 rounded" />
+        <div className="flex justify-center mb-16">
+          <div className="w-24 h-[4px] bg-gray-900" />
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8 items-start">
-          <div className="flex flex-col items-center flex-shrink-0">
-            <div className="w-[220px] h-[260px] relative overflow-hidden rounded-sm shadow">
+        {/* Layout Grid */}
+        <div className="flex flex-col lg:flex-row gap-16 items-start max-w-6xl mx-auto">
+          {/* Profile Sidebar */}
+          <div className="flex flex-col items-center flex-shrink-0 mx-auto lg:mx-0">
+            <div className="w-[340px] h-[410px] relative overflow-hidden rounded-xl shadow-md border border-gray-100 bg-black">
               <Image
-                src="/chairman.jpg"
+                src="/assets/images/Rofiqil-Islam.avif"
                 alt="ড. মোহাম্মদ রফিকুল আমীন"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
+                priority
               />
             </div>
-            <p className="text-sm text-gray-700 mt-3 text-center">
-              ড. মোহাম্মদ রফিকুল আমীন
+            <p className="text-xl font-bold text-gray-800 mt-6 text-center tracking-wide">
+              ড. মোহাম্মদ রফিকুল আমীন 
             </p>
           </div>
 
-          <div className="flex-1 text-[15px] leading-relaxed text-gray-700">
-            <p className="text-xs text-gray-400 mb-1">চেয়ারম্যানের বাণী</p>
+          {/* Message Text Content */}
+          <div className="flex-1 text-xl leading-[1.9] text-[#222222] font-normal">
+            <p className="text-sm text-gray-400 mb-3 font-semibold tracking-wider">চেয়ারম্যান ও পরিচালকের বাণী</p>
 
-            <h2 className="text-lg font-bold text-gray-800 mb-4">
-              &quot;সবার জন্য সুন্দর আবাসন – আমাদের জাতীয় অঙ্গীকার&quot;
+            <h2 className="text-2xl font-extrabold text-gray-900 mb-8 tracking-wide">
+              &quot;মানসম্মত শিক্ষা ও সুনাগরিক গঠন – আমাদের মূল অঙ্গীকার&quot;
             </h2>
 
-            <p className="mb-3">প্রিয় দেশবাসী ও সম্ভাব্য গ্রাহকবৃন্দ,</p>
+            <p className="mb-6">প্রিয় অভিভাবক, শিক্ষার্থীবৃন্দ ও শুভানুধ্যায়ীগণ,</p>
 
-            <p className="mb-3">
-              স্বপ্ন শহর প্রোপার্টিজ লিমিটেড প্রতিষ্ঠার পেছনে রয়েছে একটি গভীর সামাজিক
-              দায়বোধ।
+            <p className="mb-6">
+              আমাদের এই শিক্ষা প্রতিষ্ঠান প্রতিষ্ঠার পেছনে রয়েছে একটি সুদূরপ্রসারী সামাজিক দায়বদ্ধতা ও গুণগত শিক্ষার প্রসার ঘটানোর সুদৃঢ় প্রত্যয়।
             </p>
 
-            <p className="mb-3 text-[#1a5c3a]">
-              ক. বাংলাদেশের দ্রুত নগরায়ণ এবং জনসংখ্যা বৃদ্ধির ফলে আবাসন সংকট দিন
-              দিন তীব্রতর হচ্ছে, বিশেষ করে নিম্ন এবং নিম্ন-মধ্যবিত্ত পরিবারের জন্য। এই
-              চ্যালেঞ্জ মোকাবেলায় আমরা একটি যুগান্তকারী উদ্যোগ হাতে নিয়েছি: আগামী
-              দশ বছরের মধ্যে ৭৫০ বর্গফুটের – ১০ লক্ষ ফ্ল্যাট নির্মাণের মহাপরিকল্পনা।
+            {/* Section A - Blue Highlighted Paragraph */}
+            <p className="mb-6 text-[#1d4ed8] font-semibold">
+              ক. দ্রুত পরিবর্তনশীল বিশ্বের চ্যালেঞ্জ মোকাবেলায় এবং আমাদের ভবিষ্যৎ প্রজন্মকে যোগ্য করে গড়ে তুলতে মানসম্মত শিক্ষার কোনো বিকল্প নেই। এই লক্ষ্য অর্জনে আমরা একটি যুগান্তকারী মহাপরিকল্পনা হাতে নিয়েছি; আগামী এক দশকে আন্তর্জাতিক মানের আধুনিক সুযোগ-সুবিধা সম্বলিত শিক্ষা ক্যাম্পাস সম্প্রসারণের মাধ্যমে দেশজুড়ে ১০ লক্ষ শিক্ষার্থীর আধুনিক ও নৈতিক শিক্ষার সুযোগ নিশ্চিতকরণ।
             </p>
 
-            <p className="mb-3">
-              আমরা বিশ্বাস করি, প্রতিটি মানুষের মৌলিক অধিকারের মধ্যে যোগ্য আবাসন
-              অন্যতম। একটি পরিবার যখন স্থায়ী ও নিরাপদ বাসস্থান পায়, তখনই তারা জাতি
-              গঠনের মূলধারায় অবদান রাখতে সক্ষম হয়। আমাদের এই প্রকল্প শুধুমাত্র ইট-
-              পাথরের নির্মাণ নয়, বরং এটি একটি সামাজিক আন্দোলন।
+            <p className="mb-6">
+              আমরা বিশ্বাস করি, প্রতিটি শিশুর সুপ্ত প্রতিভা বিকাশ করা এবং তাদের সুনাগরিক হিসেবে গড়ে তোলা আমাদের মৌলিক দায়িত্ব। একটি শিক্ষার্থী যখন সুশিক্ষা ও নৈতিক মূল্যবোধ পায়, তখনই সে সমাজ ও জাতি গঠনে কার্যকর অবদান রাখতে সক্ষম হয়। আমাদের এই প্রতিষ্ঠান শুধুমাত্র একটি প্রাতিষ্ঠানিক রূপ নয়, বরং এটি একটি আদর্শ মানুষ গড়ার সামাজিক আন্দোলন।
             </p>
 
-            <p className="mb-3">
-              আমরা গড়ে তুলতে চাই সম্পূর্ণ স্বয়ংসম্পূর্ণ আবাসন কমপ্লেক্স, যেখানে প্রতিটি
-              পরিবার পাবে:
+            <p className="mb-6">
+              আমরা গড়ে তুলতে চাই এমন একটি আদর্শ ও আধুনিক শিক্ষার্থীবান্ধব পরিবেশ, যেখানে প্রতিটি শিক্ষার্থী পাবে:
             </p>
 
-            <ul className="mb-4 space-y-1 pl-1">
+            {/* Green Bullet Points */}
+            <ul className="mb-8 space-y-4 pl-2 font-bold text-xl">
               {[
-                "পরিকল্পিত ও সবুজ পরিবেশ",
-                "প্রয়োজনীয় নাগরিক সুবিধাদি",
-                "নিরাপদ ও স্বাস্থ্যসম্মত বসবাসের পরিবেশ",
-                "সামাজিক ও ধর্মীয় প্রতিষ্ঠানের সুবিধা",
+                "পরিকল্পিত, মনোরম ও প্রযুক্তিনির্ভর ক্যাম্পাস পরিবেশ",
+                "আধুনিক ল্যাবরেটরি ও সমৃদ্ধ লাইব্রেরি সুবিধা",
+                "মেধা অন্বেষণ ও সৃজনশীল সহ-শিক্ষা কার্যক্রম",
+                "নৈতিকতা, শৃঙ্খলা ও মানবিক মূল্যবোধের চর্চা",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2 text-[#1a5c3a]">
-                  <span className="mt-[6px] w-[6px] h-[6px] rounded-full bg-[#1a5c3a] flex-shrink-0" />
-                  {item}
+                <li key={item} className="flex items-center gap-4 text-[#16a34a]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] flex-shrink-0" />
+                  <span className="text-[#16a34a]">{item}</span>
                 </li>
               ))}
             </ul>
 
-            <p className="mb-3 text-[#1a5c3a]">
-              খ. এই উপলক্ষে দেশের ব্যাপক কর্ম সংস্থান এর চাহিদা পূরণে আমরা উদ্যোগ
-              নিয়েছি প্রাথমিক ভাবে কমে বেশি ২০০০০ ( বিশ হাজার) বিক্রয় ও বিপণন কর্মী
-              নিয়োগ দেয়ার। যেখানে থাকবে তাদের নিজ যোগ্যতা ও কর্মক্ষমতা অনুযায়ী
-              সন্তোষজনক আর্থিক সুবিধা অর্জনের।
-            </p>
-
-            <p className="mb-3">
-              আমাদের লক্ষ্য হলো এমন একটি বাংলাদেশ গড়ে তোলা, যেখানে আয় নির্বিশেষে
-              প্রতিটি নাগরিকের জন্য নিজস্ব একটি সুন্দর বাসস্থান থাকবে।
-            </p>
-
-            <p className="mb-3">
-              আমরা চাই আমাদের ভবিষ্যৎ প্রজন্ম যেন সুস্থ ও সুন্দর পরিবেশে বেড়ে উঠতে
-              পারে।
-            </p>
-
-            <p className="mb-3">
-              এই মহতী উদ্দেশ্যে আমরা সকলের সহযোগিতা এবং আস্থা কামনা করছি।
+            {/* Section B - Blue Highlighted Paragraph */}
+            <p className="mb-6 text-[#1d4ed8] font-semibold">
+              খ. এই শিক্ষামূলক কার্যক্রমকে আরও বেগবান করতে এবং তরুণ শিক্ষিত সমাজের কর্মসংস্থানের সুযোগ সৃষ্টিতে আমরা দেশব্যাপী মেধাবী, দক্ষ ও উদ্যমী শিক্ষক-শিক্ষিকা ও শিক্ষা কর্মকর্তা নিয়োগের উদ্যোগ নিয়েছি। যেখানে যোগ্যতার ভিত্তিতে আকর্ষণীয় ও সন্তোষজনক ক্যারিয়ার গড়ার সুযোগ থাকবে।
             </p>
 
             <p className="mb-6">
-              আসুন, আমরা সবাই মিলে গড়ে তুলি আমাদের কাঙ্ক্ষিত বাসস্থান, স্বপ্নের বাড়ি তথা
-              স্বপ্নের শহর।
+              আমাদের চূড়ান্ত লক্ষ্য হলো এমন একটি শিক্ষিত ও স্বাবলম্বী সমাজ গড়ে তোলা, যেখানে প্রতিটি শিক্ষার্থী তার মেধা ও যোগ্যতার পূর্ণ বিকাশ ঘটিয়ে বিশ্বমঞ্চে দেশের গৌরব উজ্জ্বল করতে পারে।
             </p>
 
-            <div>
-              <p className="font-bold text-gray-800">চেয়ারম্যান</p>
-              <p className="italic text-gray-500 text-sm">স্বপ্ন শহর প্রোপার্টিজ লিমিটেড</p>
+            <p className="mb-6">
+              আমরা চাই আমাদের ভবিষ্যৎ প্রজন্ম যেন একটি সুন্দর, সুশৃঙ্খল ও জ্ঞানভিত্তিক পরিবেশে বিকশিত হতে পারে।
+            </p>
+
+            <p className="mb-6">
+              এই মহতী ও গৌরবময় যাত্রায় আমরা সকল অভিভাবক ও শুভাকাঙ্ক্ষীর আন্তরিক সহযোগিতা এবং সুদৃঢ় আস্থা কামনা করছি।
+            </p>
+
+            <p className="mb-12">
+              আসুন, আমরা সবাই মিলে আমাদের সন্তানদের জন্য এক নিরাপদ, সমৃদ্ধ ও সম্ভাবনাময় আলোকিত ভবিষ্যৎ গড়ে তুলি।
+            </p>
+
+            {/* Signature Block */}
+            <div className="mt-12 pt-4 border-t border-gray-100">
+              <p className="font-black text-gray-900 text-2xl mb-1">চেয়ারম্যান ও গভর্নিং বডি পরিচালক</p>
+              <p className="text-gray-600 text-lg font-medium">আইডিয়াল মডেল স্কুল অ্যান্ড কলেজ</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="h-2 bg-[#c8a84b] mt-10" />
+      {/* Golden/Beige Footer Accent Bar */}
+      <div className="h-6 bg-[#f0e3bc] mt-24 w-full" />
     </div>
   );
 }
+
