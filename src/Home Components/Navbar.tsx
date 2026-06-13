@@ -25,13 +25,13 @@ const navList: NavItem[] = [
     name: "About us",
     link: "/aboutus",
     subLink: [
-      {
-        name: "Message from Chairman",
-        link: "/aboutus#message-from-chairman",
-      },
+  {
+  name: "Message from Chairman",
+  link: "/message-from-chairman",
+},
       {
         name: "Message from Principal",
-        link: "/aboutus#message-from-principal",
+        link: "../../src/app/Message-from-Principal/page.tsx",
       },
       {
         name: "Governing Body",
