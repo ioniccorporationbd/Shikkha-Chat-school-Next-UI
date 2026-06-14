@@ -5,9 +5,31 @@
 @import "swiper/css/pagination";
 @import "swiper/css/free-mode";
 
+/* =========================
+   Tailwind Theme Tokens
+   Tailwind CSS v4
+========================= */
+
 @theme {
-  --color-primary: #ff0000;
-  --color-secondary: #e2edf7;
+  /* Brand Colors */
+  --color-primary: #16423c;
+  --color-secondary: #ede6b3;
+
+  /* Background Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f4f4f8;
+
+  /* Text Colors */
+  --color-text-primary: #111827;
+  --color-text-secondary: #31465d;
+  --color-text-blue: #2563eb;
+  --color-text-red: #dc2626;
+  --color-text-gray: #6b7280;
+
+  /* Font Family */
+  --font-english: "Inter", sans-serif;
+  --font-bangla: "Noto Serif Bengali", serif;
+  --font-main: "Inter", "Noto Serif Bengali", sans-serif;
 }
 
 /* =========================
@@ -15,19 +37,45 @@
 ========================= */
 
 :root {
-  --primary-color: #2012e6;
-  --secondary-color: #a0b5c978;
-  --primary: var(--primary-color);
-  --secondary: var(--secondary-color);
-  --color-primary: var(--primary-color);
-  --color-secondary: var(--secondary-color);
+  /* =========================
+     Global Color System
+  ========================= */
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f8;
+
+  --color-primary: #16423c;
+  --color-secondary: #ede6b3;
+
+  /* Text Color System */
+  --text-primary: #111827;
+  --text-secondary: #31465d;
+  --text-blue: #2563eb;
+  --text-red: #dc2626;
+  --text-gray: #6b7280;
+
+  /* Optional Alias */
+  --primary: var(--color-primary);
+  --secondary: var(--color-secondary);
+
+  /* =========================
+     Global Font System
+  ========================= */
+
   --font-english: "Inter", sans-serif;
   --font-bangla: "Noto Serif Bengali", serif;
-  --font-main: var(--font-english), var(--font-bangla), sans-serif;
+
+  /*
+    Inter will apply to English.
+    Noto Serif Bengali will automatically apply to Bangla characters
+    because Inter does not contain Bengali glyphs.
+  */
+  --font-main: "Inter", "Noto Serif Bengali", sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg-primary);
 }
 
 html,
@@ -35,23 +83,65 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  background: #ffffff;
-  color: #111111;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-main);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: var(--font-main) !important;
+  font-family: var(--font-main);
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings: "width" 100;
 }
 
 body {
   overflow-x: hidden;
+}
+
+/* =========================
+   Automatic Language Font Support
+========================= */
+
+:lang(en) {
+  font-family: var(--font-english);
+}
+
+:lang(bn),
+[lang="bn"],
+[lang="bn-BD"] {
+  font-family: var(--font-bangla);
+}
+
+/*
+  Use these helper classes only when needed manually.
+  Normally body fallback system is enough.
+*/
+
+.font-english {
+  font-family: var(--font-english) !important;
+}
+
+.font-bangla {
+  font-family: var(--font-bangla) !important;
+}
+
+.font-main {
+  font-family: var(--font-main) !important;
+}
+
+/* =========================
+   Global Selection
+========================= */
+
+::selection {
+  background: var(--color-primary);
+  color: #ffffff;
 }
 
 /* =========================
@@ -62,16 +152,88 @@ body {
   color: var(--color-primary);
 }
 
-.brand-bg-primary {
-  background-color: var(--color-primary);
-}
-
 .brand-secondary {
   color: var(--color-secondary);
 }
 
+.brand-bg-primary {
+  background-color: var(--bg-primary);
+}
+
 .brand-bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.brand-bg-color-primary {
+  background-color: var(--color-primary);
+}
+
+.brand-bg-color-secondary {
   background-color: var(--color-secondary);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-color-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-color-secondary {
+  background-color: var(--color-secondary);
+}
+
+/* =========================
+   Reusable Text Color Helpers
+========================= */
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-blue {
+  color: var(--text-blue);
+}
+
+.text-red {
+  color: var(--text-red);
+}
+
+.text-gray {
+  color: var(--text-gray);
+}
+
+.text-brand-primary {
+  color: var(--color-primary);
+}
+
+.text-brand-secondary {
+  color: var(--color-secondary);
+}
+
+/* =========================
+   Global Links
+========================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-main);
 }
 
 /* =========================
@@ -210,7 +372,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-secondary);
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -220,6 +382,12 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--color-primary) 80%, black);
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--bg-secondary);
 }
 
 /* =========================
