@@ -84,19 +84,19 @@ const NoticeCard = ({ notice }: { notice: NoticeItem }) => {
   return (
     <Link
       href={notice.href}
-      className="group flex min-h-19 gap-3 rounded-lg border border-[#f1f1f0] bg-white px-3 py-2 shadow-sm transition-all duration-300 ease-out hover:-translate-y-px hover:border-red-100 hover:bg-primary/10/50 hover:shadow-md sm:min-h-20.5"
+      className="group flex min-h-19 gap-3 rounded-lg border border-soft bg-bg-primary px-3 py-2 shadow-sm transition-all duration-300 ease-out hover:-translate-y-px hover:border-red-100 hover:bg-primary/10 hover:shadow-md sm:min-h-20.5"
     >
       <div className="w-14 shrink-0 overflow-hidden rounded-md lg:w-20">
-        <p className="bg-primary py-1 text-center text-sm font-semibold text-white sm:text-base">
+        <p className="bg-primary py-1 text-center text-sm font-semibold text-inverse sm:text-base">
           {notice.day}
         </p>
-        <p className="bg-[#f0f0f0] py-1 text-center text-base font-medium text-gray-700 sm:text-[18px]">
+        <p className="bg-bg-secondary py-1 text-center text-base font-medium text-secondary sm:text-[18px]">
           {notice.month}
         </p>
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col justify-center">
-        <p className="line-clamp-2 text-sm font-bold leading-6 text-black transition-colors duration-300 group-hover:text-primary sm:text-base lg:text-lg">
+        <p className="line-clamp-2 text-sm font-bold leading-6 text-primary transition-colors duration-300 group-hover:text-primary sm:text-base lg:text-lg">
           {notice.title}
         </p>
 
@@ -121,7 +121,7 @@ const Slider2 = () => {
 
   return (
     <section className="mx-2 lg:mx-0 lg:pl-10">
-      <div className="rounded-2xl bg-white/90 p-3 transition-all duration-500 ease-out sm:p-4 lg:p-5">
+      <div className="rounded-2xl bg-bg-primary/90 p-3 transition-all duration-500 ease-out sm:p-4 lg:p-5">
         <SectionHeading title="Notice Board" />
 
         {/* Filter Buttons */}
@@ -134,10 +134,10 @@ const Slider2 = () => {
                 type="button"
                 onClick={() => setSelected(button)}
                 key={button}
-                className={`rounded-lg border px-3 py-1 text-base font-semibold transition-all duration-300 ease-out hover:-translate-y-px hover:border-primary hover:bg-primary hover:text-white hover:shadow-md sm:px-4 sm:text-lg ${
+                className={`rounded-lg border px-3 py-1 text-base font-semibold transition-all duration-300 ease-out hover:-translate-y-px hover:border-primary hover:bg-primary hover:text-inverse hover:shadow-md sm:px-4 sm:text-lg ${
                   isActive
-                    ? "border-primary bg-primary text-white shadow-sm"
-                    : "border-black bg-[#F6F2F2] text-black"
+                    ? "border-primary bg-primary text-inverse shadow-sm"
+                    : "border-black bg-bg-secondary text-primary"
                 }`}
               >
                 {button}

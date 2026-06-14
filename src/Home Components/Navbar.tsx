@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type MouseEvent } from "react";
+import { FaBars, FaChevronDown, FaTimes } from "react-icons/fa";
 
 type SubLinkItem = {
   name: string;
@@ -16,6 +17,8 @@ type NavItem = {
   subLink?: SubLinkItem[];
 };
 
+const logoSrc = "/assets/images/logo-mane.png";
+
 const navList: NavItem[] = [
   {
     name: "Home",
@@ -25,122 +28,47 @@ const navList: NavItem[] = [
     name: "About us",
     link: "/message-from-chairman",
     subLink: [
-      {
-        name: "Message from Chairman",
-        link: "/message-from-chairman",
-      },
-      {
-        name: "Message from Principal",
-        link: "/message-from-principal",
-      },
-      {
-        name: "Governing Body",
-        link: "/governing-body",
-      },
-      {
-        name: "Master Plan",
-        link: "/master-plan",
-      },
-      {
-        name: "History",
-        link: "/history",
-      },
-      {
-        name: "Vision and Objectives",
-        link: "/vision-and-objectives",
-      },
-      {
-        name: "Infrastructure",
-        link: "/infrastructure",
-      },
+      { name: "Message from Chairman", link: "/message-from-chairman" },
+      { name: "Message from Principal", link: "/message-from-principal" },
+      { name: "Governing Body", link: "/governing-body" },
+      { name: "Master Plan", link: "/master-plan" },
+      { name: "History", link: "/history" },
+      { name: "Vision and Objectives", link: "/vision-and-objectives" },
+      { name: "Infrastructure", link: "/infrastructure" },
     ],
   },
   {
     name: "Academic",
     link: "/academic",
     subLink: [
-      {
-        name: "Code of Conducts",
-        link: "/code-of-conducts",
-      },
-      {
-        name: "Guideline for Parents",
-        link: "/guideline-for-parents",
-      },
-      {
-        name: "Dress Code",
-        link: "/dress-code",
-      },
+      { name: "Code of Conducts", link: "/code-of-conducts" },
+      { name: "Guideline for Parents", link: "/guideline-for-parents" },
+      { name: "Dress Code", link: "/dress-code" },
       {
         name: "HomeWork And Class Lecture Documents",
         link: "/homework-and-class-lecture-documents",
       },
-      {
-        name: "Lesson Plan",
-        link: "/lesson-plan",
-      },
-      {
-        name: "Academic calendar",
-        link: "/academic-calendar",
-      },
-      {
-        name: "Syllabus",
-        link: "/syllabus",
-      },
-      {
-        name: "Class Routine",
-        link: "/class-routine",
-      },
-      {
-        name: "Co-curricular Activities",
-        link: "/co-curricular-activities",
-      },
+      { name: "Lesson Plan", link: "/lesson-plan" },
+      { name: "Academic calendar", link: "/academic-calendar" },
+      { name: "Syllabus", link: "/syllabus" },
+      { name: "Class Routine", link: "/class-routine" },
+      { name: "Co-curricular Activities", link: "/co-curricular-activities" },
     ],
   },
   {
     name: "Information",
     link: "/information",
     subLink: [
-      {
-        name: "Notice Board",
-        link: "/notice-board",
-      },
-      {
-        name: "Payment Procedure",
-        link: "/payment-procedure",
-      },
-      {
-        name: "Facilities",
-        link: "/facilities",
-      },
-      {
-        name: "News and Events",
-        link: "/news-and-events",
-      },
-      {
-        name: "Our Achievements",
-        link: "/our-achievements",
-      },
-      {
-        name: "List of Holidays",
-        link: "/list-of-holidays",
-      },
-      {
-        name: "Teachers Info",
-        link: "/teachers-info",
-      },
-      {
-        name: "Student Info",
-        link: "/student-info",
-      },
-      {
-        name: "Policies & Guidelines",
-        link: "/policies-and-guidelines",
-      },
-      {
-        name: "Library",
-        link: "/library",
-      },
+      { name: "Notice Board", link: "/notice-board" },
+      { name: "Payment Procedure", link: "/payment-procedure" },
+      { name: "Facilities", link: "/facilities" },
+      { name: "News and Events", link: "/news-and-events" },
+      { name: "Our Achievements", link: "/our-achievements" },
+      { name: "List of Holidays", link: "/list-of-holidays" },
+      { name: "Teachers Info", link: "/teachers-info" },
+      { name: "Student Info", link: "/student-info" },
+      { name: "Policies & Guidelines", link: "/policies-and-guidelines" },
+      { name: "Library", link: "/library" },
       {
         name: "Health and Environmental Awareness Info",
         link: "/health-and-environmental-awareness-info",
@@ -151,58 +79,28 @@ const navList: NavItem[] = [
     name: "Admission",
     link: "/admission",
     subLink: [
-      {
-        name: "Apply Now",
-        link: "/apply-now",
-      },
-      {
-        name: "Fast Facts",
-        link: "/fast-facts",
-      },
-      {
-        name: "Fees & Payment",
-        link: "/fees-and-payment",
-      },
-      {
-        name: "Scholarships",
-        link: "/scholarships",
-      },
-      {
-        name: "Transfer Procedures",
-        link: "/transfer-procedures",
-      },
+      { name: "Apply Now", link: "/apply-now" },
+      { name: "Fast Facts", link: "/fast-facts" },
+      { name: "Fees & Payment", link: "/fees-and-payment" },
+      { name: "Scholarships", link: "/scholarships" },
+      { name: "Transfer Procedures", link: "/transfer-procedures" },
     ],
   },
   {
     name: "Campus Life",
     link: "/gallery",
     subLink: [
-      {
-        name: "Photo Gallery",
-        link: "/gallery",
-      },
-      {
-        name: "Video Gallery",
-        link: "/video-gallery",
-      },
+      { name: "Photo Gallery", link: "/gallery" },
+      { name: "Video Gallery", link: "/video-gallery" },
     ],
   },
   {
     name: "Employment",
     link: "/employment",
     subLink: [
-      {
-        name: "At a Glance",
-        link: "/at-a-glance",
-      },
-      {
-        name: "Employment Circulars",
-        link: "/employment-circulars",
-      },
-      {
-        name: "Recruitment Exam Results",
-        link: "/recruitment-exam-results",
-      },
+      { name: "At a Glance", link: "/at-a-glance" },
+      { name: "Employment Circulars", link: "/employment-circulars" },
+      { name: "Recruitment Exam Results", link: "/recruitment-exam-results" },
     ],
   },
   {
@@ -213,39 +111,28 @@ const navList: NavItem[] = [
     name: "স্বাধীনতা কর্নার",
     link: "/freedomcorner",
     subLink: [
-      {
-        name: "নোটিশ",
-        link: "/freedomcorner/notices",
-      },
-      {
-        name: "ছবির গ্যালারী",
-        link: "/gallery",
-      },
-      {
-        name: "ভিডিও গ্যালারী",
-        link: "/video-gallery",
-      },
+      { name: "নোটিশ", link: "/freedomcorner/notices" },
+      { name: "ছবির গ্যালারী", link: "/gallery" },
+      { name: "ভিডিও গ্যালারী", link: "/video-gallery" },
     ],
   },
 ];
 
 const MenuIcon = () => {
-  return <span className="block text-3xl leading-none">☰</span>;
+  return <FaBars className="text-lg" />;
 };
 
 const CloseIcon = () => {
-  return <span className="block text-3xl leading-none">×</span>;
+  return <FaTimes className="text-lg" />;
 };
 
 const DownIcon = ({ open = false }: { open?: boolean }) => {
   return (
-    <span
-      className={`inline-block text-[10px] text-primary transition-transform duration-300 ${
+    <FaChevronDown
+      className={`text-[10px] transition-transform duration-300 ease-out ${
         open ? "rotate-180" : ""
       }`}
-    >
-      ▼
-    </span>
+    />
   );
 };
 
@@ -290,6 +177,19 @@ const Navbar = () => {
     }
   };
 
+  const isRouteActive = (link: string) => {
+    if (link === "/") return pathname === "/";
+    return pathname === link || pathname.startsWith(`${link}/`);
+  };
+
+  const isMenuActive = (item: NavItem) => {
+    if (isRouteActive(item.link)) return true;
+
+    return Boolean(
+      item.subLink?.some((subItem) => isRouteActive(subItem.link))
+    );
+  };
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -305,169 +205,250 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#EBEBEB] shadow-sm">
-      <div className="relative mx-auto flex h-[60px] max-w-7xl items-center justify-between gap-3 px-4">
-        <Link
-          href="/"
-          onClick={(event) => handleMenuLinkClick(event, "/")}
-          className="shrink-0"
-        >
-          <Image
-            src="/assets/images/logo-mane.png"
-            alt="Logo"
-            width={150}
-            height={52}
-            priority
-            className="h-[50px] w-auto object-contain transition-transform duration-300 hover:scale-[1.03]"
-          />
-        </Link>
-
-        <nav className="hidden flex-1 items-center justify-center gap-3 text-[13px] font-semibold xl:flex 2xl:gap-4 2xl:text-[14px]">
-          {navList.map((item, index) => {
-            const isActive =
-              pathname === item.link ||
-              (item.link !== "/" && pathname.startsWith(item.link));
-
-            return (
-              <div
-                key={`${item.name}-${index}`}
-                className={`group relative z-20 flex h-[60px] items-center gap-1 border-b-4 font-semibold transition-all duration-300 ${
-                  isActive
-                    ? "border-primary"
-                    : "border-transparent hover:border-primary"
-                }`}
-              >
-                <Link
-                  href={item.link}
-                  onClick={(event) => handleMenuLinkClick(event, item.link)}
-                  className="whitespace-nowrap text-black transition-colors duration-300 hover:text-primary"
-                >
-                  {item.name}
-                </Link>
-
-                {item.subLink && <DownIcon />}
-
-                {item.subLink && (
-                  <div className="invisible absolute left-0 top-full w-72 translate-y-3 rounded-b-md bg-white p-3 opacity-0 shadow-xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                    <div className="flex flex-col gap-1">
-                      {item.subLink.map((subItem, subIndex) => (
-                        <Link
-                          key={`${subItem.name}-${subIndex}`}
-                          href={subItem.link}
-                          onClick={(event) =>
-                            handleMenuLinkClick(event, subItem.link)
-                          }
-                          className="rounded-md px-2 py-2 text-sm text-black transition-all duration-300 hover:bg-primary/10 hover:pl-4 hover:text-primary"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </nav>
-
-        <div className="hidden shrink-0 xl:block">
+    <header className="sticky top-0 z-50 bg-primary font-main text-white">
+      <div className="border-b border-primary bg-primary shadow-sm">
+        <div className="relative mx-auto flex min-h-[78px] w-full items-center justify-between gap-3 px-4">
+          {/* Logo */}
           <Link
-            href="/login"
-            className="inline-flex rounded-md bg-primary px-5 py-2 text-base font-bold text-white transition-all duration-300 hover:-translate-y-px hover:bg-primary/90 hover:shadow-md"
+            href="/"
+            onClick={(event) => handleMenuLinkClick(event, "/")}
+            className="group shrink-0"
           >
-            Login
+            <div className="flex h-[78px] w-[136px] items-center justify-center bg-bg-primary px-3 transition-all duration-300 ease-out group-hover:shadow-md">
+              <Image
+                src={logoSrc}
+                alt="Logo"
+                width={150}
+                height={70}
+                priority
+                className="h-[66px] w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+              />
+            </div>
           </Link>
-        </div>
 
-        <button
-          type="button"
-          onClick={() => setToggle((previousValue) => !previousValue)}
-          className="flex h-10 w-10 items-center justify-center rounded-md text-primary transition-all duration-300 hover:bg-primary/10 xl:hidden"
-          aria-label="Toggle menu"
-        >
-          {toggle ? <CloseIcon /> : <MenuIcon />}
-        </button>
-
-        <div
-          className={`absolute left-0 top-full w-full bg-white shadow-xl transition-all duration-300 xl:hidden ${
-            toggle
-              ? "visible translate-y-0 opacity-100"
-              : "invisible -translate-y-4 opacity-0"
-          }`}
-        >
-          <nav className="flex max-h-[82vh] flex-col gap-1 overflow-y-auto p-3">
+          {/* Desktop Menu */}
+          <nav className="hidden flex-1 items-center justify-center gap-1 text-[12px] font-bold text-white xl:flex 2xl:gap-2 2xl:text-[14px]">
             {navList.map((item, index) => {
-              const hasSubMenu = Boolean(item.subLink?.length);
-              const isOpen = activeSubIndex === index;
-              const isActive =
-                pathname === item.link ||
-                (item.link !== "/" && pathname.startsWith(item.link));
+              const active = isMenuActive(item);
+              const hasDropdown = Boolean(item.subLink?.length);
 
               return (
-                <div key={`${item.name}-${index}`} className="flex flex-col">
-                  <div
-                    className={`flex items-center justify-between rounded-md border-b border-primary transition-all duration-300 ${
-                      isActive ? "bg-primary/10" : "bg-white"
+                <div
+                  key={`${item.name}-${index}`}
+                  className="group relative z-20 flex min-h-[78px] items-center"
+                >
+                  <Link
+                    href={item.link}
+                    onClick={(event) => handleMenuLinkClick(event, item.link)}
+                    className={`flex items-center gap-1 rounded-[6px] border px-3 py-2 transition-all duration-300 ease-out 2xl:px-4 ${
+                      active
+                        ? "border-transparent bg-primary text-text-red"
+                        : "border-transparent text-white hover:bg-primary hover:text-text-red"
                     }`}
                   >
-                    <Link
-                      href={item.link}
-                      onClick={(event) => handleMenuLinkClick(event, item.link)}
-                      className="w-full px-3 py-3 font-semibold text-black transition-colors duration-300 hover:text-primary"
-                    >
-                      {item.name}
-                    </Link>
+                    <span className="whitespace-nowrap">{item.name}</span>
+                    {hasDropdown && <DownIcon />}
+                  </Link>
 
-                    {hasSubMenu && (
-                      <button
-                        type="button"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          event.stopPropagation();
-                          handleSubToggle(index);
-                        }}
-                        className="px-4 py-3 text-primary"
-                        aria-label={`Toggle ${item.name} submenu`}
-                      >
-                        <DownIcon open={isOpen} />
-                      </button>
-                    )}
-                  </div>
-
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    {item.subLink && (
-                      <div className="ml-4 flex flex-col gap-1 border-l border-primary py-2 pl-3">
-                        {item.subLink.map((subItem, subIndex) => (
-                          <Link
-                            key={`${subItem.name}-${subIndex}`}
-                            href={subItem.link}
-                            onClick={(event) =>
-                              handleMenuLinkClick(event, subItem.link)
-                            }
-                            className="rounded-md border-b border-dotted border-primary px-3 py-2 text-sm font-medium text-black transition-all duration-300 hover:bg-primary/10 hover:pl-5 hover:text-primary"
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
+                  {hasDropdown && (
+                    <div className="invisible absolute left-0 top-full z-50 w-72 translate-y-4 overflow-hidden rounded-[12px] border border-gray-200 bg-white p-3 opacity-0 shadow-2xl transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 2xl:w-80">
+                      <div className="mb-3 rounded-[10px] bg-gray-500 px-4 py-3">
+                        <p className="text-sm font-black text-white">
+                          {item.name}
+                        </p>
+                        <p className="mt-1 text-xs font-semibold text-white/80">
+                          Explore related pages
+                        </p>
                       </div>
-                    )}
-                  </div>
+
+                      <div className="flex max-h-[430px] flex-col gap-2 overflow-y-auto pr-1">
+                        {item.subLink?.map((subItem, subIndex) => {
+                          const subActive = isRouteActive(subItem.link);
+
+                          return (
+                            <Link
+                              key={`${subItem.name}-${subIndex}`}
+                              href={subItem.link}
+                              onClick={(event) =>
+                                handleMenuLinkClick(event, subItem.link)
+                              }
+                              className={`group/item rounded-[10px] px-4 py-3 text-sm font-bold shadow-sm transition-all duration-300 ease-out hover:translate-x-1 ${
+                                subActive
+                                  ? "bg-primary text-text-red"
+                                  : "bg-gray-500 text-white hover:bg-primary hover:text-text-red"
+                              }`}
+                            >
+                              <span className="flex items-center justify-between gap-3">
+                                <span>{subItem.name}</span>
+
+                                <span
+                                  className={`transition-all duration-300 ease-out group-hover/item:translate-x-1 group-hover/item:opacity-100 ${
+                                    subActive
+                                      ? "text-text-red opacity-100"
+                                      : "text-text-red opacity-0"
+                                  }`}
+                                >
+                                  →
+                                </span>
+                              </span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
+          </nav>
 
+          {/* Desktop Login */}
+          <div className="hidden shrink-0 xl:flex">
             <Link
               href="/login"
-              onClick={closeMobileMenu}
-              className="mt-3 rounded-lg bg-primary px-4 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-primary/90"
+              onClick={(event) => handleMenuLinkClick(event, "/login")}
+              className="inline-flex items-center justify-center rounded-[8px] bg-primary px-6 py-3 text-[16px] font-black text-white shadow-sm ring-1 ring-white/20 transition-all duration-300 hover:-translate-y-0.5 hover:text-text-red hover:shadow-lg"
             >
               Login
             </Link>
-          </nav>
+          </div>
+
+          {/* Mobile Toggle */}
+          <button
+            type="button"
+            onClick={() => setToggle((previousValue) => !previousValue)}
+            className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-white/20 bg-primary text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-text-red hover:shadow-md xl:hidden"
+            aria-label="Toggle menu"
+          >
+            {toggle ? <CloseIcon /> : <MenuIcon />}
+          </button>
+
+          {/* Mobile Menu */}
+          <div
+            className={`absolute left-0 top-full z-50 w-full overflow-hidden border-b border-primary bg-white shadow-2xl transition-all duration-300 ease-out xl:hidden ${
+              toggle
+                ? "visible translate-y-0 opacity-100"
+                : "invisible -translate-y-4 opacity-0"
+            }`}
+          >
+            <nav className="flex max-h-[82vh] flex-col gap-2 overflow-y-auto bg-white p-4">
+              <div className="mb-2 rounded-[10px] border border-gray-200 bg-gray-100 p-4 text-center shadow-sm">
+                <Image
+                  src={logoSrc}
+                  alt="Logo"
+                  width={160}
+                  height={58}
+                  priority
+                  className="mx-auto h-[46px] w-auto object-contain"
+                />
+
+                <p className="mt-3 text-sm font-bold text-gray-600">
+                  Navigate through all important pages
+                </p>
+              </div>
+
+              {navList.map((item, index) => {
+                const hasSubMenu = Boolean(item.subLink?.length);
+                const isOpen = activeSubIndex === index;
+                const isActive = isMenuActive(item);
+
+                return (
+                  <div
+                    key={`${item.name}-${index}`}
+                    className="overflow-hidden rounded-[10px] border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md"
+                  >
+                    <div className="flex items-center justify-between gap-1 bg-white p-2">
+                      <Link
+                        href={item.link}
+                        onClick={(event) =>
+                          handleMenuLinkClick(event, item.link)
+                        }
+                        className={`w-full rounded-[8px] px-4 py-3 text-sm font-black transition-all duration-300 ${
+                          isActive
+                            ? "bg-primary text-text-red"
+                            : "bg-gray-500 text-white hover:bg-primary hover:text-text-red"
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+
+                      {hasSubMenu && (
+                        <button
+                          type="button"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            handleSubToggle(index);
+                          }}
+                          className={`rounded-[8px] px-4 py-3 transition-all duration-300 ${
+                            isActive || isOpen
+                              ? "bg-primary text-text-red"
+                              : "bg-gray-500 text-white hover:bg-primary hover:text-text-red"
+                          }`}
+                          aria-label={`Toggle ${item.name} submenu`}
+                        >
+                          <DownIcon open={isOpen} />
+                        </button>
+                      )}
+                    </div>
+
+                    {hasSubMenu && (
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-out ${
+                          isOpen
+                            ? "max-h-[760px] opacity-100"
+                            : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="space-y-2 border-t border-gray-200 bg-white p-3">
+                          {item.subLink?.map((subItem, subIndex) => {
+                            const subActive = isRouteActive(subItem.link);
+
+                            return (
+                              <Link
+                                key={`${subItem.name}-${subIndex}`}
+                                href={subItem.link}
+                                onClick={(event) =>
+                                  handleMenuLinkClick(event, subItem.link)
+                                }
+                                className={`group block rounded-[8px] px-4 py-3 text-sm font-bold shadow-sm transition-all duration-300 ease-out hover:translate-x-1 ${
+                                  subActive
+                                    ? "bg-primary text-text-red"
+                                    : "bg-gray-500 text-white hover:bg-primary hover:text-text-red"
+                                }`}
+                              >
+                                <span className="flex items-center justify-between gap-3">
+                                  <span>{subItem.name}</span>
+
+                                  <span
+                                    className={`transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100 ${
+                                      subActive
+                                        ? "text-text-red opacity-100"
+                                        : "text-text-red opacity-0"
+                                    }`}
+                                  >
+                                    →
+                                  </span>
+                                </span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+
+              <Link
+                href="/login"
+                onClick={closeMobileMenu}
+                className="mt-2 inline-flex items-center justify-center rounded-[8px] bg-primary px-4 py-3 text-center text-sm font-black text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-text-red hover:shadow-md"
+              >
+                Login
+              </Link>
+            </nav>
+          </div>
         </div>
       </div>
     </header>

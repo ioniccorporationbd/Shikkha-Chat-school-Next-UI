@@ -75,10 +75,10 @@ const PhotoGalleryPage = () => {
   return (
     <main className="min-h-screen bg-background px-3 py-8 sm:px-4 sm:py-10">
       <section className="mx-auto max-w-7xl">
-        <div className="mb-8 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/5 sm:p-7">
+        <div className="mb-8 rounded-2xl bg-bg-primary p-5 shadow-sm ring-1 ring-black/5 sm:p-7">
           <Link
             href="/gallery"
-            className="inline-flex rounded-lg bg-primary px-5 py-2 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-lg"
+            className="inline-flex rounded-lg bg-primary px-5 py-2 text-sm font-bold text-inverse transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-lg"
           >
             ← Back to Gallery
           </Link>
@@ -89,11 +89,11 @@ const PhotoGalleryPage = () => {
                 Image Gallery
               </p>
 
-              <h1 className="mt-2 text-3xl font-black text-black sm:text-4xl">
+              <h1 className="mt-2 text-3xl font-black text-primary sm:text-4xl">
                 Photo Gallery
               </h1>
 
-              <p className="mt-3 max-w-2xl text-sm font-medium leading-7 text-gray-600 sm:text-base">
+              <p className="mt-3 max-w-2xl text-sm font-medium leading-7 text-secondary sm:text-base">
                 Select a year card. The next page will show only that selected
                 year&apos;s image cards.
               </p>
@@ -106,21 +106,21 @@ const PhotoGalleryPage = () => {
                 <p className="text-2xl font-black text-primary">
                   {data.length}
                 </p>
-                <p className="text-xs font-bold text-gray-600">Years</p>
+                <p className="text-xs font-bold text-secondary">Years</p>
               </div>
 
               <div className="rounded-xl bg-secondary px-5 py-4 text-center">
                 <p className="text-2xl font-black text-primary">
                   {totalPhotos}
                 </p>
-                <p className="text-xs font-bold text-gray-600">Photos</p>
+                <p className="text-xs font-bold text-secondary">Photos</p>
               </div>
             </div>
           </div>
         </div>
 
         {loading ? (
-          <div className="rounded-2xl bg-white p-8 text-center text-sm font-bold text-gray-600 shadow-sm">
+          <div className="rounded-2xl bg-bg-primary p-8 text-center text-sm font-bold text-secondary shadow-sm">
             Loading photo gallery...
           </div>
         ) : (
@@ -129,7 +129,7 @@ const PhotoGalleryPage = () => {
               <Link
                 key={item.year}
                 href={`/gallery/photo/${item.year}`}
-                className="group overflow-hidden rounded-2xl bg-white text-left shadow-md ring-1 ring-secondary transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:ring-primary/40"
+                className="group overflow-hidden rounded-2xl bg-bg-primary text-left shadow-md ring-1 ring-secondary transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:ring-primary/40"
               >
                 <div className="relative h-[230px] w-full overflow-hidden bg-secondary">
                   <Image
@@ -141,18 +141,18 @@ const PhotoGalleryPage = () => {
                   />
 
                   <div className="absolute inset-0 flex items-center justify-center bg-primary/0 opacity-0 transition-all duration-300 group-hover:bg-primary/30 group-hover:opacity-100">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary shadow-lg">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-bg-primary text-primary shadow-lg">
                       <SearchIcon />
                     </span>
                   </div>
                 </div>
 
                 <div className="p-4">
-                  <h2 className="text-lg font-black text-black transition-colors duration-300 group-hover:text-primary">
+                  <h2 className="text-lg font-black text-primary transition-colors duration-300 group-hover:text-primary">
                     {item.title}
                   </h2>
 
-                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                  <p className="mt-2 text-sm leading-6 text-secondary">
                     {item.description}
                   </p>
 

@@ -25,11 +25,18 @@
   --color-text-blue: #2563eb;
   --color-text-red: #dc2626;
   --color-text-gray: #6b7280;
+  --color-text-inverse: #ffffff;
+
+  /* Soft UI Colors */
+  --color-border-soft: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  --color-blue-soft: #eff6ff;
+  --color-red-soft: #fef2f2;
 
   /* Font Family */
-  --font-english: "Inter", sans-serif;
+  --font-english: "Inter", Arial, sans-serif;
   --font-bangla: "Noto Serif Bengali", serif;
-  --font-main: "Inter", "Noto Serif Bengali", sans-serif;
+  --font-main: "Inter", "Noto Serif Bengali", Arial, sans-serif;
+  --font-code: "Courier New", monospace;
 }
 
 /* =========================
@@ -53,6 +60,14 @@
   --text-blue: #2563eb;
   --text-red: #dc2626;
   --text-gray: #6b7280;
+  --text-inverse: #ffffff;
+
+  /* Soft UI Color System */
+  --border-soft: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  --border-blue-soft: color-mix(in srgb, var(--text-blue) 18%, transparent);
+  --border-red-soft: color-mix(in srgb, var(--text-red) 18%, transparent);
+  --bg-blue-soft: #eff6ff;
+  --bg-red-soft: #fef2f2;
 
   /* Optional Alias */
   --primary: var(--color-primary);
@@ -62,15 +77,10 @@
      Global Font System
   ========================= */
 
-  --font-english: "Inter", sans-serif;
+  --font-english: "Inter", Arial, sans-serif;
   --font-bangla: "Noto Serif Bengali", serif;
-
-  /*
-    Inter will apply to English.
-    Noto Serif Bengali will automatically apply to Bangla characters
-    because Inter does not contain Bengali glyphs.
-  */
-  --font-main: "Inter", "Noto Serif Bengali", sans-serif;
+  --font-main: var(--font-english), var(--font-bangla), Arial, sans-serif;
+  --font-code: "Courier New", monospace;
 }
 
 html {
@@ -105,34 +115,32 @@ body {
 }
 
 /* =========================
-   Automatic Language Font Support
+   Manual Font Helpers
 ========================= */
 
-:lang(en) {
-  font-family: var(--font-english);
-}
-
-:lang(bn),
-[lang="bn"],
-[lang="bn-BD"] {
-  font-family: var(--font-bangla);
-}
-
 /*
-  Use these helper classes only when needed manually.
-  Normally body fallback system is enough.
+  Important:
+  Do not use :lang(bn) globally when <html lang="bn"> is used.
+  Otherwise the whole website will force Bangla font,
+  and English font will not work properly.
 */
 
-.font-english {
+.font-english,
+.font-en {
   font-family: var(--font-english) !important;
 }
 
-.font-bangla {
+.font-bangla,
+.font-bn {
   font-family: var(--font-bangla) !important;
 }
 
 .font-main {
   font-family: var(--font-main) !important;
+}
+
+.font-mono {
+  font-family: var(--font-code) !important;
 }
 
 /* =========================
@@ -172,11 +180,11 @@ body {
   background-color: var(--color-secondary);
 }
 
-.bg-primary {
+.bg-page-primary {
   background-color: var(--bg-primary);
 }
 
-.bg-secondary {
+.bg-page-secondary {
   background-color: var(--bg-secondary);
 }
 
@@ -210,6 +218,38 @@ body {
 
 .text-gray {
   color: var(--text-gray);
+}
+
+.text-inverse {
+  color: var(--text-inverse);
+}
+
+.bg-blue-soft {
+  background-color: var(--bg-blue-soft);
+}
+
+.bg-red-soft {
+  background-color: var(--bg-red-soft);
+}
+
+.border-soft {
+  border-color: var(--border-soft);
+}
+
+.border-brand-primary {
+  border-color: var(--color-primary);
+}
+
+.border-brand-primary-soft {
+  border-color: var(--border-soft);
+}
+
+.border-blue-soft {
+  border-color: var(--border-blue-soft);
+}
+
+.border-red-soft {
+  border-color: var(--border-red-soft);
 }
 
 .text-brand-primary {

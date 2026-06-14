@@ -149,7 +149,7 @@ const priorityConfig: Record<
 > = {
   High: {
     label: "High",
-    className: "bg-primary text-white",
+    className: "bg-primary text-inverse",
   },
   Medium: {
     label: "Medium",
@@ -222,7 +222,7 @@ const NoticePage = () => {
   return (
     <main className="min-h-screen bg-background px-3 py-6 sm:px-4 sm:py-8 lg:py-10">
       <section className="mx-auto max-w-[1280px]">
-        <div className="mb-6 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 sm:rounded-3xl">
+        <div className="mb-6 overflow-hidden rounded-2xl bg-bg-primary shadow-sm ring-1 ring-black/5 sm:rounded-3xl">
           <div className="relative p-5 sm:p-8 lg:p-10">
             <div className="absolute right-0 top-0 h-28 w-28 rounded-bl-full bg-primary/10 sm:h-36 sm:w-36" />
             <div className="absolute bottom-0 left-0 h-20 w-20 rounded-tr-full bg-secondary sm:h-28 sm:w-28" />
@@ -234,11 +234,11 @@ const NoticePage = () => {
 
               <div className="mt-3 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                  <h1 className="text-2xl font-black text-black sm:text-4xl lg:text-5xl">
+                  <h1 className="text-2xl font-black text-primary sm:text-4xl lg:text-5xl">
                     Latest Notices
                   </h1>
 
-                  <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-gray-600 sm:text-base">
+                  <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-secondary sm:text-base">
                     Academic notices, admission circulars, exam routines,
                     holiday updates, and school announcements.
                   </p>
@@ -260,12 +260,12 @@ const NoticePage = () => {
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="rounded-xl bg-secondary px-3 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-md sm:rounded-2xl sm:px-4 sm:py-4"
+                      className="rounded-xl bg-secondary px-3 py-3 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-bg-primary hover:shadow-md sm:rounded-2xl sm:px-4 sm:py-4"
                     >
                       <p className="text-xl font-black text-primary sm:text-2xl">
                         {item.value}
                       </p>
-                      <p className="text-[11px] font-bold text-gray-600 sm:text-xs">
+                      <p className="text-[11px] font-bold text-secondary sm:text-xs">
                         {item.label}
                       </p>
                     </div>
@@ -278,19 +278,19 @@ const NoticePage = () => {
 
         <section className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
           <aside className="lg:col-span-4 xl:col-span-3">
-            <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-black/5 sm:rounded-3xl sm:p-5 lg:sticky lg:top-24">
-              <h2 className="text-lg font-black text-black sm:text-xl">
+            <div className="rounded-2xl bg-bg-primary p-4 shadow-sm ring-1 ring-black/5 sm:rounded-3xl sm:p-5 lg:sticky lg:top-24">
+              <h2 className="text-lg font-black text-primary sm:text-xl">
                 Filters
               </h2>
 
               <div className="mt-3 h-[3px] w-14 rounded-full bg-primary sm:w-16" />
 
               <div className="mt-5">
-                <label className="mb-2 block text-sm font-bold text-black">
+                <label className="mb-2 block text-sm font-bold text-primary">
                   Search
                 </label>
 
-                <div className="flex items-center gap-2 rounded-2xl border border-secondary bg-white px-4 py-3 transition-all duration-300 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+                <div className="flex items-center gap-2 rounded-2xl border border-secondary bg-bg-primary px-4 py-3 transition-all duration-300 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
                   <span className="text-primary">
                     <SearchIcon />
                   </span>
@@ -300,14 +300,14 @@ const NoticePage = () => {
                     value={searchText}
                     onChange={(event) => setSearchText(event.target.value)}
                     placeholder="Search notices..."
-                    className="w-full border-none bg-transparent text-sm font-medium text-black outline-none placeholder:text-gray-400"
+                    className="w-full border-none bg-transparent text-sm font-medium text-primary outline-none placeholder:text-text-gray"
                   />
 
                   {searchText && (
                     <button
                       type="button"
                       onClick={() => setSearchText("")}
-                      className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-lg font-black leading-none text-gray-500 transition-all duration-300 hover:bg-primary hover:text-white"
+                      className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-lg font-black leading-none text-gray transition-all duration-300 hover:bg-primary hover:text-inverse"
                       aria-label="Clear search"
                     >
                       ×
@@ -317,7 +317,7 @@ const NoticePage = () => {
               </div>
 
               <div className="mt-5">
-                <p className="mb-3 text-sm font-bold text-black">Category</p>
+                <p className="mb-3 text-sm font-bold text-primary">Category</p>
 
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-1">
                   {categories.map((category) => (
@@ -327,8 +327,8 @@ const NoticePage = () => {
                       onClick={() => setSelectedCategory(category)}
                       className={`rounded-xl px-3 py-2 text-center text-xs font-black transition-all duration-300 sm:px-4 sm:text-sm lg:text-left ${
                         selectedCategory === category
-                          ? "bg-primary text-white shadow-md"
-                          : "bg-secondary text-black hover:-translate-y-0.5 hover:bg-primary/10 hover:text-primary"
+                          ? "bg-primary text-inverse shadow-md"
+                          : "bg-secondary text-primary hover:-translate-y-0.5 hover:bg-primary/10 hover:text-primary"
                       }`}
                     >
                       {category}
@@ -341,7 +341,7 @@ const NoticePage = () => {
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="mt-5 w-full rounded-2xl border border-primary px-5 py-3 text-sm font-black text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-white hover:shadow-md"
+                  className="mt-5 w-full rounded-2xl border border-primary px-5 py-3 text-sm font-black text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-inverse hover:shadow-md"
                 >
                   Clear Filters
                 </button>
@@ -350,8 +350,8 @@ const NoticePage = () => {
           </aside>
 
           <section className="lg:col-span-8 xl:col-span-9">
-            <div className="mb-4 rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-black/5 sm:rounded-3xl sm:px-5">
-              <p className="text-sm font-bold text-gray-700">
+            <div className="mb-4 rounded-2xl bg-bg-primary px-4 py-3 shadow-sm ring-1 ring-black/5 sm:rounded-3xl sm:px-5">
+              <p className="text-sm font-bold text-secondary">
                 <span className="text-primary">{filteredNotices.length}</span>{" "}
                 notice{filteredNotices.length !== 1 ? "s" : ""} found
               </p>
@@ -371,10 +371,10 @@ const NoticePage = () => {
                   return (
                     <article
                       key={notice.id}
-                      className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:ring-primary/25 sm:rounded-3xl"
+                      className="group overflow-hidden rounded-2xl bg-bg-primary shadow-sm ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:ring-primary/25 sm:rounded-3xl"
                     >
                       <div className="grid grid-cols-[68px_1fr] sm:grid-cols-[82px_1fr]">
-                        <div className="flex items-center justify-center bg-primary p-3 text-white sm:p-4">
+                        <div className="flex items-center justify-center bg-primary p-3 text-inverse sm:p-4">
                           <div className="text-center">
                             <p className="text-2xl font-black leading-none sm:text-3xl">
                               {day}
@@ -391,7 +391,7 @@ const NoticePage = () => {
                         <div className="p-4 sm:p-5">
                           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                             {notice.isPinned && (
-                              <span className="rounded-full bg-primary px-2.5 py-0.5 text-[10px] font-black text-white sm:text-[11px]">
+                              <span className="rounded-full bg-primary px-2.5 py-0.5 text-[10px] font-black text-inverse sm:text-[11px]">
                                 Pinned
                               </span>
                             )}
@@ -413,11 +413,11 @@ const NoticePage = () => {
                             </span>
                           </div>
 
-                          <h3 className="mt-3 text-base font-black text-black transition-colors duration-300 group-hover:text-primary sm:text-lg lg:text-xl">
+                          <h3 className="mt-3 text-base font-black text-primary transition-colors duration-300 group-hover:text-primary sm:text-lg lg:text-xl">
                             {notice.title}
                           </h3>
 
-                          <p className="mt-2 text-sm leading-6 text-gray-500 sm:leading-7">
+                          <p className="mt-2 text-sm leading-6 text-gray sm:leading-7">
                             {notice.description}
                           </p>
                         </div>
@@ -427,23 +427,23 @@ const NoticePage = () => {
                 })}
               </div>
             ) : (
-              <div className="rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-black/5 sm:rounded-3xl sm:p-10">
+              <div className="rounded-2xl bg-bg-primary p-8 text-center shadow-sm ring-1 ring-black/5 sm:rounded-3xl sm:p-10">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-primary">
                   <SearchIcon />
                 </div>
 
-                <h3 className="mt-4 text-xl font-black text-black">
+                <h3 className="mt-4 text-xl font-black text-primary">
                   No notices found
                 </h3>
 
-                <p className="mt-2 text-sm leading-7 text-gray-500">
+                <p className="mt-2 text-sm leading-7 text-gray">
                   Try adjusting your category or search term.
                 </p>
 
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="mt-5 rounded-xl bg-primary px-6 py-2.5 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-md"
+                  className="mt-5 rounded-xl bg-primary px-6 py-2.5 text-sm font-black text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-md"
                 >
                   Clear Filters
                 </button>

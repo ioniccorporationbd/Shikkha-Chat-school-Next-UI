@@ -87,7 +87,7 @@ const odhayanLogo = "/assets/images/logo-mane.png";
 
 function GoverningMemberCard({ member }: { member: GoverningMember }) {
   return (
-    <div className="flex w-36 flex-col items-center justify-center overflow-hidden rounded-md bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <div className="flex w-36 flex-col items-center justify-center overflow-hidden rounded-md bg-bg-primary shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
       <Image
         className="h-44 w-36 object-cover object-top"
         src={member.image}
@@ -153,7 +153,7 @@ export default function GoverningBody() {
             <p className="text-2xl font-semibold text-primary">
               Online payment Procedure
             </p>
-            <p className="text-2xl font-semibold text-gray-500">
+            <p className="text-2xl font-semibold text-gray">
               You can pay any fee through
             </p>
           </div>
@@ -178,7 +178,7 @@ export default function GoverningBody() {
           </div>
 
           <div className="flex flex-col items-center justify-end gap-5 lg:items-start">
-            <p className="whitespace-nowrap text-2xl font-semibold text-gray-500 xl:text-xl 2xl:text-2xl">
+            <p className="whitespace-nowrap text-2xl font-semibold text-gray xl:text-xl 2xl:text-2xl">
               You can pay any fee through
             </p>
 

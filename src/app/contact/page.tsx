@@ -96,8 +96,8 @@ const Contact = () => {
   return (
     <main className="min-h-screen bg-secondary">
       {/* Page Header */}
-      <section className="bg-white py-10 shadow-sm">
-        <div className="mx-auto max-w-[1260px] px-4 text-center text-2xl font-bold text-black sm:text-3xl lg:text-left">
+      <section className="bg-bg-primary py-10 shadow-sm">
+        <div className="mx-auto max-w-[1260px] px-4 text-center text-2xl font-bold text-primary sm:text-3xl lg:text-left">
           Contact
           <div className="mx-auto mt-3 h-[3px] w-20 rounded-full bg-primary lg:mx-0" />
         </div>
@@ -109,7 +109,7 @@ const Contact = () => {
           {contactInfo.map((item, index) => (
             <div
               key={item.title}
-              className="group flex flex-col items-center justify-center rounded-2xl bg-white p-8 text-center shadow-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+              className="group flex flex-col items-center justify-center rounded-2xl bg-bg-primary p-8 text-center shadow-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
               style={{
                 animationDelay: `${index * 120}ms`,
               }}
@@ -118,11 +118,11 @@ const Contact = () => {
                 {item.icon}
               </div>
 
-              <p className="text-lg font-bold text-[#1267B1] transition-colors duration-300 group-hover:text-primary">
+              <p className="text-lg font-bold text-blue transition-colors duration-300 group-hover:text-primary">
                 {item.title}
               </p>
 
-              <p className="mt-2 break-words text-sm leading-6 text-gray-600 sm:text-base">
+              <p className="mt-2 break-words text-sm leading-6 text-secondary sm:text-base">
                 {item.value}
               </p>
             </div>
@@ -132,21 +132,21 @@ const Contact = () => {
 
       {/* Contact Form */}
       <section className="mx-auto my-10 max-w-[1260px] px-4">
-        <div className="rounded-3xl bg-white p-5 shadow-lg transition-all duration-500 hover:shadow-2xl sm:p-8 lg:p-16 xl:p-20">
+        <div className="rounded-3xl bg-bg-primary p-5 shadow-lg transition-all duration-500 hover:shadow-2xl sm:p-8 lg:p-16 xl:p-20">
           <form className="flex flex-col space-y-6 lg:space-y-10">
             <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
               <input
                 type="text"
                 name="name"
                 placeholder="Your Name"
-                className="w-full rounded-xl bg-[#ECECEC] p-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-500 focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
+                className="w-full rounded-xl bg-bg-secondary p-4 text-sm outline-none transition-all duration-300 placeholder:text-text-gray focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
               />
 
               <input
                 type="tel"
                 name="mobile"
                 placeholder="Mobile No."
-                className="w-full rounded-xl bg-[#ECECEC] p-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-500 focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
+                className="w-full rounded-xl bg-bg-secondary p-4 text-sm outline-none transition-all duration-300 placeholder:text-text-gray focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
               />
             </div>
 
@@ -155,14 +155,14 @@ const Contact = () => {
                 type="text"
                 name="subject"
                 placeholder="Subject"
-                className="w-full rounded-xl bg-[#ECECEC] p-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-500 focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
+                className="w-full rounded-xl bg-bg-secondary p-4 text-sm outline-none transition-all duration-300 placeholder:text-text-gray focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
               />
 
               <input
                 type="email"
                 name="email"
                 placeholder="Email"
-                className="w-full rounded-xl bg-[#ECECEC] p-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-500 focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
+                className="w-full rounded-xl bg-bg-secondary p-4 text-sm outline-none transition-all duration-300 placeholder:text-text-gray focus:bg-secondary focus:ring-2 focus:ring-primary/40 lg:w-1/2"
               />
             </div>
 
@@ -170,12 +170,12 @@ const Contact = () => {
               rows={5}
               placeholder="Message"
               name="message"
-              className="w-full resize-none rounded-xl bg-[#ECECEC] p-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-500 focus:bg-secondary focus:ring-2 focus:ring-primary/40"
+              className="w-full resize-none rounded-xl bg-bg-secondary p-4 text-sm outline-none transition-all duration-300 placeholder:text-text-gray focus:bg-secondary focus:ring-2 focus:ring-primary/40"
             />
 
             <button
               type="submit"
-              className="mx-auto w-full rounded-xl bg-primary px-8 py-3 font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl active:scale-95 lg:w-44"
+              className="mx-auto w-full rounded-xl bg-primary px-8 py-3 font-bold text-inverse shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl active:scale-95 lg:w-44"
             >
               Submit
             </button>
@@ -185,7 +185,7 @@ const Contact = () => {
 
       {/* Map */}
       <section className="mx-auto max-w-[1260px] px-4 pb-10">
-        <div className="overflow-hidden rounded-3xl bg-white p-2 shadow-lg transition-all duration-500 hover:shadow-2xl">
+        <div className="overflow-hidden rounded-3xl bg-bg-primary p-2 shadow-lg transition-all duration-500 hover:shadow-2xl">
           <iframe
             title="Viqarunnisa Noon School and College Map"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14608.589438797351!2d90.407051!3d23.742124!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b84e57c2368d%3A0x4df20dee9b73140e!2sViqarunnisa%20Noon%20School%20and%20College!5e0!3m2!1sen!2sbd!4v1731414574228!5m2!1sen!2sbd"

@@ -26,43 +26,43 @@ const courses: CourseItem[] = [
     id: 1,
     title: "PSC",
     image: "/assets/Courses images/book-1.png",
-    bgColor: "bg-[#687200]",
-    subBgColor: "bg-[#DFE7AC]",
+    bgColor: "bg-primary",
+    subBgColor: "bg-secondary",
   },
   {
     id: 2,
     title: "Class 6",
     image: "/assets/Courses images/book-2.png",
-    bgColor: "bg-[#59301F]",
-    subBgColor: "bg-[#FEBA23]",
+    bgColor: "bg-primary",
+    subBgColor: "bg-secondary",
   },
   {
     id: 3,
     title: "Class 7",
     image: "/assets/Courses images/book-3.png",
-    bgColor: "bg-[#C66783]",
-    subBgColor: "bg-[#F6C0D2]",
+    bgColor: "bg-primary",
+    subBgColor: "bg-secondary",
   },
   {
     id: 4,
     title: "JSC",
     image: "/assets/Courses images/book-2.png",
-    bgColor: "bg-[#40591F]",
-    subBgColor: "bg-[#AF9842]",
+    bgColor: "bg-primary",
+    subBgColor: "bg-secondary",
   },
   {
     id: 5,
     title: "SSC",
     image: "/assets/Courses images/book-1.png",
-    bgColor: "bg-[#8F2900]",
-    subBgColor: "bg-[#FE9158]",
+    bgColor: "bg-primary",
+    subBgColor: "bg-secondary",
   },
   {
     id: 6,
     title: "HSC",
     image: "/assets/Courses images/book-3.png",
-    bgColor: "bg-[#7A831F]",
-    subBgColor: "bg-[#CDD69E]",
+    bgColor: "bg-primary",
+    subBgColor: "bg-secondary",
   },
 ];
 
@@ -101,7 +101,7 @@ const activities: ActivityItem[] = [
 
 const SectionHeading = ({ title }: { title: string }) => {
   return (
-    <div className="mb-5 text-center font-serif">
+    <div className="mb-5 text-center font-main">
       <h2 className="text-[26px] font-bold leading-none text-primary sm:text-[30px] lg:text-[34px]">
         {title}
       </h2>
@@ -114,15 +114,15 @@ const SectionHeading = ({ title }: { title: string }) => {
 const CourseCard = ({ course }: { course: CourseItem }) => {
   return (
     <div
-      className={`group h-70 overflow-hidden rounded-xl ${course.bgColor} p-2 text-center font-serif transition-all duration-300 hover:-translate-y-2 hover:shadow-xl`}
+      className={`group h-70 overflow-hidden rounded-xl ${course.bgColor} p-2 text-center font-main transition-all duration-300 hover:-translate-y-2 hover:shadow-xl`}
     >
-      <h3 className="pt-5 text-[28px] font-bold leading-none text-white">
+      <h3 className="pt-5 text-[28px] font-bold leading-none text-inverse">
         {course.title}
       </h3>
 
       <button
         type="button"
-        className="mt-5.5 rounded-lg border border-white px-3.5 py-0.75 text-[13px] font-bold leading-none text-white"
+        className="mt-5.5 rounded-lg border border-white px-3.5 py-0.75 text-[13px] font-bold leading-none text-inverse"
       >
         বিস্তারিত
       </button>
@@ -145,7 +145,7 @@ const CourseCard = ({ course }: { course: CourseItem }) => {
 
 const ActivityCard = ({ activity }: { activity: ActivityItem }) => {
   return (
-    <div className="group flex h-42.5 w-full max-w-67.5 flex-col items-center justify-center rounded-[10px] border border-[#EEEEEE] bg-white px-5 text-center font-serif shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_32px_rgba(0,0,0,0.16)]">
+    <div className="group flex h-42.5 w-full max-w-67.5 flex-col items-center justify-center rounded-[10px] border border-soft bg-bg-primary px-5 text-center font-main shadow-[0_10px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_32px_rgba(0,0,0,0.16)]">
       <Image
         src={activity.image}
         alt={activity.title}
@@ -154,7 +154,7 @@ const ActivityCard = ({ activity }: { activity: ActivityItem }) => {
         className="h-15.5 w-15.5 object-contain transition-transform duration-300 group-hover:scale-110"
       />
 
-      <h3 className="mt-5.5 text-[19px] font-bold leading-tight text-black sm:text-[20px]">
+      <h3 className="mt-5.5 text-[19px] font-bold leading-tight text-primary sm:text-[20px]">
         {activity.title}
       </h3>
     </div>
@@ -163,7 +163,7 @@ const ActivityCard = ({ activity }: { activity: ActivityItem }) => {
 
 const Courses = () => {
   return (
-    <section className="w-full bg-white px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+    <section className="w-full bg-bg-primary px-4 pb-16 pt-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-295">
         <SectionHeading title="Our Courses for Students" />
 

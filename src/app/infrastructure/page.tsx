@@ -1,267 +1,339 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type InfrastructureItem = {
   id: string;
   title: string;
+  subtitle: string;
+  image: string;
   description: string;
+  points: string[];
 };
 
-type FacilityItem = {
-  title: string;
-  description: string;
+type HighlightItem = {
+  value: string;
+  label: string;
 };
+
+const highlights: HighlightItem[] = [
+  {
+    value: "২৪/৭",
+    label: "নিরাপত্তা ব্যবস্থা",
+  },
+  {
+    value: "ডিজিটাল",
+    label: "ক্লাসরুম সুবিধা",
+  },
+  {
+    value: "পরিচ্ছন্ন",
+    label: "স্বাস্থ্যকর ক্যাম্পাস",
+  },
+  {
+    value: "সবুজ",
+    label: "পরিবেশবান্ধব এলাকা",
+  },
+];
 
 const infrastructureItems: InfrastructureItem[] = [
   {
-    id: "১",
-    title: "নিরাপদ প্রবেশদ্বার ও ক্যাম্পাস সিকিউরিটি",
+    id: "০১",
+    title: "আধুনিক শ্রেণিকক্ষ",
+    subtitle: "Smart & Comfortable Classrooms",
+    image: "/assets/3.jpg",
     description:
-      "ছাত্রীদের নিরাপত্তা নিশ্চিত করতে নিয়ন্ত্রিত প্রধান প্রবেশদ্বার, ভিজিটর রেজিস্ট্রেশন, আইডি কার্ডভিত্তিক প্রবেশ ব্যবস্থা, নারী নিরাপত্তা কর্মী, সিসিটিভি নজরদারি এবং নিরাপদ পিকআপ-ড্রপ জোন রাখা হবে।",
+      "শিক্ষার্থীদের মনোযোগ, অংশগ্রহণ ও শেখার আগ্রহ বৃদ্ধির জন্য আমাদের শ্রেণিকক্ষগুলো আলো-বাতাসপূর্ণ, পরিচ্ছন্ন এবং শিক্ষাবান্ধবভাবে সাজানো।",
+    points: [
+      "প্রশস্ত বসার ব্যবস্থা",
+      "পর্যাপ্ত আলো ও বায়ু চলাচল",
+      "মাল্টিমিডিয়া ও স্মার্ট বোর্ড সুবিধা",
+      "শিক্ষার্থী-কেন্দ্রিক ক্লাসরুম পরিবেশ",
+    ],
   },
   {
-    id: "২",
-    title: "আধুনিক শ্রেণিকক্ষ ও একাডেমিক ব্লক",
+    id: "০২",
+    title: "বিজ্ঞান ল্যাবরেটরি",
+    subtitle: "Science Laboratory",
+    image: "/assets/4.jpg",
     description:
-      "প্রতিটি শ্রেণিকক্ষ হবে পর্যাপ্ত আলো-বাতাসযুক্ত, পরিচ্ছন্ন, প্রশস্ত এবং শিক্ষাবান্ধব। স্মার্ট বোর্ড, মাল্টিমিডিয়া, আরামদায়ক বেঞ্চ, শিক্ষক পর্যবেক্ষণ ব্যবস্থা এবং শিক্ষার্থীবান্ধব seating arrangement নিশ্চিত করা হবে।",
+      "বিজ্ঞান শিক্ষাকে বাস্তবভিত্তিক করতে নিরাপদ, পরিচ্ছন্ন ও প্রয়োজনীয় যন্ত্রপাতিসম্পন্ন বিজ্ঞান ল্যাবরেটরি রাখা হয়েছে।",
+    points: [
+      "পদার্থ, রসায়ন ও জীববিজ্ঞান ব্যবহারিক শিক্ষা",
+      "নিরাপদ পরীক্ষণ ব্যবস্থা",
+      "শিক্ষকের তত্ত্বাবধানে ল্যাব কার্যক্রম",
+      "প্রজেক্টভিত্তিক শেখার সুযোগ",
+    ],
   },
   {
-    id: "৩",
-    title: "বিজ্ঞানাগার ও ব্যবহারিক শিক্ষা ব্যবস্থা",
+    id: "০৩",
+    title: "কম্পিউটার ও আইসিটি ল্যাব",
+    subtitle: "Computer & ICT Lab",
+    image: "/assets/3.jpg",
     description:
-      "পদার্থ, রসায়ন ও জীববিজ্ঞানের জন্য নিরাপদ ও সুসজ্জিত পৃথক ল্যাব থাকবে। প্রয়োজনীয় ল্যাব সরঞ্জাম, নিরাপত্তা নির্দেশিকা, ফায়ার সেফটি, ওয়াশিং স্টেশন এবং শিক্ষক তত্ত্বাবধানে হাতে-কলমে শিক্ষা নিশ্চিত করা হবে।",
+      "ডিজিটাল যুগের দক্ষতা অর্জনের জন্য কম্পিউটার ল্যাব, বেসিক কোডিং, ডিজিটাল লিটারেসি এবং প্রযুক্তিনির্ভর শিক্ষার ব্যবস্থা রাখা হয়েছে।",
+    points: [
+      "কম্পিউটার ব্যবহার শেখার সুযোগ",
+      "ইন্টারনেট ও ডিজিটাল রিসোর্স",
+      "বেসিক কোডিং ও প্রেজেন্টেশন স্কিল",
+      "আইসিটি ব্যবহারিক ক্লাস",
+    ],
   },
   {
-    id: "৪",
-    title: "আইসিটি ল্যাব ও ডিজিটাল লার্নিং সেন্টার",
+    id: "০৪",
+    title: "সমৃদ্ধ লাইব্রেরি",
+    subtitle: "Library & Reading Corner",
+    image: "/assets/4.jpg",
     description:
-      "কম্পিউটার ল্যাব, ইন্টারনেট সংযোগ, প্রজেক্টর, ডিজিটাল কনটেন্ট, অনলাইন ক্লাস সুবিধা, বেসিক কোডিং, গ্রাফিক্স, প্রেজেন্টেশন স্কিল এবং প্রযুক্তিনির্ভর শিক্ষার পরিবেশ তৈরি করা হবে।",
+      "পাঠাভ্যাস, গবেষণা মনোভাব ও জ্ঞানচর্চা বৃদ্ধির জন্য একটি শান্ত, পরিচ্ছন্ন ও সমৃদ্ধ লাইব্রেরি শিক্ষার্থীদের জন্য উন্মুক্ত।",
+    points: [
+      "পাঠ্যবই ও রেফারেন্স বই",
+      "সাহিত্য ও সাধারণ জ্ঞান কর্নার",
+      "শান্ত পাঠের পরিবেশ",
+      "নিয়মিত বইপাঠ কার্যক্রম",
+    ],
   },
   {
-    id: "৫",
-    title: "লাইব্রেরি ও রিডিং কর্নার",
+    id: "০৫",
+    title: "নিরাপদ ক্যাম্পাস",
+    subtitle: "Safety & Security",
+    image: "/assets/3.jpg",
     description:
-      "ছাত্রীদের পাঠাভ্যাস ও জ্ঞানচর্চা বৃদ্ধির জন্য নীরব লাইব্রেরি, রিডিং কর্নার, রেফারেন্স বই, গল্প-উপন্যাস, ম্যাগাজিন, সংবাদপত্র, ই-বুক সুবিধা এবং গ্রুপ স্টাডি স্পেস রাখা হবে।",
+      "বিশেষ করে গার্লস স্কুলের জন্য নিরাপত্তা সবচেয়ে গুরুত্বপূর্ণ। তাই নিয়ন্ত্রিত প্রবেশদ্বার, পর্যবেক্ষণ ও জরুরি নিরাপত্তা ব্যবস্থা রাখা হয়েছে।",
+    points: [
+      "নিয়ন্ত্রিত প্রবেশ ও প্রস্থান",
+      "সিসিটিভি নজরদারি",
+      "নিরাপত্তা কর্মী",
+      "জরুরি বহির্গমন ব্যবস্থা",
+    ],
   },
   {
-    id: "৬",
-    title: "নারীবান্ধব স্বাস্থ্য ও স্যানিটেশন সুবিধা",
+    id: "০৬",
+    title: "স্বাস্থ্য ও স্যানিটেশন",
+    subtitle: "Health, Hygiene & Sanitation",
+    image: "/assets/4.jpg",
     description:
-      "পরিচ্ছন্ন ও নিরাপদ টয়লেট, বিশুদ্ধ পানি, হাত ধোয়ার ব্যবস্থা, স্যানিটারি ন্যাপকিন কর্নার, ইনসিনারেটর, নিয়মিত পরিষ্কার-পরিচ্ছন্নতা এবং ছাত্রীদের স্বাস্থ্য সচেতনতার জন্য আলাদা ব্যবস্থা থাকবে।",
+      "ছাত্রীদের স্বাস্থ্য, পরিচ্ছন্নতা ও ব্যক্তিগত নিরাপত্তার জন্য স্বাস্থ্যসম্মত স্যানিটেশন, বিশুদ্ধ পানি এবং ফার্স্ট এইড সুবিধা নিশ্চিত করা হয়েছে।",
+    points: [
+      "স্বাস্থ্যসম্মত টয়লেট ব্যবস্থা",
+      "বিশুদ্ধ পানীয় জল",
+      "ফার্স্ট এইড কর্নার",
+      "স্যানিটারি হাইজিন সচেতনতা",
+    ],
   },
   {
-    id: "৭",
-    title: "স্বাস্থ্য কক্ষ ও কাউন্সেলিং সেন্টার",
+    id: "০৭",
+    title: "খেলার মাঠ ও সহশিক্ষা",
+    subtitle: "Playground & Co-curricular Activities",
+    image: "/assets/3.jpg",
     description:
-      "ফার্স্ট এইড, বিশ্রাম কক্ষ, প্রাথমিক চিকিৎসা, স্বাস্থ্য পর্যবেক্ষণ, কৈশোরকালীন স্বাস্থ্য শিক্ষা, মানসিক স্বাস্থ্য সহায়তা এবং ক্যারিয়ার কাউন্সেলিংয়ের জন্য নির্দিষ্ট কক্ষ থাকবে।",
+      "শারীরিক, মানসিক ও সামাজিক বিকাশের জন্য খেলাধুলা, সাংস্কৃতিক কার্যক্রম, বিতর্ক এবং ক্লাব কার্যক্রমের জন্য প্রয়োজনীয় পরিবেশ রাখা হয়েছে।",
+    points: [
+      "খেলার মাঠ",
+      "ইনডোর ও আউটডোর গেমস",
+      "সাংস্কৃতিক কার্যক্রম",
+      "নেতৃত্ব বিকাশের সুযোগ",
+    ],
   },
   {
-    id: "৮",
-    title: "খেলার মাঠ ও ইনডোর স্পোর্টস সুবিধা",
+    id: "০৮",
+    title: "সবুজ ও পরিচ্ছন্ন ক্যাম্পাস",
+    subtitle: "Green & Clean Campus",
+    image: "/assets/4.jpg",
     description:
-      "ছাত্রীদের শারীরিক বিকাশের জন্য খোলা মাঠ, অ্যাসেম্বলি গ্রাউন্ড, ব্যাডমিন্টন, ভলিবল, ইনডোর গেমস, যোগব্যায়াম, পিটি ক্লাস এবং বার্ষিক ক্রীড়া আয়োজনের উপযোগী অবকাঠামো থাকবে।",
-  },
-  {
-    id: "৯",
-    title: "অডিটোরিয়াম ও সাংস্কৃতিক কার্যক্রম এলাকা",
-    description:
-      "আবৃত্তি, বিতর্ক, সংগীত, নৃত্য, নাটক, বিজ্ঞান মেলা, পুরস্কার বিতরণী, অভিভাবক সভা এবং বিভিন্ন জাতীয় দিবস পালনের জন্য আধুনিক অডিটোরিয়াম বা মাল্টিপারপাস হল থাকবে।",
-  },
-  {
-    id: "১০",
-    title: "পরিবেশবান্ধব গ্রিন ক্যাম্পাস",
-    description:
-      "বৃক্ষরোপণ, ফুলের বাগান, পরিচ্ছন্ন walkway, বৃষ্টির পানি সংরক্ষণ, সৌরবিদ্যুৎ ব্যবহার, বর্জ্য ব্যবস্থাপনা এবং প্লাস্টিকমুক্ত ক্যাম্পাস গড়ে তোলার পরিকল্পনা থাকবে।",
+      "শিক্ষার্থীদের জন্য স্বাস্থ্যকর ও মনোরম পরিবেশ নিশ্চিত করতে সবুজায়ন, বাগান, পরিচ্ছন্নতা ও পরিবেশবান্ধব উদ্যোগ গ্রহণ করা হয়েছে।",
+    points: [
+      "বৃক্ষরোপণ ও বাগান",
+      "পরিচ্ছন্ন ক্যাম্পাস",
+      "বর্জ্য ব্যবস্থাপনা",
+      "পরিবেশ সচেতনতা কার্যক্রম",
+    ],
   },
 ];
 
-const supportFacilities: FacilityItem[] = [
-  {
-    title: "প্রশাসনিক অফিস",
-    description:
-      "প্রধান শিক্ষক কক্ষ, সহকারী প্রধান শিক্ষক কক্ষ, অফিস শাখা, হিসাব শাখা ও ভর্তি তথ্য কেন্দ্র।",
-  },
-  {
-    title: "শিক্ষক মিলনায়তন",
-    description:
-      "শিক্ষকদের lesson planning, meeting, training এবং academic coordination-এর জন্য আলাদা কক্ষ।",
-  },
-  {
-    title: "অভিভাবক অপেক্ষা কর্নার",
-    description:
-      "অভিভাবকদের জন্য নিরাপদ waiting zone, information desk এবং parent communication support।",
-  },
-  {
-    title: "নিরাপদ পরিবহন ব্যবস্থা",
-    description:
-      "স্কুল বাস/ভ্যান, নারী সহকারী, route monitoring এবং নিরাপদ pick-up/drop-off management।",
-  },
-];
-
-export default function GirlsSchoolInfrastructurePage() {
+function InfrastructureImage({
+  src,
+  alt,
+  id,
+}: {
+  src: string;
+  alt: string;
+  id: string;
+}) {
   return (
-    <main className="min-h-screen bg-white font-sans text-[#1f3347] antialiased">
-      <section className="mx-auto w-full max-w-[1320px] px-4 py-10 sm:px-6 sm:py-12 md:px-8 lg:px-10 xl:px-6">
-        {/* Header */}
-        <div className="mb-14 text-center sm:mb-16 md:mb-20 lg:mb-24">
+    <div className="group relative h-[260px] overflow-hidden rounded-3xl border border-soft bg-page-secondary shadow-xl transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-2xl sm:h-[340px] lg:h-full lg:min-h-[420px]">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(22,66,60,0.65)] via-[rgba(22,66,60,0.12)] to-transparent" />
+
+      <div className="absolute left-5 top-5 flex h-14 w-14 items-center justify-center rounded-full bg-color-secondary text-lg font-black text-primary shadow-md transition-all duration-500 group-hover:scale-110">
+        {id}
+      </div>
+
+      <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/10 p-4 text-inverse backdrop-blur-sm transition-all duration-500 group-hover:bg-white/15">
+        <p className="text-sm font-bold text-brand-secondary">
+          School Infrastructure
+        </p>
+        <p className="mt-1 text-xl font-black leading-snug">{alt}</p>
+      </div>
+    </div>
+  );
+}
+
+function InfrastructureCard({
+  item,
+  index,
+}: {
+  item: InfrastructureItem;
+  index: number;
+}) {
+  const imageFirst = index % 2 !== 0;
+
+  return (
+    <article className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch">
+      {imageFirst && (
+        <InfrastructureImage src={item.image} alt={item.title} id={item.id} />
+      )}
+
+      <div className="group rounded-3xl border border-soft bg-page-primary p-6 shadow-xl transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-2xl sm:p-8">
+        <span className="inline-flex rounded-full bg-color-secondary px-4 py-2 text-sm font-black text-primary">
+          {item.subtitle}
+        </span>
+
+        <h2 className="mt-5 text-2xl font-black leading-snug text-primary sm:text-3xl">
+          {item.title}
+        </h2>
+
+        <div className="mt-4 h-[3px] w-24 rounded-full bg-color-primary" />
+
+        <p className="mt-6 text-justify text-base font-medium leading-8 text-secondary sm:text-lg">
+          {item.description}
+        </p>
+
+        <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {item.points.map((point) => (
+            <div
+              key={point}
+              className="flex items-start gap-3 rounded-2xl border border-soft bg-page-secondary p-4 transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-page-primary hover:shadow-md"
+            >
+              <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-color-primary text-xs font-black text-inverse transition-all duration-500 group-hover:bg-color-secondary group-hover:text-primary">
+                ✓
+              </span>
+
+              <p className="text-sm font-bold leading-6 text-brand-primary sm:text-base">
+                {point}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {!imageFirst && (
+        <InfrastructureImage src={item.image} alt={item.title} id={item.id} />
+      )}
+    </article>
+  );
+}
+
+export default function SchoolInfrastructurePage() {
+  return (
+    <main className="min-h-screen bg-page-secondary font-main text-primary">
+      <section className="mx-auto max-w-[1600px] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
+        {/* Page Header */}
+        <header className="mb-12 text-center">
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-brand-primary">
+            Infrastructure
+          </p>
+
+          <h1 className="mt-3 text-3xl font-black leading-tight text-primary sm:text-4xl md:text-5xl">
+            স্কুল ইনফ্রাস্ট্রাকচার
+          </h1>
+
+          <div className="mx-auto mt-5 h-[4px] w-28 rounded-full bg-color-primary" />
+
+          <p className="mx-auto mt-5 max-w-3xl text-base font-medium leading-7 text-secondary sm:text-lg">
+            একটি আধুনিক, নিরাপদ, পরিচ্ছন্ন ও ছাত্রীবান্ধব শিক্ষা পরিবেশ
+            নিশ্চিত করার জন্য আমাদের স্কুলের পূর্ণাঙ্গ অবকাঠামোগত সুবিধাসমূহ।
+          </p>
+
           <Link
             href="/"
-            className="inline-flex items-center justify-center rounded-full bg-[#0e4a43] px-5 py-2 text-xs font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0a3833] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#0e4a43]/30"
+            className="mt-6 inline-flex rounded-full bg-color-primary px-6 py-3 text-sm font-bold text-inverse shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-md"
           >
             Back to Home
           </Link>
+        </header>
 
-          <h1 className="mt-5 text-[28px] font-extrabold leading-tight tracking-tight text-[#111827] sm:text-3xl md:text-[34px]">
-            বালিকা বিদ্যালয়ের অবকাঠামো
-          </h1>
+        {/* Hero Section */}
+        <section className="mb-12 overflow-hidden rounded-3xl bg-color-primary shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+            <div className="p-6 text-inverse sm:p-8 lg:col-span-8 lg:p-10">
+              <span className="inline-block rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-brand-secondary">
+                Our Campus Facilities
+              </span>
 
-          <div className="mx-auto mt-5 h-[3px] w-20 rounded-full bg-[#111827]" />
-        </div>
-
-        {/* Main Content */}
-        <div className="mx-auto max-w-[1180px] space-y-16 sm:space-y-20 md:space-y-24">
-          {/* Overview */}
-          <section className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
-            <article>
-              <h2 className="mb-6 text-[25px] font-extrabold leading-tight text-[#10283f] sm:text-[28px] md:text-[30px]">
-                অবকাঠামোর লক্ষ্য{" "}
-                <span className="text-[#111827]">(Infrastructure Goal)</span>
+              <h2 className="mt-5 text-3xl font-black leading-snug sm:text-4xl">
+                নিরাপদ, আধুনিক ও শিক্ষাবান্ধব ক্যাম্পাস
               </h2>
 
-              <div className="space-y-7 text-justify text-[18px] font-medium leading-[1.95] tracking-[-0.01em] text-[#31465d] sm:text-[19px] sm:leading-[2] md:text-[20px] md:leading-[2.05] lg:text-[21px]">
-                <p>
-                  &quot;একটি নিরাপদ, আধুনিক, পরিচ্ছন্ন, নারীবান্ধব ও
-                  শিক্ষাবান্ধব ক্যাম্পাস গড়ে তোলা, যেখানে প্রতিটি ছাত্রী
-                  আত্মবিশ্বাস, মর্যাদা ও আনন্দের সাথে শিক্ষা গ্রহণ করতে পারে।&quot;
-                </p>
+              <p className="mt-5 max-w-4xl text-justify text-base font-medium leading-8 text-white/85 sm:text-lg">
+                একটি ভালো স্কুলের অবকাঠামো শুধু ভবন, শ্রেণিকক্ষ বা মাঠের মধ্যে
+                সীমাবদ্ধ নয়। এটি শিক্ষার্থীর নিরাপত্তা, স্বাস্থ্য, শেখার
+                পরিবেশ, প্রযুক্তি দক্ষতা, সহশিক্ষা কার্যক্রম এবং মানসিক
+                বিকাশের সাথে সরাসরি সম্পর্কিত। তাই আমাদের স্কুলে প্রতিটি
+                সুবিধা পরিকল্পিতভাবে সাজানো হয়েছে, যাতে শিক্ষার্থীরা নিরাপদ ও
+                আনন্দময় পরিবেশে শিক্ষা গ্রহণ করতে পারে।
+              </p>
+            </div>
 
-                <p>
-                  বালিকা বিদ্যালয়ের অবকাঠামো পরিকল্পনার মূল লক্ষ্য হলো
-                  শিক্ষার মান, নিরাপত্তা, স্বাস্থ্য, প্রযুক্তি, সহশিক্ষা,
-                  মানসিক বিকাশ এবং ভবিষ্যৎ দক্ষতাকে একই কাঠামোর মধ্যে
-                  সমন্বিত করা। তাই প্রতিটি ভবন, কক্ষ, খেলার জায়গা, স্বাস্থ্য
-                  সুবিধা ও নিরাপত্তা ব্যবস্থা ছাত্রীদের বাস্তব প্রয়োজনকে
-                  গুরুত্ব দিয়ে পরিকল্পনা করা হবে।
-                </p>
-              </div>
-            </article>
-
-            <article>
-              <h2 className="mb-6 text-[25px] font-extrabold leading-tight text-[#10283f] sm:text-[28px] md:text-[30px]">
-                পরিকল্পনার মূলনীতি{" "}
-                <span className="text-[#111827]">(Core Principles)</span>
-              </h2>
-
-              <div className="space-y-7 text-justify text-[18px] font-medium leading-[1.95] tracking-[-0.01em] text-[#31465d] sm:text-[19px] sm:leading-[2] md:text-[20px] md:leading-[2.05] lg:text-[21px]">
-                <p>
-                  বিদ্যালয়ের প্রতিটি অবকাঠামো এমনভাবে সাজানো হবে, যাতে
-                  ছাত্রীদের নিরাপদ চলাচল, স্বাস্থ্যসম্মত পরিবেশ, মানসিক
-                  স্বাচ্ছন্দ্য, একাডেমিক মনোযোগ এবং সৃজনশীল বিকাশ নিশ্চিত হয়।
-                </p>
-
-                <p>
-                  এই পরিকল্পনায় নিরাপত্তা, accessibility, hygiene, emergency
-                  response, inclusive education, digital learning এবং green
-                  campus development-কে বিশেষ অগ্রাধিকার দেওয়া হয়েছে।
-                </p>
-              </div>
-            </article>
-          </section>
-
-          {/* Infrastructure Cards */}
-          <section>
-            <h2 className="mb-8 text-[25px] font-extrabold leading-tight text-[#10283f] sm:text-[28px] md:text-[30px]">
-              প্রধান অবকাঠামো সুবিধাসমূহ{" "}
-              <span className="text-[#111827]">(Main Infrastructure)</span>
-            </h2>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {infrastructureItems.map((item) => (
-                <article
-                  key={item.id}
-                  className="group rounded-2xl border border-[#d8e2ea] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#0e4a43]/40 hover:shadow-[0_14px_35px_rgba(15,45,36,0.12)] sm:p-7"
+            <div className="grid grid-cols-2 gap-4 bg-white/10 p-6 sm:p-8 lg:col-span-4 lg:p-10">
+              {highlights.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl bg-white/10 p-5 text-center text-inverse backdrop-blur-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/15 hover:shadow-lg"
                 >
-                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#0e4a43] text-lg font-extrabold text-white shadow-sm">
-                    {item.id}
-                  </div>
-
-                  <h3 className="mb-3 text-[20px] font-extrabold leading-snug text-[#26384d] transition-colors duration-300 group-hover:text-[#0e4a43] sm:text-[21px]">
-                    {item.title}
+                  <h3 className="text-2xl font-black text-brand-secondary sm:text-3xl">
+                    {item.value}
                   </h3>
 
-                  <p className="text-justify text-[16px] font-medium leading-[1.9] text-[#31465d] sm:text-[17px]">
-                    {item.description}
+                  <p className="mt-2 text-sm font-semibold leading-6 text-white/85">
+                    {item.label}
                   </p>
-                </article>
+                </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Support Facilities */}
-          <section className="rounded-3xl border border-[#d8e2ea] bg-[#f8fbfa] p-6 shadow-sm sm:p-8 md:p-10">
-            <h2 className="mb-8 text-[25px] font-extrabold leading-tight text-[#10283f] sm:text-[28px] md:text-[30px]">
-              সহায়ক অবকাঠামো সুবিধা{" "}
-              <span className="text-[#111827]">(Support Facilities)</span>
-            </h2>
+        {/* Infrastructure List */}
+        <section className="space-y-10">
+          {infrastructureItems.map((item, index) => (
+            <InfrastructureCard key={item.id} item={item} index={index} />
+          ))}
+        </section>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {supportFacilities.map((facility) => (
-                <article
-                  key={facility.title}
-                  className="rounded-2xl bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                >
-                  <h3 className="mb-3 text-xl font-extrabold text-[#0e4a43]">
-                    {facility.title}
-                  </h3>
+        {/* Closing Section */}
+        <section className="mt-12 rounded-3xl border border-soft bg-page-primary p-6 text-center shadow-xl sm:p-8 lg:p-10">
+          <span className="inline-flex rounded-full bg-color-secondary px-4 py-2 text-sm font-black text-primary">
+            Future Development
+          </span>
 
-                  <p className="text-justify text-[16px] font-medium leading-[1.9] text-[#31465d]">
-                    {facility.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
+          <h2 className="mx-auto mt-5 max-w-3xl text-2xl font-black leading-snug text-primary sm:text-3xl">
+            আরও উন্নত, নিরাপদ ও প্রযুক্তিনির্ভর শিক্ষা পরিবেশ গড়ে তোলাই আমাদের
+            ভবিষ্যৎ পরিকল্পনা
+          </h2>
 
-          {/* Development Standard */}
-          <section className="rounded-3xl bg-[#0e4a43] p-6 text-white shadow-sm sm:p-8 md:p-10">
-            <h2 className="mb-6 text-[25px] font-extrabold leading-tight sm:text-[28px] md:text-[30px]">
-              উন্নয়ন মানদণ্ড{" "}
-              <span className="text-white/85">(Development Standard)</span>
-            </h2>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-                <h3 className="mb-3 text-xl font-extrabold">
-                  Safety First
-                </h3>
-                <p className="text-justify text-[16px] font-medium leading-[1.9] text-white/90">
-                  প্রতিটি অবকাঠামো ছাত্রীদের নিরাপত্তা, privacy, emergency exit
-                  এবং supervised movement বিবেচনায় তৈরি করা হবে।
-                </p>
-              </div>
-
-              <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-                <h3 className="mb-3 text-xl font-extrabold">
-                  Learning Friendly
-                </h3>
-                <p className="text-justify text-[16px] font-medium leading-[1.9] text-white/90">
-                  শ্রেণিকক্ষ, ল্যাব, লাইব্রেরি ও activity zone এমনভাবে থাকবে,
-                  যাতে শেখা আনন্দদায়ক ও ফলপ্রসূ হয়।
-                </p>
-              </div>
-
-              <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-                <h3 className="mb-3 text-xl font-extrabold">
-                  Future Ready
-                </h3>
-                <p className="text-justify text-[16px] font-medium leading-[1.9] text-white/90">
-                  ভবিষ্যতে নতুন ভবন, digital system, skill lab এবং student
-                  support service যুক্ত করার জন্য expansion-friendly planning
-                  রাখা হবে।
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
+          <p className="mx-auto mt-5 max-w-4xl text-base font-medium leading-8 text-secondary sm:text-lg">
+            ভবিষ্যতে আরও স্মার্ট ক্লাসরুম, উন্নত বিজ্ঞান ও আইসিটি ল্যাব,
+            সমৃদ্ধ লাইব্রেরি, স্বাস্থ্যসেবা, পরিবহন সুবিধা এবং পরিবেশবান্ধব
+            ক্যাম্পাস উন্নয়নের মাধ্যমে স্কুলকে একটি আদর্শ শিক্ষা প্রতিষ্ঠানে
+            রূপান্তর করার পরিকল্পনা রয়েছে।
+          </p>
+        </section>
       </section>
     </main>
   );

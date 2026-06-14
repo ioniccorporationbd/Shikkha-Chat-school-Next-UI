@@ -246,8 +246,8 @@ const PhotoYearPage = () => {
   if (loading) {
     return (
       <main className="min-h-screen bg-background px-4 py-10">
-        <section className="mx-auto max-w-7xl rounded-2xl bg-white p-8 text-center shadow-sm">
-          <p className="text-sm font-bold text-gray-600">Loading photos...</p>
+        <section className="mx-auto max-w-7xl rounded-2xl bg-bg-primary p-8 text-center shadow-sm">
+          <p className="text-sm font-bold text-secondary">Loading photos...</p>
         </section>
       </main>
     );
@@ -256,13 +256,13 @@ const PhotoYearPage = () => {
   if (!selectedYear) {
     return (
       <main className="min-h-screen bg-background px-4 py-10">
-        <section className="mx-auto max-w-[900px] rounded-2xl bg-white p-8 text-center shadow-sm">
-          <h1 className="text-3xl font-black text-black">Photo Gallery Not Found</h1>
-          <p className="mt-3 text-gray-600">This year photo gallery does not exist.</p>
+        <section className="mx-auto max-w-[900px] rounded-2xl bg-bg-primary p-8 text-center shadow-sm">
+          <h1 className="text-3xl font-black text-primary">Photo Gallery Not Found</h1>
+          <p className="mt-3 text-secondary">This year photo gallery does not exist.</p>
 
           <Link
             href="/gallery/photo"
-            className="mt-6 inline-flex rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-primary/90"
+            className="mt-6 inline-flex rounded-lg bg-primary px-6 py-3 text-sm font-bold text-inverse transition-all duration-300 hover:bg-primary/90"
           >
             Back to Photo Gallery
           </Link>
@@ -274,10 +274,10 @@ const PhotoYearPage = () => {
   return (
     <main className="min-h-screen bg-background px-3 py-8 sm:px-4 sm:py-10">
       <section className="mx-auto max-w-7xl">
-        <div className="mb-8 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/5 sm:p-7">
+        <div className="mb-8 rounded-2xl bg-bg-primary p-5 shadow-sm ring-1 ring-black/5 sm:p-7">
           <Link
             href="/gallery/photo"
-            className="inline-flex rounded-lg bg-primary px-5 py-2 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-lg"
+            className="inline-flex rounded-lg bg-primary px-5 py-2 text-sm font-bold text-inverse transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-lg"
           >
             ← Back to Year Cards
           </Link>
@@ -288,11 +288,11 @@ const PhotoYearPage = () => {
                 Dynamic Photo Gallery
               </p>
 
-              <h1 className="mt-2 text-3xl font-black text-black sm:text-4xl">
+              <h1 className="mt-2 text-3xl font-black text-primary sm:text-4xl">
                 {selectedYear.title}
               </h1>
 
-              <p className="mt-3 max-w-2xl text-sm font-medium leading-7 text-gray-600 sm:text-base">
+              <p className="mt-3 max-w-2xl text-sm font-medium leading-7 text-secondary sm:text-base">
                 {selectedYear.description}
               </p>
 
@@ -301,22 +301,22 @@ const PhotoYearPage = () => {
 
             <div className="rounded-xl bg-secondary px-5 py-4 text-center">
               <p className="text-2xl font-black text-primary">{photos.length}</p>
-              <p className="text-xs font-bold text-gray-600">Photos</p>
+              <p className="text-xs font-bold text-secondary">Photos</p>
             </div>
           </div>
         </div>
 
-        <section className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-black/5 sm:p-6">
+        <section className="rounded-2xl bg-bg-primary p-4 shadow-sm ring-1 ring-black/5 sm:p-6">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">
               Photos
             </p>
 
-            <h2 className="mt-2 text-2xl font-black text-black">
+            <h2 className="mt-2 text-2xl font-black text-primary">
               {year} Photo Gallery
             </h2>
 
-            <p className="mt-2 text-sm font-medium text-gray-600">
+            <p className="mt-2 text-sm font-medium text-secondary">
               Click any image to open preview. Mouse wheel zooms in/out. Double click toggles zoom.
             </p>
           </div>
@@ -327,7 +327,7 @@ const PhotoYearPage = () => {
                 key={item.id}
                 type="button"
                 onClick={() => openPhoto(index)}
-                className="group overflow-hidden rounded-2xl bg-white text-left shadow-md ring-1 ring-secondary transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:ring-primary/40"
+                className="group overflow-hidden rounded-2xl bg-bg-primary text-left shadow-md ring-1 ring-secondary transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:ring-primary/40"
               >
                 <div className="relative h-[230px] w-full overflow-hidden bg-secondary">
                   <Image
@@ -339,18 +339,18 @@ const PhotoYearPage = () => {
                   />
 
                   <div className="absolute inset-0 flex items-center justify-center bg-primary/0 opacity-0 transition-all duration-300 group-hover:bg-primary/30 group-hover:opacity-100">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary shadow-lg">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-bg-primary text-primary shadow-lg">
                       <SearchIcon />
                     </span>
                   </div>
                 </div>
 
                 <div className="p-4">
-                  <h3 className="text-base font-black text-black transition-colors duration-300 group-hover:text-primary">
+                  <h3 className="text-base font-black text-primary transition-colors duration-300 group-hover:text-primary">
                     {item.title}
                   </h3>
 
-                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                  <p className="mt-2 text-sm leading-6 text-secondary">
                     {item.description}
                   </p>
                 </div>
@@ -372,7 +372,7 @@ const PhotoYearPage = () => {
             aria-label="Close modal background"
           />
 
-          <div className="absolute left-4 top-5 z-20 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white backdrop-blur">
+          <div className="absolute left-4 top-5 z-20 rounded-full bg-bg-primary/10 px-4 py-2 text-sm font-bold text-inverse backdrop-blur">
             {(activeIndex ?? 0) + 1} / {photos.length} · {Math.round(zoom * 100)}%
           </div>
 
@@ -381,7 +381,7 @@ const PhotoYearPage = () => {
               href={activePhoto.image}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 items-center justify-center rounded-full bg-white px-4 text-xs font-black text-black shadow-lg transition-all duration-300 hover:scale-105 sm:h-11"
+              className="flex h-10 items-center justify-center rounded-full bg-bg-primary px-4 text-xs font-black text-primary shadow-lg transition-all duration-300 hover:scale-105 sm:h-11"
             >
               Open
             </a>
@@ -389,7 +389,7 @@ const PhotoYearPage = () => {
             <button
               type="button"
               onClick={zoomIn}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-lg transition-all duration-300 hover:scale-110 sm:h-11 sm:w-11"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-primary text-primary shadow-lg transition-all duration-300 hover:scale-110 sm:h-11 sm:w-11"
               aria-label="Zoom in"
             >
               <PlusIcon />
@@ -398,7 +398,7 @@ const PhotoYearPage = () => {
             <button
               type="button"
               onClick={zoomOut}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-lg transition-all duration-300 hover:scale-110 sm:h-11 sm:w-11"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-primary text-primary shadow-lg transition-all duration-300 hover:scale-110 sm:h-11 sm:w-11"
               aria-label="Zoom out"
             >
               <MinusIcon />
@@ -407,7 +407,7 @@ const PhotoYearPage = () => {
             <button
               type="button"
               onClick={resetView}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-xs font-black text-black shadow-lg transition-all duration-300 hover:scale-110 sm:h-11 sm:w-11"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-primary text-xs font-black text-primary shadow-lg transition-all duration-300 hover:scale-110 sm:h-11 sm:w-11"
               aria-label="Reset zoom"
             >
               1x
@@ -416,7 +416,7 @@ const PhotoYearPage = () => {
             <button
               type="button"
               onClick={closePhoto}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-primary/90 sm:h-11 sm:w-11"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-inverse shadow-lg transition-all duration-300 hover:scale-110 hover:bg-primary/90 sm:h-11 sm:w-11"
               aria-label="Close"
             >
               <CloseIcon />
@@ -427,7 +427,7 @@ const PhotoYearPage = () => {
             type="button"
             onClick={showPreviousPhoto}
             disabled={activeIndex === null || activeIndex <= 0}
-            className="absolute left-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl font-bold text-black shadow-lg transition-all duration-300 hover:scale-110 disabled:cursor-not-allowed disabled:opacity-30 sm:left-5 sm:h-12 sm:w-12"
+            className="absolute left-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-bg-primary text-3xl font-bold text-primary shadow-lg transition-all duration-300 hover:scale-110 disabled:cursor-not-allowed disabled:opacity-30 sm:left-5 sm:h-12 sm:w-12"
           >
             ‹
           </button>
@@ -460,16 +460,16 @@ const PhotoYearPage = () => {
             type="button"
             onClick={showNextPhoto}
             disabled={activeIndex === null || activeIndex >= photos.length - 1}
-            className="absolute right-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-3xl font-bold text-black shadow-lg transition-all duration-300 hover:scale-110 disabled:cursor-not-allowed disabled:opacity-30 sm:right-5 sm:h-12 sm:w-12"
+            className="absolute right-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-bg-primary text-3xl font-bold text-primary shadow-lg transition-all duration-300 hover:scale-110 disabled:cursor-not-allowed disabled:opacity-30 sm:right-5 sm:h-12 sm:w-12"
           >
             ›
           </button>
 
-          <div className="absolute bottom-24 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/10 px-5 py-2 text-center text-xs font-bold uppercase text-white backdrop-blur sm:text-sm">
+          <div className="absolute bottom-24 left-1/2 z-20 -translate-x-1/2 rounded-full bg-bg-primary/10 px-5 py-2 text-center text-xs font-bold uppercase text-inverse backdrop-blur sm:text-sm">
             {activePhoto.title}
           </div>
 
-          <div className="absolute bottom-5 left-1/2 z-20 flex max-w-[92vw] -translate-x-1/2 gap-3 overflow-x-auto rounded-2xl bg-white/10 p-3 backdrop-blur">
+          <div className="absolute bottom-5 left-1/2 z-20 flex max-w-[92vw] -translate-x-1/2 gap-3 overflow-x-auto rounded-2xl bg-bg-primary/10 p-3 backdrop-blur">
             {photos.map((item, index) => {
               const isActive = index === activeIndex;
 

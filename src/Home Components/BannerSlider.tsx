@@ -41,12 +41,12 @@ const sliders: SliderItem[] = [
 
 const BannerSlider = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section className="relative w-full overflow-hidden bg-bg-primary">
       <Link
         href="https://education.ionicerp.xyz"
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute right-3 top-3 z-20 rounded-md bg-primary px-4 py-2 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-px hover:bg-primary/90 hover:shadow-lg sm:right-6 sm:top-6 md:px-6 md:py-2.5 lg:right-20 lg:top-10 lg:rounded-xl lg:px-8 lg:py-3 lg:text-base"
+        className="absolute right-3 top-3 z-20 rounded-md bg-primary px-4 py-2 text-sm font-bold text-inverse shadow-md transition-all duration-300 hover:-translate-y-px hover:bg-primary/90 hover:shadow-lg sm:right-6 sm:top-6 md:px-6 md:py-2.5 lg:right-20 lg:top-10 lg:rounded-xl lg:px-8 lg:py-3 lg:text-base"
       >
         Login
       </Link>

@@ -80,7 +80,7 @@ const Slider1 = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-secondary">
+    <section className="relative w-full overflow-hidden rounded-2xl bg-bg-primary shadow-sm ring-1 ring-secondary">
       <div className="group relative w-full overflow-hidden rounded-2xl">
         <Swiper
           onSwiper={(swiper) => {
@@ -125,7 +125,7 @@ const Slider1 = () => {
           type="button"
           onClick={handlePrevious}
           aria-label="Previous slide"
-          className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-primary shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-white active:scale-95 sm:left-5 sm:h-11 sm:w-11 lg:left-6 lg:h-12 lg:w-12"
+          className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-bg-primary/90 text-primary shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-inverse active:scale-95 sm:left-5 sm:h-11 sm:w-11 lg:left-6 lg:h-12 lg:w-12"
         >
           <ArrowLeftIcon />
         </button>
@@ -134,7 +134,7 @@ const Slider1 = () => {
           type="button"
           onClick={handleNext}
           aria-label="Next slide"
-          className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-primary shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-white active:scale-95 sm:right-5 sm:h-11 sm:w-11 lg:right-6 lg:h-12 lg:w-12"
+          className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-bg-primary/90 text-primary shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-inverse active:scale-95 sm:right-5 sm:h-11 sm:w-11 lg:right-6 lg:h-12 lg:w-12"
         >
           <ArrowRightIcon />
         </button>

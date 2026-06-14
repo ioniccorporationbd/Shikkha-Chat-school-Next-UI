@@ -28,7 +28,7 @@ const SectionHeading = ({ title }: SectionHeadingProps) => {
 
 const ProfileCard = ({ image, name, designation }: ProfileCardProps) => {
   return (
-    <div className="group flex min-h-75 flex-col items-center justify-center rounded-2xl bg-white/95 p-5 text-center shadow-sm ring-1 ring-red-100 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl hover:ring-red-200">
+    <div className="group flex min-h-75 flex-col items-center justify-center rounded-2xl bg-bg-primary/95 p-5 text-center shadow-sm ring-1 ring-red-100 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl hover:ring-red-200">
       <div className="relative mb-4 h-40 w-40 overflow-hidden rounded-xl bg-primary/10 shadow-sm">
         <Image
           src={image}
@@ -43,7 +43,7 @@ const ProfileCard = ({ image, name, designation }: ProfileCardProps) => {
         {name}
       </h3>
 
-      <p className="mt-2 min-h-12 px-1 text-xs leading-5 text-gray-500 sm:px-4 lg:px-6 lg:text-sm">
+      <p className="mt-2 min-h-12 px-1 text-xs leading-5 text-gray sm:px-4 lg:px-6 lg:text-sm">
         {designation}
       </p>
     </div>
@@ -52,12 +52,12 @@ const ProfileCard = ({ image, name, designation }: ProfileCardProps) => {
 
 const Oddhayan = () => {
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="relative overflow-hidden bg-bg-primary">
       {/* Soft background wallpaper */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.07),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(231,179,179,0.35),transparent_40%)]" />
 
       <div className="relative z-10">
-        <div className="my-2 h-3 bg-[#e7b3b3]" />
+        <div className="my-2 h-3 bg-secondary" />
 
         {/* Top banner image */}
         <div className="relative h-55 w-full overflow-hidden sm:h-75 md:h-87.5 lg:h-100">
@@ -75,10 +75,10 @@ const Oddhayan = () => {
 
         <div className="mx-auto my-10 grid max-w-7xl grid-cols-1 gap-10 px-3 sm:px-5 lg:px-6 xl:grid-cols-2">
           {/* Left Content */}
-          <div className="rounded-2xl bg-white/80 p-3 backdrop-blur-sm transition-all duration-500 ease-out hover:bg-white sm:p-5 lg:p-6">
+          <div className="rounded-2xl bg-bg-primary/80 p-3 backdrop-blur-sm transition-all duration-500 ease-out hover:bg-bg-primary sm:p-5 lg:p-6">
             <SectionHeading title="Viqarunnisa Noon School & College" />
 
-            <p className="pb-4 text-justify text-sm leading-7 text-gray-700 transition-colors duration-300 lg:text-base lg:leading-8">
+            <p className="pb-4 text-justify text-sm leading-7 text-secondary transition-colors duration-300 lg:text-base lg:leading-8">
               Viqarunnisa Noon School & College is an all-girls educational
               institute in Baily Road, Dhaka, Bangladesh. It has 4 campuses and
               around 25,000 students. Viqarunnisa Noon School & College is one
@@ -99,7 +99,7 @@ const Oddhayan = () => {
                 Tanvir Ahmed
               </p>
 
-              <p className="text-center text-sm font-semibold text-gray-800 lg:text-left">
+              <p className="text-center text-sm font-semibold text-primary lg:text-left">
                 Chairman, Viqarunnisa Noon School & College
               </p>
             </div>

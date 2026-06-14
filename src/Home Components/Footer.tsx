@@ -56,7 +56,7 @@ const serviceLinks: FooterLink[] = [
 const FacebookIcon = () => (
   <svg
     viewBox="0 0 24 24"
-    className="h-6 w-6 fill-[#1877F2]"
+    className="h-6 w-6 fill-[var(--text-blue)]"
     aria-hidden="true"
   >
     <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.08 22 12.06Z" />
@@ -76,7 +76,7 @@ const TwitterIcon = () => (
 const LinkedinIcon = () => (
   <svg
     viewBox="0 0 24 24"
-    className="h-6 w-6 fill-[#0A66C2]"
+    className="h-6 w-6 fill-[var(--text-blue)]"
     aria-hidden="true"
   >
     <path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.27 2.37 4.27 5.46v6.28h-.01ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z" />
@@ -120,8 +120,8 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="relative overflow-hidden bg-linear-to-b from-red-100 to-red-400 text-black">
-      <div className="absolute inset-0 bg-white/10" />
+    <footer className="relative overflow-hidden bg-linear-to-b from-red-100 to-red-400 text-primary">
+      <div className="absolute inset-0 bg-bg-primary/10" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         {/* Upper Buttons */}
@@ -130,7 +130,7 @@ const Footer = () => {
             <Link
               key={button.title}
               href={button.href}
-              className="group flex items-center justify-center gap-4 rounded-xl border-2 border-primary bg-white px-5 py-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-primary hover:shadow-lg"
+              className="group flex items-center justify-center gap-4 rounded-xl border-2 border-primary bg-bg-primary px-5 py-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-primary hover:shadow-lg"
             >
               <Image
                 src={button.icon}
@@ -139,21 +139,21 @@ const Footer = () => {
                 height={36}
                 className="h-9 w-9 object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert"
               />
-              <span className="text-lg font-semibold text-primary transition-colors duration-300 group-hover:text-white sm:text-xl">
+              <span className="text-lg font-semibold text-primary transition-colors duration-300 group-hover:text-inverse sm:text-xl">
                 {button.title}
               </span>
             </Link>
           ))}
         </div>
 
-        <div className="my-10 h-px w-full bg-[#2b2121]/70" />
+        <div className="my-10 h-px w-full bg-primary/70" />
 
         {/* Footer Grid */}
         <div className="grid grid-cols-1 gap-8 text-sm sm:grid-cols-2 lg:grid-cols-5 lg:gap-7">
           {/* About Us */}
           <div className="lg:col-span-1">
             <h3 className="text-2xl font-semibold">About Us</h3>
-            <div className="mb-5 mt-2 h-px w-4/5 bg-[#2b2121]" />
+            <div className="mb-5 mt-2 h-px w-4/5 bg-primary" />
 
             <p className="text-justify text-sm leading-6">
               Viqarunnisa Noon School & College is an all-girls educational
@@ -164,7 +164,7 @@ const Footer = () => {
 
             <Link
               href="/contact"
-              className="mt-5 inline-flex rounded-xl border border-primary bg-white px-4 py-2 text-lg font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-md"
+              className="mt-5 inline-flex rounded-xl border border-primary bg-bg-primary px-4 py-2 text-lg font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-inverse hover:shadow-md"
             >
               Contact us
             </Link>
@@ -173,7 +173,7 @@ const Footer = () => {
           {/* Important Link */}
           <div>
             <h3 className="text-2xl font-semibold">Important Link</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-[#2b2121]" />
+            <div className="mb-5 mt-2 h-px w-full bg-primary" />
 
             <div className="flex flex-col gap-2">
               {importantLinks.map((item) => (
@@ -191,7 +191,7 @@ const Footer = () => {
           {/* Services */}
           <div>
             <h3 className="text-2xl font-semibold">Services</h3>
-            <div className="mb-5 mt-2 h-px w-3/4 bg-[#2b2121]" />
+            <div className="mb-5 mt-2 h-px w-3/4 bg-primary" />
 
             <div className="flex flex-col gap-2">
               {serviceLinks.map((item) => (
@@ -209,7 +209,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div>
             <h3 className="text-2xl font-semibold">Contact Info</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-[#2b2121]" />
+            <div className="mb-5 mt-2 h-px w-full bg-primary" />
 
             <div className="space-y-2 leading-5">
               <p className="font-bold">Help Line Number (Mob)</p>
@@ -224,7 +224,7 @@ const Footer = () => {
             </div>
 
             <h3 className="pt-6 text-2xl font-semibold">Working Hours</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-[#2b2121]" />
+            <div className="mb-5 mt-2 h-px w-full bg-primary" />
 
             <div className="space-y-2">
               <p>Week Days: 9 AM - 5 PM</p>
@@ -235,17 +235,17 @@ const Footer = () => {
           {/* Visitor Counter */}
           <div>
             <h3 className="text-2xl font-semibold">Visitor Counter</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-[#2b2121]" />
+            <div className="mb-5 mt-2 h-px w-full bg-primary" />
 
             <div className="space-y-3">
-              <div className="flex flex-col items-center justify-center rounded-lg border border-primary bg-white p-3 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+              <div className="flex flex-col items-center justify-center rounded-lg border border-primary bg-bg-primary p-3 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                 <p className="text-base font-bold">Today Total Visitors</p>
                 <p className="text-xl font-bold text-primary">
                   {todayCount}
                 </p>
               </div>
 
-              <div className="flex flex-col items-center justify-center rounded-lg border border-primary bg-white p-3 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+              <div className="flex flex-col items-center justify-center rounded-lg border border-primary bg-bg-primary p-3 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                 <p className="text-base font-bold">Grand Total</p>
                 <p className="text-xl font-bold text-primary">
                   {totalCount}
@@ -255,7 +255,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="my-8 h-px w-full bg-[#474646]/80" />
+        <div className="my-8 h-px w-full bg-primary/80" />
 
         {/* Social Links */}
         <div className="flex items-center justify-center gap-5">
