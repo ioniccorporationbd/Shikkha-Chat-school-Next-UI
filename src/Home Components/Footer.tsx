@@ -1,14 +1,29 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import {
+  FaArrowRight,
+  FaCalendarCheck,
+  FaClock,
+  FaEnvelope,
+  FaFacebookF,
+  FaGraduationCap,
+  FaLinkedinIn,
+  FaMapLocationDot,
+  FaPhoneVolume,
+  FaRegAddressCard,
+  FaRegEye,
+  FaSchool,
+  FaTwitter,
+  FaUserGraduate,
+  FaYoutube,
+} from "react-icons/fa6";
 
 type QuickButton = {
   title: string;
-  icon: string;
-  alt: string;
   href: string;
+  icon: ReactNode;
 };
 
 type FooterLink = {
@@ -16,24 +31,27 @@ type FooterLink = {
   href: string;
 };
 
+type SocialLink = {
+  title: string;
+  href: string;
+  icon: ReactNode;
+};
+
 const quickButtons: QuickButton[] = [
   {
     title: "Get Appointment",
-    icon: "/assets/images/email.png",
-    alt: "Email icon",
     href: "/contact",
+    icon: <FaCalendarCheck />,
   },
   {
     title: "Contact Us Today",
-    icon: "/assets/images/nap.png",
-    alt: "Map icon",
     href: "/contact",
+    icon: <FaPhoneVolume />,
   },
   {
     title: "Take a School Tour",
-    icon: "/assets/images/Telecom.png",
-    alt: "Telecom icon",
     href: "/campuslife",
+    icon: <FaMapLocationDot />,
   },
 ];
 
@@ -41,7 +59,10 @@ const importantLinks: FooterLink[] = [
   { title: "Dhaka Districts office", href: "#" },
   { title: "Dhaka Education Board", href: "#" },
   { title: "eTIF", href: "#" },
-  { title: "Directorate of Secondary and Higher Education", href: "#" },
+  {
+    title: "Directorate of Secondary and Higher Education",
+    href: "#",
+  },
   { title: "Directorate of Primary Education", href: "#" },
   { title: "Ministry of Education", href: "#" },
 ];
@@ -53,45 +74,128 @@ const serviceLinks: FooterLink[] = [
   { title: "Fees Payment", href: "#" },
 ];
 
-const FacebookIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="h-6 w-6 fill-[var(--text-blue)]"
-    aria-hidden="true"
-  >
-    <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.08 22 12.06Z" />
-  </svg>
-);
+const socialLinks: SocialLink[] = [
+  {
+    title: "Facebook",
+    href: "#",
+    icon: <FaFacebookF />,
+  },
+  {
+    title: "Twitter",
+    href: "#",
+    icon: <FaTwitter />,
+  },
+  {
+    title: "LinkedIn",
+    href: "#",
+    icon: <FaLinkedinIn />,
+  },
+  {
+    title: "YouTube",
+    href: "#",
+    icon: <FaYoutube />,
+  },
+];
 
-const TwitterIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="h-6 w-6 fill-black"
-    aria-hidden="true"
-  >
-    <path d="M18.9 3H22l-6.76 7.72L23.2 21h-6.23l-4.88-6.38L6.5 21H3.4l7.23-8.26L3 3h6.39l4.41 5.83L18.9 3Zm-1.09 16.19h1.72L8.45 4.72H6.6l11.21 14.47Z" />
-  </svg>
-);
+const SectionTitle = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="mb-5">
+      <div className="inline-flex items-center gap-2 rounded-full border border-soft bg-page-secondary px-3 py-1.5">
+        <span className="h-2 w-2 rounded-full bg-color-secondary" />
+        <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">
+          Explore
+        </p>
+      </div>
 
-const LinkedinIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="h-6 w-6 fill-[var(--text-blue)]"
-    aria-hidden="true"
-  >
-    <path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.27 2.37 4.27 5.46v6.28h-.01ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z" />
-  </svg>
-);
+      <h3 className="mt-3 text-xl font-black leading-tight text-primary sm:text-2xl">
+        {children}
+      </h3>
 
-const YoutubeIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="h-7 w-7 fill-primary"
-    aria-hidden="true"
-  >
-    <path d="M21.58 7.19a2.72 2.72 0 0 0-1.91-1.92C17.98 4.82 12 4.82 12 4.82s-5.98 0-7.67.45a2.72 2.72 0 0 0-1.91 1.92C1.97 8.88 1.97 12.4 1.97 12.4s0 3.52.45 5.21a2.72 2.72 0 0 0 1.91 1.92c1.69.45 7.67.45 7.67.45s5.98 0 7.67-.45a2.72 2.72 0 0 0 1.91-1.92c.45-1.69.45-5.21.45-5.21s0-3.52-.45-5.21ZM9.98 15.62V9.18l5.2 3.22-5.2 3.22Z" />
-  </svg>
-);
+      <div className="mt-3 flex items-center gap-2">
+        <span className="h-1 w-12 rounded-full bg-color-primary" />
+        <span className="h-1 w-5 rounded-full bg-color-secondary" />
+      </div>
+    </div>
+  );
+};
+
+const FooterNavLink = ({ item }: { item: FooterLink }) => {
+  return (
+    <Link
+      href={item.href}
+      className="group flex items-center justify-between gap-3 rounded-[14px] border border-transparent px-3 py-2.5 text-sm font-bold text-secondary transition-all duration-500 ease-out hover:translate-x-1 hover:border-soft hover:bg-color-primary hover:text-inverse hover:shadow-md"
+    >
+      <span className="flex items-start gap-2">
+        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-color-secondary transition-all duration-500 group-hover:bg-page-primary" />
+        <span>{item.title}</span>
+      </span>
+
+      <FaArrowRight className="shrink-0 text-xs opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-100" />
+    </Link>
+  );
+};
+
+const ContactCard = ({
+  icon,
+  title,
+  children,
+}: {
+  icon: ReactNode;
+  title: string;
+  children: ReactNode;
+}) => {
+  return (
+    <div className="group rounded-[18px] border border-soft bg-page-secondary p-4 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-color-primary hover:text-inverse hover:shadow-md">
+      <div className="flex items-start gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-color-secondary text-primary transition-all duration-500 group-hover:bg-page-primary group-hover:text-brand-primary">
+          {icon}
+        </span>
+
+        <div>
+          <p className="text-sm font-black text-primary transition-colors duration-500 group-hover:text-inverse">
+            {title}
+          </p>
+
+          <div className="mt-1 text-sm font-semibold leading-6 text-secondary transition-colors duration-500 group-hover:text-inverse">
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StatCard = ({
+  title,
+  value,
+  icon,
+  accent = false,
+}: {
+  title: string;
+  value: number;
+  icon: ReactNode;
+  accent?: boolean;
+}) => {
+  return (
+    <div
+      className={`group rounded-[20px] border border-soft p-4 text-center transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-color-primary hover:text-inverse hover:shadow-md ${
+        accent ? "bg-color-secondary" : "bg-page-secondary"
+      }`}
+    >
+      <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-[16px] bg-page-primary text-primary shadow-sm transition-all duration-500 group-hover:bg-color-secondary group-hover:text-primary">
+        {icon}
+      </div>
+
+      <p className="mt-3 text-xs font-black uppercase tracking-wide text-secondary transition-colors duration-500 group-hover:text-inverse">
+        {title}
+      </p>
+
+      <p className="mt-1 text-3xl font-black text-primary transition-colors duration-500 group-hover:text-inverse">
+        {value}
+      </p>
+    </div>
+  );
+};
 
 const Footer = () => {
   const [todayCount, setTodayCount] = useState<number>(0);
@@ -105,207 +209,225 @@ const Footer = () => {
       const now = new Date();
       const today = now.toISOString().split("T")[0];
 
-      const visitsToday = visits.filter((visit) => visit.startsWith(today));
+      const todayVisits = visits.filter((visit) => visit.startsWith(today));
       const updatedVisits = [...visits, now.toISOString()];
 
-      setTodayCount(visitsToday.length + 1);
+      setTodayCount(todayVisits.length + 1);
       setTotalCount(updatedVisits.length);
 
       localStorage.setItem("visitData", JSON.stringify(updatedVisits));
     } catch {
+      const fallbackVisit = new Date().toISOString();
+
       setTodayCount(1);
       setTotalCount(1);
-      localStorage.setItem("visitData", JSON.stringify([new Date().toISOString()]));
+      localStorage.setItem("visitData", JSON.stringify([fallbackVisit]));
     }
   }, []);
 
   return (
-    <footer className="relative overflow-hidden bg-linear-to-b from-red-100 to-red-400 text-primary">
-      <div className="absolute inset-0 bg-bg-primary/10" />
+    <footer className="relative overflow-hidden bg-page-secondary font-main text-primary">
+      <div className="h-1 w-full bg-color-primary" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        {/* Upper Buttons */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-color-primary opacity-20 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-20 h-80 w-80 rounded-full bg-color-secondary opacity-20 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-[1600px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
           {quickButtons.map((button) => (
             <Link
               key={button.title}
               href={button.href}
-              className="group flex items-center justify-center gap-4 rounded-xl border-2 border-primary bg-bg-primary px-5 py-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-primary hover:shadow-lg"
+              className="group relative overflow-hidden rounded-[24px] border border-soft bg-page-primary p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-color-primary hover:text-inverse hover:shadow-xl"
             >
-              <Image
-                src={button.icon}
-                alt={button.alt}
-                width={36}
-                height={36}
-                className="h-9 w-9 object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert"
-              />
-              <span className="text-lg font-semibold text-primary transition-colors duration-300 group-hover:text-inverse sm:text-xl">
-                {button.title}
-              </span>
+              <div className="flex items-center gap-4">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-color-secondary text-2xl text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-page-primary group-hover:text-brand-primary">
+                  {button.icon}
+                </span>
+
+                <div>
+                  <p className="text-base font-black text-primary transition-colors duration-500 group-hover:text-inverse sm:text-lg">
+                    {button.title}
+                  </p>
+
+                  <p className="mt-1 flex items-center gap-2 text-sm font-semibold text-secondary transition-colors duration-500 group-hover:text-inverse">
+                    View details
+                    <FaArrowRight className="text-xs transition-transform duration-500 group-hover:translate-x-1" />
+                  </p>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
 
-        <div className="my-10 h-px w-full bg-primary/70" />
+        <div className="mt-8 rounded-[30px] border border-soft bg-page-primary p-5 shadow-sm sm:p-7 lg:mt-10 lg:p-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-5">
+            <div className="xl:col-span-1">
+              <SectionTitle>About Us</SectionTitle>
 
-        {/* Footer Grid */}
-        <div className="grid grid-cols-1 gap-8 text-sm sm:grid-cols-2 lg:grid-cols-5 lg:gap-7">
-          {/* About Us */}
-          <div className="lg:col-span-1">
-            <h3 className="text-2xl font-semibold">About Us</h3>
-            <div className="mb-5 mt-2 h-px w-4/5 bg-primary" />
+              <div className="rounded-[22px] border border-soft bg-page-secondary p-5">
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-[18px] bg-color-secondary text-2xl text-primary">
+                  <FaSchool />
+                </div>
 
-            <p className="text-justify text-sm leading-6">
-              Viqarunnisa Noon School & College is an all-girls educational
-              institute in Baily Road, Dhaka, Bangladesh. It has 4 campuses and
-              around 25,000 students. Viqarunnisa Noon School & College is one
-              of the renowned educational institutes in Bangladesh.
-            </p>
-
-            <Link
-              href="/contact"
-              className="mt-5 inline-flex rounded-xl border border-primary bg-bg-primary px-4 py-2 text-lg font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-inverse hover:shadow-md"
-            >
-              Contact us
-            </Link>
-          </div>
-
-          {/* Important Link */}
-          <div>
-            <h3 className="text-2xl font-semibold">Important Link</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-primary" />
-
-            <div className="flex flex-col gap-2">
-              {importantLinks.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="leading-5 transition-all duration-300 hover:translate-x-1 hover:text-primary"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="text-2xl font-semibold">Services</h3>
-            <div className="mb-5 mt-2 h-px w-3/4 bg-primary" />
-
-            <div className="flex flex-col gap-2">
-              {serviceLinks.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="transition-all duration-300 hover:translate-x-1 hover:text-primary"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-2xl font-semibold">Contact Info</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-primary" />
-
-            <div className="space-y-2 leading-5">
-              <p className="font-bold">Help Line Number (Mob)</p>
-              <p>01867268422, 01866785183, 01866785184</p>
-
-              <p className="font-bold">Help Line Number (Tel)</p>
-              <p>02-48317513, 02-48317519</p>
-              <p>02-58310500</p>
-
-              <p className="font-bold">Email Address</p>
-              <p className="wrap-break-word">info@vnsc.edu.bd, vnsc_bd@yahoo.com</p>
-            </div>
-
-            <h3 className="pt-6 text-2xl font-semibold">Working Hours</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-primary" />
-
-            <div className="space-y-2">
-              <p>Week Days: 9 AM - 5 PM</p>
-              <p className="font-bold">Friday & Saturday : Close</p>
-            </div>
-          </div>
-
-          {/* Visitor Counter */}
-          <div>
-            <h3 className="text-2xl font-semibold">Visitor Counter</h3>
-            <div className="mb-5 mt-2 h-px w-full bg-primary" />
-
-            <div className="space-y-3">
-              <div className="flex flex-col items-center justify-center rounded-lg border border-primary bg-bg-primary p-3 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                <p className="text-base font-bold">Today Total Visitors</p>
-                <p className="text-xl font-bold text-primary">
-                  {todayCount}
+                <p className="text-justify text-sm font-semibold leading-7 text-secondary">
+                  Viqarunnisa Noon School & College is an all-girls educational
+                  institute in Baily Road, Dhaka, Bangladesh. It has 4 campuses
+                  and around 25,000 students. Viqarunnisa Noon School & College
+                  is one of the renowned educational institutes in Bangladesh.
                 </p>
+
+                <Link
+                  href="/contact"
+                  className="mt-5 inline-flex items-center gap-2 rounded-[14px] bg-color-primary px-5 py-3 text-sm font-black text-inverse shadow-sm transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-color-secondary hover:text-primary hover:shadow-md"
+                >
+                  Contact us
+                  <FaArrowRight className="text-xs" />
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <SectionTitle>Important Link</SectionTitle>
+
+              <div className="rounded-[22px] border border-soft bg-page-secondary p-3">
+                <div className="flex flex-col gap-1">
+                  {importantLinks.map((item) => (
+                    <FooterNavLink key={item.title} item={item} />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <SectionTitle>Services</SectionTitle>
+
+              <div className="rounded-[22px] border border-soft bg-page-secondary p-3">
+                <div className="flex flex-col gap-1">
+                  {serviceLinks.map((item) => (
+                    <FooterNavLink key={item.title} item={item} />
+                  ))}
+                </div>
               </div>
 
-              <div className="flex flex-col items-center justify-center rounded-lg border border-primary bg-bg-primary p-3 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                <p className="text-base font-bold">Grand Total</p>
-                <p className="text-xl font-bold text-primary">
-                  {totalCount}
+              <div className="mt-5 rounded-[22px] border border-soft bg-color-secondary p-5">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-page-primary text-xl text-primary">
+                    <FaUserGraduate />
+                  </span>
+
+                  <div>
+                    <p className="text-lg font-black text-primary">
+                      Student Support
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-secondary">
+                      Fast access to admission and payment services.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <SectionTitle>Contact Info</SectionTitle>
+
+              <div className="space-y-3">
+                <ContactCard
+                  icon={<FaPhoneVolume />}
+                  title="Help Line Number (Mob)"
+                >
+                  <p>01867268422, 01866785183, 01866785184</p>
+                </ContactCard>
+
+                <ContactCard
+                  icon={<FaRegAddressCard />}
+                  title="Help Line Number (Tel)"
+                >
+                  <p>02-48317513, 02-48317519</p>
+                  <p>02-58310500</p>
+                </ContactCard>
+
+                <ContactCard icon={<FaEnvelope />} title="Email Address">
+                  <p className="break-words">info@vnsc.edu.bd</p>
+                  <p className="break-words">vnsc_bd@yahoo.com</p>
+                </ContactCard>
+              </div>
+            </div>
+
+            <div>
+              <SectionTitle>Visitor Counter</SectionTitle>
+
+              <div className="grid grid-cols-2 gap-3">
+                <StatCard
+                  title="Today"
+                  value={todayCount}
+                  icon={<FaRegEye />}
+                />
+
+                <StatCard
+                  title="Total"
+                  value={totalCount}
+                  icon={<FaGraduationCap />}
+                  accent
+                />
+              </div>
+
+              <div className="mt-6">
+                <SectionTitle>Working Hours</SectionTitle>
+
+                <div className="group rounded-[22px] border border-soft bg-page-secondary p-5 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-color-primary hover:text-inverse hover:shadow-md">
+                  <div className="flex items-start gap-3">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] bg-color-secondary text-primary transition-all duration-500 group-hover:bg-page-primary group-hover:text-brand-primary">
+                      <FaClock />
+                    </span>
+
+                    <div className="text-sm font-semibold leading-7 text-secondary transition-colors duration-500 group-hover:text-inverse">
+                      <p>
+                        <span className="font-black text-primary transition-colors duration-500 group-hover:text-inverse">
+                          Week Days:
+                        </span>{" "}
+                        9 AM - 5 PM
+                      </p>
+                      <p>
+                        <span className="font-black text-primary transition-colors duration-500 group-hover:text-inverse">
+                          Friday & Saturday:
+                        </span>{" "}
+                        Close
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <p className="mb-3 text-sm font-black text-primary">
+                  Follow us on social media
                 </p>
+
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((item) => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      aria-label={item.title}
+                      className="flex h-11 w-11 items-center justify-center rounded-[16px] border border-soft bg-page-secondary text-primary shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-color-primary hover:text-inverse hover:shadow-md"
+                    >
+                      {item.icon}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="my-8 h-px w-full bg-primary/80" />
-
-        {/* Social Links */}
-        <div className="flex items-center justify-center gap-5">
-          <Link
-            href="#"
-            aria-label="Facebook"
-            className="transition-transform duration-300 hover:-translate-y-1"
-          >
-            <FacebookIcon />
-          </Link>
-
-          <Link
-            href="#"
-            aria-label="Twitter"
-            className="transition-transform duration-300 hover:-translate-y-1"
-          >
-            <TwitterIcon />
-          </Link>
-
-          <Link
-            href="#"
-            aria-label="LinkedIn"
-            className="transition-transform duration-300 hover:-translate-y-1"
-          >
-            <LinkedinIcon />
-          </Link>
-
-          <Link
-            href="#"
-            aria-label="YouTube"
-            className="transition-transform duration-300 hover:-translate-y-1"
-          >
-            <YoutubeIcon />
-          </Link>
-        </div>
-
-        {/* Copyright */}
-        <div className="flex flex-col items-center justify-center gap-2 pt-5 text-center">
-          <p className="text-sm">
-            © Copyright Shikkha Chat 2009, All Rights Reserved
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 rounded-[24px] border border-soft bg-color-primary px-5 py-4 text-center text-sm font-bold text-inverse shadow-sm md:flex-row">
+          <p>
+            © {new Date().getFullYear()} Viqarunnisa Noon School & College. All
+            Rights Reserved.
           </p>
 
-          <Link
-            href="https://shikkhachat.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pb-2 text-sm transition-colors duration-300 hover:text-primary"
-          >
-            Developed By IONIC Corporation
-          </Link>
+          <p>Designed with care for a modern school website.</p>
         </div>
       </div>
     </footer>
