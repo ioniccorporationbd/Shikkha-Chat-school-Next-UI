@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import {
   callSite,
+  guardianLabel,
   toSubmittedApplication,
   type UploadPayload,
 } from "@/lib/admission-api";
@@ -221,7 +222,8 @@ export const POST = async (request: Request) => {
 
   // The guardian picture only has a home once a guardian row exists, so it is skipped when the school
   // keeps no guardian records — the answer says so rather than reporting a paper that went nowhere.
-  const guardians = Array.isArray(filed.data.guardians) ? (filed.data.guardians as string[]) : [];
+  const filedGuardians = Array.isArray(filed.data.guardians) ? filed.data.guardians : [];
+  const guardians = filedGuardians.map(guardianLabel).filter((label) => Boolean(label));
   if (body.guardianPhoto?.content) {
     if (guardians.length) {
       await attach(body.guardianPhoto, "guardian_photo", "অভিভাবকের ছবি");

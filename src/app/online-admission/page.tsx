@@ -26,6 +26,8 @@ import {
   FaUserGraduate,
 } from "react-icons/fa6";
 
+import type { OpenProgram } from "@/lib/admission-api";
+
 type OverviewItem = {
   title: string;
   value: string;
@@ -316,6 +318,46 @@ const initialGuardianData: GuardianData = {
 const toBanglaNumber = (value: string | number) =>
   value.toString().replace(/\d/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)]);
 
+/** What the school asks every applicant to bring; used when a class has no list of its own. */
+const DEFAULT_DOCUMENTS = "শিক্ষার্থীর ছবি, অভিভাবকের ছবি, জন্ম নিবন্ধন সনদ";
+
+const BANGLA_MONTHS = [
+  "জানুয়ারি",
+  "ফেব্রুয়ারি",
+  "মার্চ",
+  "এপ্রিল",
+  "মে",
+  "জুন",
+  "জুলাই",
+  "আগস্ট",
+  "সেপ্টেম্বর",
+  "অক্টোবর",
+  "নভেম্বর",
+  "ডিসেম্বর",
+];
+
+/**
+ * The school answers with Frappe's `"2026-10-18 10:00:00"`. A parent reading a receipt wants the day
+ * the application was taken, in their own script — not a timestamp they have to parse.
+ */
+const formatSubmittedDate = (value: string) => {
+  const [datePart] = value.trim().split(" ");
+  const [year, month, day] = datePart.split("-").map((part) => Number(part));
+
+  if (!year || !month || !day || month < 1 || month > 12) {
+    return value.trim();
+  }
+
+  return `${toBanglaNumber(day)} ${BANGLA_MONTHS[month - 1]} ${toBanglaNumber(year)}`;
+};
+
+/** `৳ ১২,০০০` — the currency symbol belongs in front of the amount, not after it. */
+const formatFee = (amount: number, currency: string) => {
+  const rounded = Math.round(amount).toLocaleString("en-US");
+  const symbol = currency.trim().toUpperCase() === "BDT" || !currency.trim() ? "৳" : currency.trim();
+  return `${symbol} ${toBanglaNumber(rounded)}`;
+};
+
 const formatFileSize = (fileSize: number) => {
   if (fileSize < 1024) {
     return `${toBanglaNumber(fileSize)} বাইট`;
@@ -367,9 +409,7 @@ const OnlineAdmissionPage = () => {
     useState<SubmittedApplication | null>(null);
   const [fileInputKey, setFileInputKey] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [openPrograms, setOpenPrograms] = useState<
-    { program: string; label: string; available: boolean; register: string }[]
-  >([]);
+  const [openPrograms, setOpenPrograms] = useState<OpenProgram[]>([]);
 
   // The classes on offer come from the school's own open intake, not from copy on this page: a class
   // with no running admission register is shown as closed instead of failing after the form is filled.
@@ -381,7 +421,7 @@ const OnlineAdmissionPage = () => {
         const response = await fetch("/api/admission/programs", { cache: "no-store" });
         const payload = (await response.json()) as {
           ok?: boolean;
-          programs?: { program: string; label: string; available: boolean; register: string }[];
+          programs?: OpenProgram[];
         };
 
         if (!cancelled && payload?.ok && Array.isArray(payload.programs)) {
@@ -399,11 +439,30 @@ const OnlineAdmissionPage = () => {
     };
   }, []);
 
-  const selectedClassInfo = useMemo(
-    () =>
-      admissionClasses.find((item) => item.title === studentData.selectedClass),
-    [studentData.selectedClass]
-  );
+  /**
+   * The fee and paper list for whichever class the visitor picked.
+   *
+   * A class the school is admitting into comes from `list_open_programs` and has no entry in this
+   * page's own preset list, so the summary reads its fee off the school's answer instead of claiming
+   * no class has been chosen yet.
+   */
+  const selectedClassInfo = useMemo(() => {
+    const preset = admissionClasses.find((item) => item.title === studentData.selectedClass);
+    if (preset) return preset;
+
+    const live = openPrograms.find((item) => item.program === studentData.selectedClass);
+    if (!live) return undefined;
+
+    return {
+      title: live.label || live.program,
+      age: "",
+      fee: live.fee ? formatFee(live.fee, live.currency || "BDT") : "",
+      documents: DEFAULT_DOCUMENTS,
+      status: "চলমান",
+      description: "",
+      icon: null,
+    } satisfies AdmissionClass;
+  }, [studentData.selectedClass, openPrograms]);
 
   const totalDocumentSize = useMemo(
     () => documents.reduce((total, file) => total + file.size, 0),
@@ -721,7 +780,7 @@ const OnlineAdmissionPage = () => {
         statusLabel: application.statusLabel || "আবেদন জমা হয়েছে",
         program: application.program || studentData.selectedClass,
         feeLabel: application.fee
-          ? `${toBanglaNumber(application.fee.toFixed(0))} ${application.currency || "৳"}`
+          ? formatFee(application.fee, application.currency || "BDT")
           : "",
         submittedOn: application.submittedOn,
         guardians: application.guardians ?? [],
@@ -1021,8 +1080,9 @@ const OnlineAdmissionPage = () => {
             </h2>
 
             <p className="mx-auto mt-4 max-w-3xl text-sm font-semibold leading-7 text-secondary">
-              এই ফরমটি শুধু ফ্রন্টএন্ডে কার্যকর ডেমো। ছবি ও ডকুমেন্ট স্থানীয়
-              ব্রাউজার প্রিভিউ হিসেবে দেখাবে, সার্ভারে আপলোড করবে না।
+              এই ফরম পূরণ করে জমা দিলে আবেদন সরাসরি বিদ্যালয়ের রেকর্ডে পৌঁছে যাবে — ছবি ও
+              ডকুমেন্টসহ। জমা দেওয়ার পর যে আবেদন নম্বরটি দেখানো হবে, সেটি বিদ্যালয়ের নিজের
+              নম্বর; ওই নম্বর ও অভিভাবকের মোবাইল দিয়ে যেকোনো সময় আবেদনের অবস্থা জানা যাবে।
             </p>
           </div>
 
@@ -1219,21 +1279,26 @@ const OnlineAdmissionPage = () => {
                         শ্রেণি নির্বাচন করুন
                       </option>
                       {(openPrograms.length
-                        ? openPrograms.map((item) => ({
-                            title: item.label || item.program,
-                            available: item.available,
-                          }))
-                        : admissionClasses.map((item) => ({ title: item.title, available: true }))
-                      ).map((item) => (
-                        <option
-                          key={item.title}
-                          value={item.title}
-                          disabled={!item.available}
-                          className="bg-page-primary text-primary"
-                        >
-                          {item.available ? item.title : `${item.title} — এখন বন্ধ`}
-                        </option>
-                      ))}
+                      ? openPrograms.map((item) => ({
+                          value: item.program,
+                          title: item.label || item.program,
+                          available: item.available,
+                        }))
+                      : admissionClasses.map((item) => ({
+                          value: item.title,
+                          title: item.title,
+                          available: true,
+                        }))
+                    ).map((item) => (
+                      <option
+                        key={item.value}
+                        value={item.value}
+                        disabled={!item.available}
+                        className="bg-page-primary text-primary"
+                      >
+                        {item.available ? item.title : `${item.title} — এখন বন্ধ`}
+                      </option>
+                    ))}
                     </select>
                     <p className="text-xs font-semibold leading-6 text-secondary">
                       তালিকাটি বিদ্যালয়ের চলমান ভর্তি রেজিস্টার থেকে আসে; বন্ধ শ্রেণি নির্বাচন করা যায় না।
@@ -1650,7 +1715,7 @@ const OnlineAdmissionPage = () => {
                     {[
                       ["অবস্থা", submittedApplication.statusLabel],
                       ["শ্রেণি", submittedApplication.program],
-                      ["আবেদনের তারিখ", submittedApplication.submittedOn || "আজ"],
+                      ["আবেদনের তারিখ", formatSubmittedDate(submittedApplication.submittedOn) || "আজ"],
                       ["আবেদন ফি", submittedApplication.feeLabel || "শ্রেণি অনুযায়ী"],
                       [
                         "সংরক্ষিত অভিভাবক",

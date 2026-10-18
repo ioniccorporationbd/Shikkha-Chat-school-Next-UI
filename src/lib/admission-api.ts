@@ -128,12 +128,21 @@ export const callSite = async <T>(
     const body = payload as { message?: unknown; exc?: string } | null;
 
     if (!response.ok || body?.exc) {
+      const sentence = readableError(
+        payload,
+        "বিদ্যালয়ের সার্ভার এখন সাড়া দিচ্ছে না। কিছুক্ষণ পর আবার চেষ্টা করুন।"
+      );
+      const excType = (payload as { exc_type?: unknown } | null)?.exc_type;
+
+      // An unhandled error on the site answers with a bare `{"exc_type": "KeyError"}`. A parent cannot
+      // act on that, but dropping it leaves whoever deploys the backend with nothing to search for, so
+      // the type rides along after the sentence they can read.
       return {
         ok: false,
-        message: readableError(
-          payload,
-          "বিদ্যালয়ের সার্ভার এখন সাড়া দিচ্ছে না। কিছুক্ষণ পর আবার চেষ্টা করুন।"
-        ),
+        message:
+          typeof excType === "string" && excType.trim()
+            ? `${sentence} (সার্ভার ত্রুটি: ${excType.trim()})`
+            : sentence,
       };
     }
 
@@ -173,6 +182,32 @@ export const toOpenProgram = (row: Record<string, unknown>): OpenProgram => ({
   endsOn: String(row.ends_on ?? "").trim(),
   academicYear: String(row.academic_year ?? "").trim(),
 });
+
+/**
+ * One guardian as the school filed them, for the receipt: `"Abul Kalam (বাবা)"`.
+ *
+ * `submit_application` answers with `{guardian, name, relation}`; an older response (or a site whose
+ * guardian child table is unavailable) can be a bare record name, which is kept rather than dropped.
+ */
+export const guardianLabel = (row: unknown): string => {
+  if (typeof row === "string") return row.trim();
+  if (!row || typeof row !== "object") return "";
+
+  const record = row as { name?: unknown; guardian_name?: unknown; relation?: unknown };
+  const name = String(record.name ?? record.guardian_name ?? "").trim();
+  const relation = String(record.relation ?? "").trim();
+  const relationBn = GUARDIAN_RELATION_LABELS[relation.toLowerCase()] ?? relation;
+
+  if (!name) return "";
+  return relationBn && relationBn !== "অন্যান্য" ? `${name} (${relationBn})` : name;
+};
+
+const GUARDIAN_RELATION_LABELS: Record<string, string> = {
+  father: "বাবা",
+  mother: "মা",
+  guardian: "অভিভাবক",
+  others: "অন্যান্য",
+};
 
 /** Normalise the state `submit_application` answers with. */
 export const toSubmittedApplication = (
