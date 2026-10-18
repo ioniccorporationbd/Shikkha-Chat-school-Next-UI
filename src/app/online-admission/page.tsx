@@ -95,6 +95,13 @@ type GuardianData = {
 
 type SubmittedApplication = {
   applicationId: string;
+  applicationNo: string;
+  statusLabel: string;
+  program: string;
+  feeLabel: string;
+  submittedOn: string;
+  guardians: string[];
+  warnings: string[];
   student: StudentData;
   guardian: GuardianData;
   studentPhotoName: string;
@@ -321,10 +328,19 @@ const formatFileSize = (fileSize: number) => {
   return `${toBanglaNumber((fileSize / (1024 * 1024)).toFixed(2))} এমবি`;
 };
 
-const generateApplicationId = () => {
-  const randomNumber = Math.floor(1000 + Math.random() * 9000);
-  return `ভর্তি-২০২৬-${toBanglaNumber(randomNumber)}`;
-};
+/** Base64 of one chosen file, the shape the site's guest attachment method takes. */
+const fileToBase64 = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const result = String(reader.result ?? "");
+      const comma = result.indexOf(",");
+      resolve(comma >= 0 ? result.slice(comma + 1) : result);
+    };
+    reader.onerror = () => reject(new Error("ফাইল পড়া যায়নি।"));
+    reader.readAsDataURL(file);
+  });
 
 const inputClassName =
   "rounded-2xl border border-soft bg-page-primary p-4 text-sm font-semibold text-primary outline-none placeholder:text-primary focus:border-brand-primary";
@@ -350,6 +366,38 @@ const OnlineAdmissionPage = () => {
   const [submittedApplication, setSubmittedApplication] =
     useState<SubmittedApplication | null>(null);
   const [fileInputKey, setFileInputKey] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openPrograms, setOpenPrograms] = useState<
+    { program: string; label: string; available: boolean; register: string }[]
+  >([]);
+
+  // The classes on offer come from the school's own open intake, not from copy on this page: a class
+  // with no running admission register is shown as closed instead of failing after the form is filled.
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadPrograms = async () => {
+      try {
+        const response = await fetch("/api/admission/programs", { cache: "no-store" });
+        const payload = (await response.json()) as {
+          ok?: boolean;
+          programs?: { program: string; label: string; available: boolean; register: string }[];
+        };
+
+        if (!cancelled && payload?.ok && Array.isArray(payload.programs)) {
+          setOpenPrograms(payload.programs);
+        }
+      } catch {
+        // The select falls back to this page's own list; submission is where a real class is required.
+      }
+    };
+
+    loadPrograms();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const selectedClassInfo = useMemo(
     () =>
@@ -549,6 +597,19 @@ const OnlineAdmissionPage = () => {
       return "প্রধান অভিভাবকের মোবাইল নম্বর আবশ্যক।";
     }
 
+    if (!/^01\d{9}$/.test(guardianData.guardianPhone.replace(/[^\d]/g, ""))) {
+      return "অভিভাবকের মোবাইল নম্বর ১১ ডিজিটের হতে হবে (যেমন: 01712345678)।";
+    }
+
+    // The school files one contact email with the application; without it the record cannot be saved.
+    if (!guardianData.guardianEmail.trim()) {
+      return "যোগাযোগের ইমেইল আবশ্যক।";
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(guardianData.guardianEmail.trim())) {
+      return "যোগাযোগের ইমেইলটি সঠিক নয়।";
+    }
+
     if (!studentPhoto) {
       return "শিক্ষার্থীর ছবি আপলোড করা আবশ্যক।";
     }
@@ -564,8 +625,12 @@ const OnlineAdmissionPage = () => {
     return "";
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
 
     const validationError = validateApplication();
 
@@ -577,23 +642,104 @@ const OnlineAdmissionPage = () => {
       return;
     }
 
-    const newApplicationId = generateApplicationId();
-
-    setApplicationId(newApplicationId);
-    setSuccess(
-      "আপনার ভর্তি আবেদন তথ্য সফলভাবে স্থানীয় ব্রাউজারে প্রস্তুত হয়েছে। ব্যাকএন্ড/API ছাড়া এটি ডেমো সাবমিশন হিসেবে দেখানো হচ্ছে।"
-    );
+    setIsSubmitting(true);
     setError("");
+    setSuccess("");
 
-    setSubmittedApplication({
-      applicationId: newApplicationId,
-      student: studentData,
-      guardian: guardianData,
-      studentPhotoName: studentPhoto?.name ?? "",
-      guardianPhotoName: guardianPhoto?.name ?? "",
-      documentCount: documents.length,
-      totalDocumentSize: formatFileSize(totalDocumentSize),
-    });
+    try {
+      // A class card carries the register it belongs to; without one the backend resolves the program.
+      const chosenProgram = openPrograms.find(
+        (item) => (item.label || item.program) === studentData.selectedClass
+      );
+
+      if (chosenProgram && !chosenProgram.available) {
+        setError("এই শ্রেণিতে এখন আর আবেদন নেওয়া হচ্ছে না। অন্য শ্রেণি নির্বাচন করুন।");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const [studentPhotoContent, guardianPhotoContent, documentContents] = await Promise.all([
+        studentPhoto ? fileToBase64(studentPhoto) : Promise.resolve(""),
+        guardianPhoto ? fileToBase64(guardianPhoto) : Promise.resolve(""),
+        Promise.all(
+          documents.map(async (file) => ({ name: file.name, content: await fileToBase64(file) }))
+        ),
+      ]);
+
+      const response = await fetch("/api/admission/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          student: studentData,
+          guardian: guardianData,
+          program: chosenProgram?.program ?? studentData.selectedClass,
+          register: chosenProgram?.register ?? "",
+          studentPhoto: studentPhoto ? { name: studentPhoto.name, content: studentPhotoContent } : null,
+          guardianPhoto: guardianPhoto
+            ? { name: guardianPhoto.name, content: guardianPhotoContent }
+            : null,
+          documents: documentContents,
+        }),
+      });
+
+      const payload = (await response.json()) as {
+        ok?: boolean;
+        message?: string;
+        duplicate?: boolean;
+        warnings?: string[];
+        application?: {
+          applicationNo: string;
+          statusLabel: string;
+          program: string;
+          fee: number;
+          currency: string;
+          submittedOn: string;
+          guardians: string[];
+        };
+      };
+
+      if (!payload?.ok || !payload.application?.applicationNo) {
+        setError(payload?.message || "আবেদন জমা দেওয়া যায়নি। আবার চেষ্টা করুন।");
+        setApplicationId("");
+        setSubmittedApplication(null);
+        setIsSubmitting(false);
+        return;
+      }
+
+      const application = payload.application;
+      const warnings = Array.isArray(payload.warnings) ? payload.warnings : [];
+
+      setApplicationId(application.applicationNo);
+      setSuccess(
+        payload.duplicate
+          ? `এই শিক্ষার্থীর একটি আবেদন ইতিমধ্যে জমা আছে — আবেদন নম্বর ${application.applicationNo}।`
+          : `আপনার আবেদন বিদ্যালয়ের সার্ভারে জমা হয়েছে। আবেদন নম্বর: ${application.applicationNo}।`
+      );
+      setSubmittedApplication({
+        applicationId: application.applicationNo,
+        applicationNo: application.applicationNo,
+        statusLabel: application.statusLabel || "আবেদন জমা হয়েছে",
+        program: application.program || studentData.selectedClass,
+        feeLabel: application.fee
+          ? `${toBanglaNumber(application.fee.toFixed(0))} ${application.currency || "৳"}`
+          : "",
+        submittedOn: application.submittedOn,
+        guardians: application.guardians ?? [],
+        warnings,
+        student: studentData,
+        guardian: guardianData,
+        studentPhotoName: studentPhoto?.name ?? "",
+        guardianPhotoName: guardianPhoto?.name ?? "",
+        documentCount: documents.length,
+        totalDocumentSize: formatFileSize(totalDocumentSize),
+      });
+    } catch {
+      setError("আবেদন পাঠানো যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।");
+      setApplicationId("");
+      setSubmittedApplication(null);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -911,131 +1057,216 @@ const OnlineAdmissionPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                  <input
-                    name="studentFullName"
-                    value={studentData.studentFullName}
-                    onChange={handleStudentChange}
-                    placeholder="শিক্ষার্থীর পূর্ণ নাম *"
-                    className={inputClassName}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="studentFullName" className="text-sm font-black text-primary">
+                      শিক্ষার্থীর পূর্ণ নাম (ইংরেজিতে){" "}
+                      <span className="text-brand-primary">*</span>
+                    </label>
+                    <input
+                      id="studentFullName"
+                      name="studentFullName"
+                      value={studentData.studentFullName}
+                      onChange={handleStudentChange}
+                      placeholder="যেমন: Rahim Uddin Ahmed"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
 
-                  <input
-                    name="studentBanglaName"
-                    value={studentData.studentBanglaName}
-                    onChange={handleStudentChange}
-                    placeholder="বাংলা নাম"
-                    className={inputClassName}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="studentBanglaName" className="text-sm font-black text-primary">
+                      শিক্ষার্থীর নাম (বাংলায়)
+                    </label>
+                    <input
+                      id="studentBanglaName"
+                      name="studentBanglaName"
+                      value={studentData.studentBanglaName}
+                      onChange={handleStudentChange}
+                      placeholder="যেমন: রহিম উদ্দিন আহমেদ"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
 
-                  <input
-                    type="date"
-                    name="dateOfBirth"
-                    value={studentData.dateOfBirth}
-                    onChange={handleStudentChange}
-                    className={inputClassName}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="dateOfBirth" className="text-sm font-black text-primary">
+                      জন্ম তারিখ <span className="text-brand-primary">*</span>
+                    </label>
+                    <input
+                      id="dateOfBirth"
+                      type="date"
+                      name="dateOfBirth"
+                      value={studentData.dateOfBirth}
+                      onChange={handleStudentChange}
+                      max={new Date().toISOString().slice(0, 10)}
+                      className={`w-full ${inputClassName}`}
+                    />
+                    <p className="text-xs font-semibold leading-6 text-secondary">
+                      জন্ম সনদের মতোই দিন — ভর্তির বয়সসীমা এই তারিখ থেকেই যাচাই হবে।
+                    </p>
+                  </div>
 
-                  <select
-                    name="gender"
-                    value={studentData.gender}
-                    onChange={handleStudentChange}
-                    className={selectClassName}
-                  >
-                    <option className="bg-page-primary text-primary" value="">
-                      লিঙ্গ নির্বাচন করুন
-                    </option>
-                    <option className="bg-page-primary text-primary" value="পুরুষ">
-                      পুরুষ
-                    </option>
-                    <option className="bg-page-primary text-primary" value="নারী">
-                      নারী
-                    </option>
-                    <option className="bg-page-primary text-primary" value="অন্যান্য">
-                      অন্যান্য
-                    </option>
-                  </select>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="gender" className="text-sm font-black text-primary">
+                      লিঙ্গ <span className="text-brand-primary">*</span>
+                    </label>
+                    <select
+                      id="gender"
+                      name="gender"
+                      value={studentData.gender}
+                      onChange={handleStudentChange}
+                      className={`w-full ${selectClassName}`}
+                    >
+                      <option className="bg-page-primary text-primary" value="">
+                        লিঙ্গ নির্বাচন করুন
+                      </option>
+                      <option className="bg-page-primary text-primary" value="Male">
+                        পুরুষ
+                      </option>
+                      <option className="bg-page-primary text-primary" value="Female">
+                        নারী
+                      </option>
+                      <option className="bg-page-primary text-primary" value="Other">
+                        অন্যান্য
+                      </option>
+                    </select>
+                  </div>
 
-                  <select
-                    name="bloodGroup"
-                    value={studentData.bloodGroup}
-                    onChange={handleStudentChange}
-                    className={selectClassName}
-                  >
-                    <option className="bg-page-primary text-primary" value="">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="bloodGroup" className="text-sm font-black text-primary">
                       রক্তের গ্রুপ
-                    </option>
-                    {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map(
-                      (group) => (
+                    </label>
+                    <select
+                      id="bloodGroup"
+                      name="bloodGroup"
+                      value={studentData.bloodGroup}
+                      onChange={handleStudentChange}
+                      className={`w-full ${selectClassName}`}
+                    >
+                      <option className="bg-page-primary text-primary" value="">
+                        রক্তের গ্রুপ নির্বাচন করুন
+                      </option>
+                      {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map(
+                        (group) => (
+                          <option
+                            key={group}
+                            value={group}
+                            className="bg-page-primary text-primary"
+                          >
+                            {group}
+                          </option>
+                        )
+                      )}
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="religion" className="text-sm font-black text-primary">
+                      ধর্ম
+                    </label>
+                    <input
+                      id="religion"
+                      name="religion"
+                      value={studentData.religion}
+                      onChange={handleStudentChange}
+                      placeholder="যেমন: ইসলাম"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="nationality" className="text-sm font-black text-primary">
+                      জাতীয়তা
+                    </label>
+                    <input
+                      id="nationality"
+                      name="nationality"
+                      value={studentData.nationality}
+                      onChange={handleStudentChange}
+                      placeholder="যেমন: বাংলাদেশি"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label
+                      htmlFor="birthRegistrationNumber"
+                      className="text-sm font-black text-primary"
+                    >
+                      জন্ম নিবন্ধন নম্বর
+                    </label>
+                    <input
+                      id="birthRegistrationNumber"
+                      name="birthRegistrationNumber"
+                      value={studentData.birthRegistrationNumber}
+                      onChange={handleStudentChange}
+                      inputMode="numeric"
+                      placeholder="১৭ ডিজিটের জন্ম নিবন্ধন নম্বর"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="selectedClass" className="text-sm font-black text-primary">
+                      যে শ্রেণিতে ভর্তি হতে চায় <span className="text-brand-primary">*</span>
+                    </label>
+                    <select
+                      id="selectedClass"
+                      name="selectedClass"
+                      value={studentData.selectedClass}
+                      onChange={handleStudentChange}
+                      className={`w-full ${selectClassName}`}
+                    >
+                      <option className="bg-page-primary text-primary" value="">
+                        শ্রেণি নির্বাচন করুন
+                      </option>
+                      {(openPrograms.length
+                        ? openPrograms.map((item) => ({
+                            title: item.label || item.program,
+                            available: item.available,
+                          }))
+                        : admissionClasses.map((item) => ({ title: item.title, available: true }))
+                      ).map((item) => (
                         <option
-                          key={group}
-                          value={group}
+                          key={item.title}
+                          value={item.title}
+                          disabled={!item.available}
                           className="bg-page-primary text-primary"
                         >
-                          {group}
+                          {item.available ? item.title : `${item.title} — এখন বন্ধ`}
                         </option>
-                      )
-                    )}
-                  </select>
+                      ))}
+                    </select>
+                    <p className="text-xs font-semibold leading-6 text-secondary">
+                      তালিকাটি বিদ্যালয়ের চলমান ভর্তি রেজিস্টার থেকে আসে; বন্ধ শ্রেণি নির্বাচন করা যায় না।
+                    </p>
+                  </div>
 
-                  <input
-                    name="religion"
-                    value={studentData.religion}
-                    onChange={handleStudentChange}
-                    placeholder="ধর্ম"
-                    className={inputClassName}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="previousSchool" className="text-sm font-black text-primary">
+                      পূর্ববর্তী বিদ্যালয়
+                    </label>
+                    <input
+                      id="previousSchool"
+                      name="previousSchool"
+                      value={studentData.previousSchool}
+                      onChange={handleStudentChange}
+                      placeholder="পূর্ববর্তী বিদ্যালয়ের নাম"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
 
-                  <input
-                    name="nationality"
-                    value={studentData.nationality}
-                    onChange={handleStudentChange}
-                    placeholder="জাতীয়তা"
-                    className={inputClassName}
-                  />
-
-                  <input
-                    name="birthRegistrationNumber"
-                    value={studentData.birthRegistrationNumber}
-                    onChange={handleStudentChange}
-                    placeholder="জন্ম নিবন্ধন নম্বর"
-                    className={inputClassName}
-                  />
-
-                  <select
-                    name="selectedClass"
-                    value={studentData.selectedClass}
-                    onChange={handleStudentChange}
-                    className={selectClassName}
-                  >
-                    <option className="bg-page-primary text-primary" value="">
-                      শ্রেণি নির্বাচন করুন *
-                    </option>
-                    {admissionClasses.map((item) => (
-                      <option
-                        key={item.title}
-                        value={item.title}
-                        className="bg-page-primary text-primary"
-                      >
-                        {item.title}
-                      </option>
-                    ))}
-                  </select>
-
-                  <input
-                    name="previousSchool"
-                    value={studentData.previousSchool}
-                    onChange={handleStudentChange}
-                    placeholder="পূর্ববর্তী বিদ্যালয়"
-                    className={inputClassName}
-                  />
-
-                  <input
-                    name="previousClass"
-                    value={studentData.previousClass}
-                    onChange={handleStudentChange}
-                    placeholder="পূর্ববর্তী শ্রেণি"
-                    className={inputClassName}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="previousClass" className="text-sm font-black text-primary">
+                      পূর্ববর্তী শ্রেণি
+                    </label>
+                    <input
+                      id="previousClass"
+                      name="previousClass"
+                      value={studentData.previousClass}
+                      onChange={handleStudentChange}
+                      placeholder="যেমন: পঞ্চম শ্রেণি"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
 
                   <div className="rounded-2xl border border-soft bg-page-primary p-4">
                     <label className="text-sm font-black text-primary">
@@ -1051,23 +1282,35 @@ const OnlineAdmissionPage = () => {
                 </div>
 
                 <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-                  <textarea
-                    name="presentAddress"
-                    value={studentData.presentAddress}
-                    onChange={handleStudentChange}
-                    rows={4}
-                    placeholder="বর্তমান ঠিকানা"
-                    className={inputClassName}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="presentAddress" className="text-sm font-black text-primary">
+                      বর্তমান ঠিকানা
+                    </label>
+                    <textarea
+                      id="presentAddress"
+                      name="presentAddress"
+                      value={studentData.presentAddress}
+                      onChange={handleStudentChange}
+                      rows={4}
+                      placeholder="বাসা / রোড / এলাকা / উপজেলা / জেলা"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
 
-                  <textarea
-                    name="permanentAddress"
-                    value={studentData.permanentAddress}
-                    onChange={handleStudentChange}
-                    rows={4}
-                    placeholder="স্থায়ী ঠিকানা"
-                    className={inputClassName}
-                  />
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="permanentAddress" className="text-sm font-black text-primary">
+                      স্থায়ী ঠিকানা
+                    </label>
+                    <textarea
+                      id="permanentAddress"
+                      name="permanentAddress"
+                      value={studentData.permanentAddress}
+                      onChange={handleStudentChange}
+                      rows={4}
+                      placeholder="বর্তমান ঠিকানা একই হলে তা-ই লিখুন"
+                      className={`w-full ${inputClassName}`}
+                    />
+                  </div>
                 </div>
 
                 {studentPhoto && (
@@ -1121,29 +1364,47 @@ const OnlineAdmissionPage = () => {
 
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                   {[
-                    ["fatherName", "পিতার নাম"],
-                    ["fatherOccupation", "পিতার পেশা"],
-                    ["fatherNid", "পিতার জাতীয় পরিচয়পত্র"],
-                    ["fatherPhone", "পিতার ফোন"],
-                    ["motherName", "মাতার নাম"],
-                    ["motherOccupation", "মাতার পেশা"],
-                    ["motherNid", "মাতার জাতীয় পরিচয়পত্র"],
-                    ["motherPhone", "মাতার ফোন"],
-                    ["guardianName", "অভিভাবকের নাম *"],
-                    ["guardianRelation", "অভিভাবকের সম্পর্ক"],
-                    ["guardianPhone", "অভিভাবকের ফোন *"],
-                    ["guardianEmail", "অভিভাবকের ইমেইল"],
-                    ["emergencyContact", "জরুরি যোগাযোগ"],
-                  ].map(([name, placeholder]) => (
-                    <input
-                      key={name}
-                      type={name === "guardianEmail" ? "email" : "text"}
-                      name={name}
-                      value={guardianData[name as keyof GuardianData]}
-                      onChange={handleGuardianChange}
-                      placeholder={placeholder}
-                      className={inputClassName}
-                    />
+                    ["fatherName", "পিতার নাম", "যেমন: Abul Kalam", false],
+                    ["fatherOccupation", "পিতার পেশা", "যেমন: ব্যবসায়ী", false],
+                    ["fatherNid", "পিতার জাতীয় পরিচয়পত্র নম্বর", "জাতীয় পরিচয়পত্রের ১০-১৭ ডিজিট", false],
+                    ["fatherPhone", "পিতার মোবাইল নম্বর", "যেমন: 01712345678", false],
+                    ["motherName", "মাতার নাম", "যেমন: Rahima Begum", false],
+                    ["motherOccupation", "মাতার পেশা", "যেমন: গৃহিণী", false],
+                    ["motherNid", "মাতার জাতীয় পরিচয়পত্র নম্বর", "জাতীয় পরিচয়পত্রের ১০-১৭ ডিজিট", false],
+                    ["motherPhone", "মাতার মোবাইল নম্বর", "যেমন: 01812345678", false],
+                    ["guardianName", "অভিভাবকের নাম", "যিনি বিদ্যালয়ের সাথে যোগাযোগ রাখবেন", true],
+                    ["guardianRelation", "অভিভাবকের সাথে সম্পর্ক", "যেমন: পিতা / মাতা / চাচা", false],
+                    ["guardianPhone", "অভিভাবকের মোবাইল নম্বর", "এই নম্বরেই আবেদনের খবর যাবে", true],
+                    ["guardianEmail", "যোগাযোগের ইমেইল", "বিদ্যালয় ইমেইলে নিশ্চিতকরণ পাঠাবে", true],
+                    ["emergencyContact", "জরুরি যোগাযোগের নম্বর", "বিকল্প একটি নম্বর", false],
+                  ].map(([name, label, hint, required]) => (
+                    <div key={name as string} className="flex flex-col gap-2">
+                      <label
+                        htmlFor={name as string}
+                        className="text-sm font-black text-primary"
+                      >
+                        {label as string}
+                        {required ? <span className="ml-1 text-brand-primary">*</span> : null}
+                      </label>
+                      <input
+                        id={name as string}
+                        type={name === "guardianEmail" ? "email" : "text"}
+                        name={name as string}
+                        value={guardianData[name as keyof GuardianData]}
+                        onChange={handleGuardianChange}
+                        inputMode={
+                          name === "guardianEmail"
+                            ? "email"
+                            : String(name).toLowerCase().includes("phone") ||
+                                String(name).includes("Nid") ||
+                                name === "emergencyContact"
+                              ? "numeric"
+                              : "text"
+                        }
+                        placeholder={hint as string}
+                        className={`w-full ${inputClassName}`}
+                      />
+                    </div>
                   ))}
 
                   <div className="rounded-2xl border border-soft bg-page-primary p-4">
@@ -1159,14 +1420,23 @@ const OnlineAdmissionPage = () => {
                   </div>
                 </div>
 
-                <textarea
-                  name="guardianPresentAddress"
-                  value={guardianData.guardianPresentAddress}
-                  onChange={handleGuardianChange}
-                  rows={4}
-                  placeholder="অভিভাবকের বর্তমান ঠিকানা"
-                  className={`mt-5 w-full ${inputClassName}`}
-                />
+                <div className="mt-5 flex flex-col gap-2">
+                  <label
+                    htmlFor="guardianPresentAddress"
+                    className="text-sm font-black text-primary"
+                  >
+                    অভিভাবকের বর্তমান ঠিকানা
+                  </label>
+                  <textarea
+                    id="guardianPresentAddress"
+                    name="guardianPresentAddress"
+                    value={guardianData.guardianPresentAddress}
+                    onChange={handleGuardianChange}
+                    rows={4}
+                    placeholder="বাসা / রোড / এলাকা / উপজেলা / জেলা"
+                    className={`w-full ${inputClassName}`}
+                  />
+                </div>
 
                 {guardianPhoto && (
                   <div className="mt-5 rounded-[24px] border border-soft bg-page-primary p-4">
@@ -1287,9 +1557,10 @@ const OnlineAdmissionPage = () => {
               <div className="flex flex-col gap-3 sm:flex-row">
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-color-primary px-8 py-4 text-sm font-black text-inverse shadow-md transition-all duration-300 hover:-translate-y-1 hover:opacity-90 hover:shadow-xl sm:w-auto"
+                  disabled={isSubmitting}
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-color-primary px-8 py-4 text-sm font-black text-inverse shadow-md transition-all duration-300 hover:-translate-y-1 hover:opacity-90 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 sm:w-auto"
                 >
-                  আবেদন জমা দিন
+                  {isSubmitting ? "জমা হচ্ছে..." : "আবেদন জমা দিন"}
                   <FaCheck />
                 </button>
 
@@ -1346,10 +1617,13 @@ const OnlineAdmissionPage = () => {
                 {applicationId && (
                   <div className="mt-5 rounded-[22px] border border-soft bg-color-secondary p-5">
                     <p className="text-xs font-black uppercase tracking-[0.16em] text-brand-primary">
-                      তৈরি হওয়া আইডি
+                      বিদ্যালয়ের দাখিল নম্বর
                     </p>
                     <p className="mt-2 text-2xl font-black text-primary">
                       {applicationId}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold leading-7 text-secondary">
+                      এই নম্বরটি সংরক্ষণ করুন — এই নম্বর ও অভিভাবকের মোবাইল দিয়ে পরবর্তীতে আবেদনের অবস্থা দেখা যাবে।
                     </p>
                   </div>
                 )}
@@ -1364,24 +1638,61 @@ const OnlineAdmissionPage = () => {
                   <FaCheck />
                 </div>
 
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs font-black uppercase tracking-[0.16em] text-brand-primary">
-                    জমা দেওয়া স্থানীয় রশিদ
+                    বিদ্যালয়ে জমা হওয়া আবেদন
                   </p>
                   <h3 className="mt-2 text-2xl font-black text-primary">
-                    আবেদন আইডি: {submittedApplication.applicationId}
+                    আবেদন নম্বর: {submittedApplication.applicationNo}
                   </h3>
-                  <p className="mt-3 text-sm font-semibold leading-7 text-secondary">
-                    শিক্ষার্থী: {submittedApplication.student.studentFullName} ·
-                    শ্রেণি: {submittedApplication.student.selectedClass} ·
-                    অভিভাবক: {submittedApplication.guardian.guardianName} ·
-                    ডকুমেন্ট: {toBanglaNumber(submittedApplication.documentCount)} · মোট সাইজ:{" "}
+
+                  <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {[
+                      ["অবস্থা", submittedApplication.statusLabel],
+                      ["শ্রেণি", submittedApplication.program],
+                      ["আবেদনের তারিখ", submittedApplication.submittedOn || "আজ"],
+                      ["আবেদন ফি", submittedApplication.feeLabel || "শ্রেণি অনুযায়ী"],
+                      [
+                        "সংরক্ষিত অভিভাবক",
+                        submittedApplication.guardians.length
+                          ? submittedApplication.guardians.join(", ")
+                          : "নাম ছাড়া যোগাযোগের নম্বর সংরক্ষিত হয়েছে",
+                      ],
+                      ["শিক্ষার্থী", submittedApplication.student.studentFullName],
+                    ].map(([label, value]) => (
+                      <div key={label} className="rounded-2xl border border-soft bg-page-primary p-4">
+                        <p className="text-xs font-black uppercase tracking-[0.16em] text-brand-primary">
+                          {label}
+                        </p>
+                        <p className="mt-1 text-sm font-bold leading-7 text-secondary">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="mt-4 text-sm font-semibold leading-7 text-secondary">
+                    শিক্ষার্থীর ছবি: {submittedApplication.studentPhotoName || "যুক্ত হয়নি"} ·
+                    অভিভাবকের ছবি: {submittedApplication.guardianPhotoName || "যুক্ত হয়নি"} ·
+                    ডকুমেন্ট: {toBanglaNumber(submittedApplication.documentCount)}টি · মোট সাইজ:{" "}
                     {submittedApplication.totalDocumentSize}
                   </p>
-                  <p className="mt-2 text-sm font-semibold leading-7 text-secondary">
-                    শিক্ষার্থীর ছবি: {submittedApplication.studentPhotoName} ·
-                    অভিভাবকের ছবি: {submittedApplication.guardianPhotoName}
-                  </p>
+
+                  {submittedApplication.warnings.length > 0 && (
+                    <div className="mt-4 rounded-2xl border border-soft bg-page-primary p-4">
+                      <p className="text-xs font-black uppercase tracking-[0.16em] text-brand-primary">
+                        যেগুলো আবার পাঠাতে হবে
+                      </p>
+                      <ul className="mt-2 space-y-1">
+                        {submittedApplication.warnings.map((warning) => (
+                          <li key={warning} className="text-sm font-semibold leading-7 text-secondary">
+                            • {warning}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="mt-2 text-sm font-semibold leading-7 text-secondary">
+                        আবেদনটি জমা হয়েছে — শুধু উপরের ফাইলগুলো বিদ্যালয়ের অফিসে আবার পাঠান।
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </section>
